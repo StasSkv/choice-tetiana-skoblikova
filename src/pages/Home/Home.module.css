@@ -1,0 +1,15 @@
+.hero {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container {
+     display: flex;
+     flex-direction: column;
+     gap: 36px;
+}
+
+.tetiana {
+    max-width: 400px;
+    margin: 0 auto;
+}

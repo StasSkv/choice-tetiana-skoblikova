@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  opacity: 90%;
+  background-color: var(--white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+  position: fixed;
+}
+
+.header::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: var(--accent);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoWrap {
+ width: 200px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.logoImg {
+width: 120%;
+height: 130%;
+  object-fit: cover;
+}
+

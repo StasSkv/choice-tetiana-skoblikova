@@ -1,22 +1,32 @@
 :root {
-  --font: Helvetica, Arial, sans-serif;
-  --background: rgba(255, 255, 255, 0.87);
-  --main-color: rgba(18, 17, 17, 0.87);
-
-  font-family: var(--font);
-  color: var(--main-color);
-  background-color: var(--background);
-  line-height: 1.5;
-  font-weight: 400;
+  --font-family: 'Montserrat', sans-serif;
+  --background: #f4f4f4;
+  --white: #fff;
+  --accent: #008000;
+  --main-text: #070000;
+  --grey-text: #8f8f8f;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
 
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--main-text);
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+main {
+  flex-grow: 1;
+  margin-top: 100px;
 }
 
 h1,
@@ -53,4 +63,25 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+.container {
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 16px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 32px;
+  }
 }

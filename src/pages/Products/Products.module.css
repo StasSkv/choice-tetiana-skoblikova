@@ -1,0 +1,18 @@
+.products {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+}
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.productCard {
+  max-width: calc((100% - 60px) / 4);
+}

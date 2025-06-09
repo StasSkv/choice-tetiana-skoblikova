@@ -1,0 +1,141 @@
+.productCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  gap: 8px;
+  transition: transform 0.4s ease;
+}
+
+.productCard:hover {
+  transform: scale(1.05);
+}
+
+.productImage {
+  max-width: 80%;
+}
+
+.myLove {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 20px;
+  color: rgb(188, 195, 188);
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transition: color 0.4s ease;
+}
+
+.myLoveActive {
+  color: var(--accent);
+}
+
+.myLove:hover {
+  color: var(--accent);
+}
+
+.myLove:active {
+  transform: scale(0.9);
+}
+
+.descriptionWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  gap: 32px;
+}
+
+.textAndOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--main-text);
+  cursor: pointer;
+  min-height: 50px;
+}
+
+.text {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--grey-text);
+  max-height: 4.5em;
+  z-index: 1;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--main-text);
+  z-index: 1;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+.colorRound {
+  position: absolute;
+  z-index: 0;
+  width: 45%;
+  height: 30%;
+  background-color: var(--accent);
+  border-radius: 100%;
+  bottom: -10%;
+  right: -15%;
+  transition: width 0.5s ease, height 0.5s ease, right 0.5s ease, border-radius 0.5s ease;
+}
+
+.productCard:hover .colorRound {
+  width: 200%;
+  height: 50%;
+  right: 0;
+  border-radius: 20% 20% 0 0;
+}
+
+.productCard:hover .text {
+  color: var(--white);
+}
+
+.productCard:hover .price {
+  color: var(--white);
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  transition: color 0.4s ease;
+}
+
+.btn:hover {
+  color: var(--white);
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
