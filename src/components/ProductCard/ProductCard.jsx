@@ -1,19 +1,22 @@
 import s from './ProductCard.module.css';
-import product from '../../assets/images/product.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductToCart } from '../../redux/cartSlice/cartSlice';
 import { BsCart4 } from 'react-icons/bs';
 import { FaHeart } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 import {
   addProductToFavorites,
   removeProductFromFavorites,
 } from '../../redux/favoritesSlice/favoritesSlice.js';
 import { makeSelectIsProductFavorite } from '../../redux/favoritesSlice/favoritesSelectors.js';
+import image from '../../assets/images/product.png';
+import { useState } from 'react';
 
-export const ProductCard = ({ id, price, name, text }) => {
+export const ProductCard = ({ id, price, name, text, isFavoritesPage = false }) => {
   const dispatch = useDispatch();
   const isLoved = useSelector(makeSelectIsProductFavorite(id));
-  const productData = { id, name, price, product };
+  const [isRemoving, setIsRemoving] = useState(false);
+  const productData = { id, name, price, text };
 
   const handleClickLove = () => {
     if (isLoved) {
@@ -27,12 +30,28 @@ export const ProductCard = ({ id, price, name, text }) => {
     dispatch(addProductToCart(productData));
   };
 
+  const handleRemove = () => {
+    setIsRemoving(true);
+    setTimeout(() => {
+      dispatch(removeProductFromFavorites(id));
+    }, 300);
+  };
+
   return (
-    <div className={s.productCard}>
-      <button className={`${s.myLove} ${isLoved ? s.myLoveActive : ''}`} onClick={handleClickLove}>
-        <FaHeart />
-      </button>
-      <img src={product} alt="product" className={s.productImage} />
+    <div className={`${s.productCard} ${isRemoving ? s.removing : ''}`}>
+      {isFavoritesPage ? (
+        <button className={s.deleteBtn} onClick={handleRemove}>
+          <MdDelete />
+        </button>
+      ) : (
+        <button
+          className={`${s.myLove} ${isLoved ? s.myLoveActive : ''}`}
+          onClick={handleClickLove}
+        >
+          <FaHeart />
+        </button>
+      )}
+      <img src={image} alt={name} className={s.productImage} />
       <div className={s.descriptionWrap}>
         <p className={s.name}>{name}</p>
         <div className={s.textAndOptions}>
@@ -45,6 +64,7 @@ export const ProductCard = ({ id, price, name, text }) => {
           </div>
         </div>
       </div>
+
       <span className={s.colorRound}></span>
     </div>
   );

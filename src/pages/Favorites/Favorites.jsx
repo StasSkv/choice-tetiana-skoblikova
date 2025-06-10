@@ -1,27 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import s from './Favorites.module.css';
-import { removeProductFromFavorites } from '../../redux/favoritesSlice/favoritesSlice.js';
+import { ProductCard } from '../../components/ProductCard/ProductCard.jsx';
 
 export const Favorites = () => {
   const favoritesProducts = useSelector(selectFavoritesProducts);
-  const dispatch = useDispatch();
 
-  const handleClick = (id) => {
-    dispatch(removeProductFromFavorites(id));
-  };
   return (
-    <ul>
-      {favoritesProducts.map((product) => (
-        <li key={product.id}>
-          <img src={product.product} alt="" />
-          <p>{product.text}</p>
-          <p>{product.price}</p>
-          <button className={s.deleteProduct} onClick={() => handleClick(product.id)}>
-            delete
-          </button>
-        </li>
-      ))}
-    </ul>
+    <section className={s.favorites}>
+      <div className="container">
+        <h2 className={s.subtitle}>Улюбленні товари</h2>
+
+        <ul className={s.favoritesList}>
+          {favoritesProducts.map(({ id, name, price, text }) => (
+            <li key={id} className={s.productCard}>
+              <ProductCard id={id} name={name} price={price} text={text} isFavoritesPage={true} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 };

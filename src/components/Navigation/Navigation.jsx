@@ -1,25 +1,43 @@
 import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css';
+import { CiHeart } from 'react-icons/ci';
+import { VscAccount } from 'react-icons/vsc';
+import { BsCart4 } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { useEffect, useRef, useState } from 'react';
+import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
 
 export const Navigation = () => {
-  const counter = useSelector(selectProductsInCart);
-  const [animate, setAnimate] = useState(false);
-  const prevCountRef = useRef(counter.length);
+  const cartItems = useSelector(selectProductsInCart);
+  const favoriteItems = useSelector(selectFavoritesProducts);
+  const [animateCart, setAnimateCart] = useState(false);
+  const [animateFavorites, setAnimateFavorites] = useState(false);
+  const prevCartRef = useRef(cartItems.length);
+  const prevFavoritesRef = useRef(favoriteItems.length);
+  const totalSum = cartItems.reduce((acc, { price }) => acc + Number(price), 0);
 
   const navLinkStyle = ({ isActive }) => (isActive ? `${s.link} ${s.active}` : s.link);
 
   useEffect(() => {
-    if (counter.length !== prevCountRef.current) {
-      setAnimate(true);
-      prevCountRef.current = counter.length;
-
-      const timeout = setTimeout(() => setAnimate(false), 400);
+    if (cartItems.length !== prevCartRef.current) {
+      setAnimateCart(true);
+      prevCartRef.current = cartItems.length;
+      const timeout = setTimeout(() => setAnimateCart(false), 400);
       return () => clearTimeout(timeout);
     }
-  }, [counter]);
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (favoriteItems.length !== prevFavoritesRef.current) {
+      setAnimateFavorites(true);
+      prevFavoritesRef.current = favoriteItems.length;
+      const timeout = setTimeout(() => setAnimateFavorites(false), 400);
+      return () => clearTimeout(timeout);
+    }
+  }, [favoriteItems]);
+
+  console.log(totalSum);
 
   return (
     <nav>
@@ -33,15 +51,28 @@ export const Navigation = () => {
         Каталог
       </NavLink>
       <NavLink to="/favorites" className={navLinkStyle}>
-        Збережені товари
-      </NavLink>
-      <NavLink to="/cart" className={navLinkStyle}>
-        Кошик
-        {counter.length > 0 && (
-          <span className={`${s.counter} ${s.counterShow} ${animate ? s.bounce : ''}`}>
-            {counter.length}
+        <CiHeart className={s.favorites} />
+        {favoriteItems.length > 0 && (
+          <span
+            className={`${s.favoriteCounter} ${s.counterShow} ${animateFavorites ? s.bounce : ''}`}
+          >
+            {favoriteItems.length}
           </span>
         )}
+      </NavLink>
+      <NavLink to="/profile" className={navLinkStyle}>
+        <VscAccount className={s.myAccount} />
+      </NavLink>
+      <NavLink to="/cart" className={s.navLinkCart}>
+   <div className={s.totalSumWrap}>
+          {cartItems.length > 0 && (
+            <span className={`${s.counter} ${s.counterShow} ${animateCart ? s.bounce : ''}`}>
+              {cartItems.length} <span className={s.currency}>x</span>
+            </span>
+          )}
+          <p className={s.totalSum}> {totalSum} <span className={s.currency}>грн</span></p>
+   </div>
+        <BsCart4 className={ s.cart} />
       </NavLink>
     </nav>
   );
