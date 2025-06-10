@@ -1,6 +1,5 @@
 import s from './Home.module.css';
 import tetiana from '../../assets/images/tetiana.jpeg';
-import TestComponent from '../../components/aaaa/aaaa.jsx';
 const Home = () => {
   return (
     <section className={s.hero}>
@@ -9,7 +8,6 @@ const Home = () => {
         <p> Якщо ти будеш замовляти в мене багато продукції, то я куплю собі бібіку!</p>
         <img src={tetiana} alt="" className={s.tetiana} />
       </div>
-     <TestComponent></TestComponent>
     </section>
   );
 };

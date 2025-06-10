@@ -12,11 +12,11 @@ import { makeSelectIsProductFavorite } from '../../redux/favoritesSlice/favorite
 import image from '../../assets/images/product.png';
 import { useState } from 'react';
 
-export const ProductCard = ({ id, price, name, text, isFavoritesPage = false }) => {
+export const ProductCard = ({ id, price, name, text, quantity, isFavoritesPage = false }) => {
   const dispatch = useDispatch();
   const isLoved = useSelector(makeSelectIsProductFavorite(id));
   const [isRemoving, setIsRemoving] = useState(false);
-  const productData = { id, name, price, text };
+  const productData = { id, name, price, text, quantity };
 
   const handleClickLove = () => {
     if (isLoved) {

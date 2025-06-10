@@ -18,6 +18,7 @@ export const Products = () => {
                 text={product.text}
                 price={product.price}
                 id={product.id}
+                quantity={product.quantity}
               />
             </li>
           ))}

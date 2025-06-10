@@ -1,4 +1,168 @@
-li {
-    width: 100px;
-    height: 100px;
+.cart {
+  width: 100%;
+  height: 90%;
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: 24px;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.totalProducts {
+  font-size: 18px;
+  color: var(--grey-text);
+}
+
+.totalProducts span {
+  font-size: 18px;
+  color: var(--main-text);
+}
+
+.cleanCart {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  padding: 0;
+  gap: 8px;
+  border: none;
+  background-color: transparent;
+  transition: color 0.3s ease;
+}
+
+.cleanCart:hover {
+  color: var(--error);
+}
+
+.cleanCart span {
+  font-size: 24px;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 65%;
+  flex: 1;
+  overflow: scroll;
+  overflow-y: scroll;
+  padding-right: 40px;
+}
+
+.productList::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.productList::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.productList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.productItem {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--grey-text);
+}
+
+.description {
+}
+
+.description h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.description p {
+  color: var(--grey-text);
+}
+
+.productImg {
+  max-width: 100px;
+  margin-right: 20px;
+}
+
+.quantity {
+  width: 110px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+}
+
+.quantityPrice {
+    font-size: 24px;
+    font-weight: 600;
+
+}
+.quantityPrice span {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.plus {
+  margin-bottom: 3px;
+}
+.plus,
+.minus {
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minus span {
+  width: 12px;
+  height: 2.2px;
+  border: 50%;
+  background-color: var(--main-text);
+}
+
+.deleteBtn {
+    padding: 0;
+    display: flex;
+    align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  font-size: 24px;
+  border: none;
+  transition: color 0.3s ease;
+}
+
+.deleteBtn:hover {
+    color: var(--error);
+}
+
+.options {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.line {
+  width: 100%;
+  border: 1px solid gray;
 }

@@ -13,15 +13,11 @@
   overflow-y: auto;
   z-index: 999;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease-out;
 }
 
-.overlay.ReactModal__Overlay--after-open {
-  opacity: 1 !important;
-}
-
-.overlay.ReactModal__Overlay--before-close {
-  opacity: 0 !important;
+.overlayActive {
+  opacity: 1;
 }
 
 .overlay::before,
@@ -37,26 +33,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  max-width: 40rem;
-  padding: 60px 20px 50px 20px;
+  width: 80%;
+  height: 80%;
+  flex-grow: 1;
+  padding: 32px 60px 40px;
   background-color: var(--white);
-  border-radius: 30px;
-  filter: drop-shadow(0 0 10px rgba(255, 103, 0, 0.7));
+  border-radius: 16px;
   transform: translateY(50px);
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease-out;
 }
 
-.content.ReactModal__Content--after-open {
+.contentActive {
   transform: translateY(0);
-}
-
-.content.ReactModal__Content--before-close {
-  transform: translateY(50px);
 }
 
 .closeBtn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 32px;
+  right: 60px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.7rem;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+.closeBtn:hover {
+  transform: rotate(90deg);
+}
+
+.submitBtn {
+  padding: 10px 20px;
+  background-color: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: opacity 0.3s ease;
+}
+
+.submitBtn:hover {
+  opacity: 80%;
 }
