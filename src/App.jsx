@@ -6,6 +6,7 @@ import { Cart } from './pages/Cart/Cart';
 import { Layout } from './components/Layout/Layout';
 import { Favorites } from './pages/Favorites/Favorites.jsx';
 
+
 const App = () => {
   return (
     <Routes>
@@ -13,11 +14,11 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="team" element={<Team />} />
         <Route path="products" element={<Products />} />
-        <Route path="cart" element={<Cart />} />
         <Route path="favorites" element={<Favorites />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    
   );
 };
 

@@ -31,7 +31,7 @@
   cursor: pointer;
   background-color: transparent;
   border: none;
-  transition: color 0.4s ease, transform 0.4s ease;
+  transition: color 0.4s ease, transform 0.3s ease;
 }
 
 .myLoveActive {
@@ -156,7 +156,7 @@
   background-color: transparent;
   border: none;
   font-size: 25px;
-  transition: color 0.4s ease, transform 0.4s ease;
+  transition: color 0.4s ease, transform 0.3s ease;
 }
 
 .btn:hover {

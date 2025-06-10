@@ -14,5 +14,7 @@ export const Cart = () => {
         </li>
       ))}
     </ul>
+
+    
   );
 };
