@@ -4,17 +4,17 @@
 }
 
 .subtitle {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  padding-left: 50px;
+  font-size: 38px;
 }
 
-.productList {
+.mainWrap {
   display: flex;
-  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
   gap: 20px;
 }
 
-.productCard {
-  max-width: calc((100% - 60px) / 4);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
-}
+
+

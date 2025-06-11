@@ -4,10 +4,12 @@
 }
 
 .subtitle {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  padding-left: 50px;
+  font-size: 38px;
 }
 
-.favoritesList {
+.productList {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;

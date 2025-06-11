@@ -6,6 +6,7 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  height: 100%;
   background-color: var(--white);
   border-radius: 12px;
   padding: 16px;
@@ -114,6 +115,7 @@
   max-height: 4.5em;
   z-index: 1;
   cursor: pointer;
+  min-height: 75px;
   transition: color 0.4s ease;
 }
 
