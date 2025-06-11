@@ -63,12 +63,65 @@
   transform: rotate(90deg);
 }
 
+.optionsWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.goBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.goBack span {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.goBack:hover {
+  color: var(--accent);
+}
+
+.goBack:active {
+  transform: scale(1.1);
+}
+
+.orderWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.orderText {
+  color: var(--grey-text);
+  font-size: 16px;
+}
+
+.orderSum {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.orderCurrency {
+  font-size: 20px;
+}
+
 .submitBtn {
-  padding: 10px 20px;
+  padding: 18px 24px;
   background-color: var(--accent);
   color: var(--white);
   border: none;
-  border-radius: 5px;
+  border-radius: 32px;
   cursor: pointer;
   font-size: 18px;
   transition: opacity 0.3s ease;

@@ -18,6 +18,7 @@
   transform: scale(1.05);
 }
 
+
 .productImage {
   max-width: 80%;
 }
@@ -63,7 +64,7 @@
 }
 
 .deleteBtn:active {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .removing {
@@ -116,6 +117,8 @@
   transition: color 0.4s ease;
 }
 
+
+
 .price {
   font-size: 1.25rem;
   font-weight: 600;
@@ -144,15 +147,34 @@
   border-radius: 20% 20% 0 0;
 }
 
+.colorRoundIsInCart {
+    width: 200%;
+  height: 50%;
+  right: 0;
+  border-radius: 20% 20% 0 0;
+}
+
 .productCard:hover .text {
   color: var(--white);
 }
+
+
 
 .productCard:hover .price {
   color: var(--white);
 }
 
+.textIsInCart {
+    color: var(--white);
+}
+
+.priceIsInCart {
+  color: var(--white);
+
+}
+
 .btn {
+  position: relative;
   background-color: transparent;
   border: none;
   font-size: 25px;
@@ -164,6 +186,28 @@
   transform: scale(1.3);
 }
 
+.btnIsInCart {
+    color: var(--white);
+  transform: scale(1.3);
+  pointer-events: none;
+}
+
 .btn:active {
   transform: scale(0.9);
+}
+
+.check {
+  color: var(--white);
+  font-size: 14px;
+  position: absolute;
+  top: 35%;
+  left: -30%;
+    opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.checkVisible {
+  opacity: 1;
+  transform: translateY(0);
 }

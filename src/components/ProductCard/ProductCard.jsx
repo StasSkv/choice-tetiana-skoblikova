@@ -4,6 +4,7 @@ import { addProductToCart } from '../../redux/cartSlice/cartSlice';
 import { BsCart4 } from 'react-icons/bs';
 import { FaHeart } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
+import { GiCheckMark } from 'react-icons/gi';
 import {
   addProductToFavorites,
   removeProductFromFavorites,
@@ -11,12 +12,15 @@ import {
 import { makeSelectIsProductFavorite } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import image from '../../assets/images/product.png';
 import { useState } from 'react';
+import clsx from 'clsx';
+import { makeSelectIsProductInCart } from '../../redux/cartSlice/cartSelectors.js';
 
 export const ProductCard = ({ id, price, name, text, quantity, isFavoritesPage = false }) => {
   const dispatch = useDispatch();
   const isLoved = useSelector(makeSelectIsProductFavorite(id));
+  const isInCart = useSelector(makeSelectIsProductInCart(id));
   const [isRemoving, setIsRemoving] = useState(false);
-  const productData = { id, name, price, text, quantity };
+  const productData = { id, name, price, text, quantity };  
 
   const handleClickLove = () => {
     if (isLoved) {
@@ -38,7 +42,7 @@ export const ProductCard = ({ id, price, name, text, quantity, isFavoritesPage =
   };
 
   return (
-    <div className={`${s.productCard} ${isRemoving ? s.removing : ''}`}>
+    <div className={clsx(s.productCard, isRemoving && s.removing)}>
       {isFavoritesPage ? (
         <button className={s.deleteBtn} onClick={handleRemove}>
           <MdDelete />
@@ -55,17 +59,22 @@ export const ProductCard = ({ id, price, name, text, quantity, isFavoritesPage =
       <div className={s.descriptionWrap}>
         <p className={s.name}>{name}</p>
         <div className={s.textAndOptions}>
-          <p className={s.text}>{text}</p>
+          <p className={clsx(s.text, isInCart && s.textIsInCart)}>{text}</p>
           <div className={s.options}>
-            <p className={s.price}>{`${price} грн`}</p>
-            <button className={s.btn} onClick={handleClickBuy}>
+            <p className={clsx(s.price, isInCart && s.priceIsInCart)}>{`${price} грн`}</p>
+            <button className={clsx(s.btn, isInCart && s.btnIsInCart)} onClick={handleClickBuy}>
+              {isInCart && (
+                <span>
+                  <GiCheckMark className={clsx(s.check, isInCart && s.checkVisible)} />
+                </span>
+              )}
               <BsCart4 />
             </button>
           </div>
         </div>
       </div>
 
-      <span className={s.colorRound}></span>
+      <span className={clsx(s.colorRound, isInCart && s.colorRoundIsInCart)}></span>
     </div>
   );
 };

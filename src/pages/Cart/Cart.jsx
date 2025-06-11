@@ -13,6 +13,7 @@ import {
 export const Cart = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectProductsInCart);
+
   const handleClickClearCart = () => {
     dispatch(addclearCart());
   };
@@ -72,7 +73,7 @@ export const Cart = () => {
                 </button>
               </div>
               <p className={s.quantityPrice}>
-                {product.price} <span>грн</span>
+                {(product.quantity * product.price).toLocaleString('uk-UA')} <span>грн</span>
               </p>
               <button
                 className={s.deleteBtn}

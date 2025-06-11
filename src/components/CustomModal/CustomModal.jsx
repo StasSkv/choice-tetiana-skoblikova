@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import s from './CustomModal.module.css';
 import { TfiClose } from 'react-icons/tfi';
+import { GoArrowLeft } from 'react-icons/go';
 
-const CustomModal = ({ isOpen, onClose, submitBtn, children }) => {
+const CustomModal = ({ isOpen, onClose, submitBtn, order, children }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
@@ -48,11 +49,28 @@ const CustomModal = ({ isOpen, onClose, submitBtn, children }) => {
         <TfiClose />
       </button>
       {children}
-      {submitBtn && (
-        <button className={s.submitBtn} onClick={onClose}>
-          {submitBtn}
+      <div className={s.optionsWrap}>
+        <button className={s.goBack} onClick={onClose}>
+          <span>
+            <GoArrowLeft />
+          </span>
+          Продовжити покупки
         </button>
-      )}
+        {order && (
+          <div className={s.orderWrap}>
+            <p className={s.orderText}>Сумма замовлення</p>
+            <p className={s.orderSum}>
+              {order}
+              <span className={s.orderCurrency}> грн</span>
+            </p>
+          </div>
+        )}
+        {submitBtn && (
+          <button className={s.submitBtn} onClick={onClose}>
+            {submitBtn}
+          </button>
+        )}
+      </div>
     </Modal>
   );
 };
