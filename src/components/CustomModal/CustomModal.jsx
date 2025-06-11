@@ -17,16 +17,19 @@ const CustomModal = ({ isOpen, onClose, submitBtn, order, children }) => {
       openTimeout = setTimeout(() => {
         setModalActive(true);
       }, 50);
+      document.body.style.overflow = 'hidden';
     } else {
       setModalActive(false);
       closeTimeout = setTimeout(() => {
         setModalVisible(false);
       }, 400);
+      document.body.style.overflow = '';
     }
 
     return () => {
       clearTimeout(openTimeout);
       clearTimeout(closeTimeout);
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 

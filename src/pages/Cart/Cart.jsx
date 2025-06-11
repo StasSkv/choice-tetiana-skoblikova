@@ -9,6 +9,7 @@ import {
   addMinusQuantity,
   addPlusQuantity,
 } from '../../redux/cartSlice/cartSlice.js';
+import { toast } from 'react-toastify';
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -16,10 +17,12 @@ export const Cart = () => {
 
   const handleClickClearCart = () => {
     dispatch(addclearCart());
+    toast.warning('Кошик очищенно');
   };
 
   const handleClickDeleteProduct = (id) => {
     dispatch(addDeleteProduct(id));
+    toast.warning('Товар видалено з кошику');
   };
 
   const handleClickPlusQuantity = (id) => {
@@ -44,49 +47,53 @@ export const Cart = () => {
           Очистити кошик
         </button>
       </div>
-      <ul className={s.productList}>
-        {products.map((product) => (
-          <li key={product.id} className={s.productItem}>
-            <img src={img} alt="" className={s.productImg} />
-            <div className={s.description}>
-              <h3>{product.name}</h3>
-              <p>{product.text}</p>
-            </div>
-            <div className={s.options}>
-              <div className={s.quantity}>
+      {products.length > 0 ? (
+        <ul className={s.productList}>
+          {products.map((product) => (
+            <li key={product.id} className={s.productItem}>
+              <img src={img} alt="" className={s.productImg} />
+              <div className={s.description}>
+                <h3>{product.name}</h3>
+                <p>{product.text}</p>
+              </div>
+              <div className={s.options}>
+                <div className={s.quantity}>
+                  <button
+                    className={s.minus}
+                    onClick={() => {
+                      handleClickMinusQuantity(product.id);
+                    }}
+                  >
+                    <span></span>
+                  </button>
+                  <p>{product.quantity}</p>
+                  <button
+                    className={s.plus}
+                    onClick={() => {
+                      handleClickPlusQuantity(product.id);
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+                <p className={s.quantityPrice}>
+                  {(product.quantity * product.price).toLocaleString('uk-UA')} <span>грн</span>
+                </p>
                 <button
-                  className={s.minus}
+                  className={s.deleteBtn}
                   onClick={() => {
-                    handleClickMinusQuantity(product.id);
+                    handleClickDeleteProduct(product.id);
                   }}
                 >
-                  <span></span>
-                </button>
-                <p>{product.quantity}</p>
-                <button
-                  className={s.plus}
-                  onClick={() => {
-                    handleClickPlusQuantity(product.id);
-                  }}
-                >
-                  +
+                  {<MdOutlineDeleteOutline />}
                 </button>
               </div>
-              <p className={s.quantityPrice}>
-                {(product.quantity * product.price).toLocaleString('uk-UA')} <span>грн</span>
-              </p>
-              <button
-                className={s.deleteBtn}
-                onClick={() => {
-                  handleClickDeleteProduct(product.id);
-                }}
-              >
-                {<MdOutlineDeleteOutline />}
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className={s.notProductInCart}>Кошик порожній</p>
+      )}
     </div>
   );
 };

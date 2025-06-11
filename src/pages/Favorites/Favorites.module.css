@@ -18,5 +18,40 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+.isNotFavorite {
+  padding: 50px;
+}
 
+.isNotFavoriteText {
+  color: var(--grey-text);
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 100px;
+}
 
+.goBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 240px;
+  gap: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 5px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.goBack span {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.goBack:hover {
+  color: var(--accent);
+}
+
+.goBack:active {
+  transform: scale(1.1);
+}
