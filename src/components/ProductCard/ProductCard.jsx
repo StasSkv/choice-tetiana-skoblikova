@@ -1,88 +1,45 @@
 import s from './ProductCard.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { addProductToCart } from '../../redux/cartSlice/cartSlice';
-
-import { BsCart4 } from 'react-icons/bs';
-import { FaHeart } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
-import { GiCheckMark } from 'react-icons/gi';
 import image from '../../assets/images/product.png';
-import {
-  addProductToFavorites,
-  removeProductFromFavorites,
-} from '../../redux/favoritesSlice/favoritesSlice.js';
-import { makeSelectIsProductFavorite } from '../../redux/favoritesSlice/favoritesSelectors.js';
-import { useState } from 'react';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
+import { makeSelectIsProductFavorite } from '../../redux/favoritesSlice/favoritesSelectors';
 import { makeSelectIsProductInCart } from '../../redux/cartSlice/cartSelectors.js';
-import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import { LikeButton } from '../Buttons/LikeButton/LikeButton.jsx';
+import { DeleteButton } from '../Buttons/DeleteButton/DeleteButton.jsx';
+import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
 
 export const ProductCard = ({ id, price, name, text, quantity, isFavoritesPage = false }) => {
-  const dispatch = useDispatch();
   const isLoved = useSelector(makeSelectIsProductFavorite(id));
   const isInCart = useSelector(makeSelectIsProductInCart(id));
   const [isRemoving, setIsRemoving] = useState(false);
+  const navigate = useNavigate();
+
   const productData = { id, name, price, text, quantity };
 
-  const cardClasses = {
-    text: clsx(s.text, { [s.textIsInCart]: isInCart }),
-    price: clsx(s.price, { [s.priceIsInCart]: isInCart }),
-    btn: clsx(s.btn, { [s.btnIsInCart]: isInCart }),
-    check: clsx(s.check, { [s.checkVisible]: isInCart }),
-  };
-
-  const handleClickLove = () => {
-    if (isLoved) {
-      dispatch(removeProductFromFavorites(id));
-      toast.warning('Товар видалено з улюблених');
-    } else {
-      dispatch(addProductToFavorites(productData));
-      toast.success('Товар додано до улюблених');
-    }
-  };
-
-  const handleClickBuy = () => {
-    dispatch(addProductToCart(productData));
-    toast.success('Товар додано до кошику');
-  };
-
-  const handleRemove = () => {
-    setIsRemoving(true);
-    setTimeout(() => {
-      dispatch(removeProductFromFavorites(id));
-    }, 300);
-    toast.warning('Товар видалено з улюблених');
+  const handleCardClick = (e) => {
+    if (e.target.closest('button')) return;
+    navigate(`/product/${id}`);
   };
 
   return (
-    <div className={clsx(s.productCard, isRemoving && s.removing)}>
+    <div className={clsx(s.productCard, isRemoving && s.removing)} onClick={handleCardClick}>
       {isFavoritesPage ? (
-        <button className={s.deleteBtn} onClick={handleRemove}>
-          <MdDelete />
-        </button>
+        <DeleteButton id={id} onStartRemove={() => setIsRemoving(true)} />
       ) : (
-        <button
-          className={`${s.myLove} ${isLoved ? s.myLoveActive : ''}`}
-          onClick={handleClickLove}
-        >
-          <FaHeart />
-        </button>
+        <LikeButton isLoved={isLoved} productData={productData} />
       )}
+
       <img src={image} alt={name} className={s.productImage} />
       <div className={s.descriptionWrap}>
         <p className={s.name}>{name}</p>
         <div className={s.textAndOptions}>
-          <p className={cardClasses.text}>{text}</p>
+          <p className={clsx(s.text, { [s.textIsInCart]: isInCart })}>{text}</p>
           <div className={s.options}>
-            <p className={cardClasses.price}>{`${price} грн`}</p>
-            <button className={cardClasses.btn} onClick={handleClickBuy}>
-              {isInCart && (
-                <span>
-                  <GiCheckMark className={cardClasses.check} />
-                </span>
-              )}
-              <BsCart4 />
-            </button>
+            <p className={clsx(s.price, { [s.priceIsInCart]: isInCart })}>{`${price} грн`}</p>
+            <BuyButton productData={productData} isInCart={isInCart} />
           </div>
         </div>
       </div>
