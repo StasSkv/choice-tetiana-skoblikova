@@ -1,0 +1,23 @@
+.myLove {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 20px;
+  color: rgb(188, 195, 188);
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.myLoveActive {
+  color: var(--accent);
+}
+
+.myLove:hover {
+  transform: scale(1.2);
+}
+
+.myLove:active {
+  transform: scale(0.9);
+}
