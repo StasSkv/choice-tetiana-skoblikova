@@ -6,7 +6,7 @@ import s from './Navigation.module.css';
 import { NavLinkItem } from './NavigationComponents/NavLinkItem/NavLinkItem.jsx';
 import { FavoritesLink } from './NavigationComponents/FavoritesLink/FavoritesLink.jsx';
 import { CartLink } from './NavigationComponents/CartLink/CartLink.jsx';
-import { AccountLink } from './NavigationComponents/accountLink/accountLink.jsx';
+import { AccountLink } from './NavigationComponents/AccountLink/AccountLink.jsx';
 
 export const Navigation = () => {
   const productsInCart = useSelector(selectProductsInCart);
@@ -18,14 +18,12 @@ export const Navigation = () => {
   const prevCartRef = useRef(productsInCart.length);
   const prevFavoritesRef = useRef(favoriteItems.length);
 
+  const order = productsInCart.reduce((total, product) => {
+    return total + product.price * product.quantity;
+  }, 0);
 
-   const order = productsInCart.reduce((total, product) => {
-     return total + product.price * product.quantity;
-   }, 0);
-  
   const formatted = order.toLocaleString('uk-UA');
-  
-  
+
   useEffect(() => {
     if (productsInCart.length !== prevCartRef.current) {
       setAnimateCart(true);
@@ -51,11 +49,7 @@ export const Navigation = () => {
       <NavLinkItem to="/products">Каталог</NavLinkItem>
       <FavoritesLink count={favoriteItems.length} animate={animateFavorites} />
       <AccountLink />
-      <CartLink
-        count={productsInCart.length}
-        totalSum={formatted}
-        animate={animateCart}
-      />
+      <CartLink count={productsInCart.length} totalSum={formatted} animate={animateCart} />
     </nav>
   );
 };
