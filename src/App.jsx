@@ -5,6 +5,7 @@ import { Products } from './pages/Products/Products';
 import { Layout } from './components/Layout/Layout';
 import { Favorites } from './pages/Favorites/Favorites.jsx';
 import { ToastContainer, Zoom } from 'react-toastify';
+import { ProductDetails } from './pages/ProductDetails/ProductDetails.jsx';
 
 const App = () => {
   return (
@@ -14,10 +15,13 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="team" element={<Team />} />
           <Route path="products" element={<Products />} />
+          <Route path="product/:id" element={<ProductDetails />} />
           <Route path="favorites" element={<Favorites />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
+
+        <Route path="*" element={<Navigate to="/team" replace />} />
       </Routes>
+
       <ToastContainer
         position="bottom-left"
         autoClose={3000}

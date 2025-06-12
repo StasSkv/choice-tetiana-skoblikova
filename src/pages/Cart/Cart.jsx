@@ -10,8 +10,10 @@ import {
   addPlusQuantity,
 } from '../../redux/cartSlice/cartSlice.js';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-export const Cart = () => {
+export const Cart = ({ onClose }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector(selectProductsInCart);
 
@@ -33,6 +35,12 @@ export const Cart = () => {
     dispatch(addMinusQuantity(id));
   };
 
+  const handleCardClick = (e, id) => {
+    if (e.target.closest('button')) return;
+    if (onClose) onClose();
+    navigate(`/product/${id}`);
+  };
+
   return (
     <div className={s.cart}>
       <h2 className={s.title}>Кошик товарів</h2>
@@ -50,7 +58,11 @@ export const Cart = () => {
       {products.length > 0 ? (
         <ul className={s.productList}>
           {products.map((product) => (
-            <li key={product.id} className={s.productItem}>
+            <li
+              key={product.id}
+              className={s.productItem}
+              onClick={(e) => handleCardClick(e, product.id)}
+            >
               <img src={img} alt="" className={s.productImg} />
               <div className={s.description}>
                 <h3>{product.name}</h3>
