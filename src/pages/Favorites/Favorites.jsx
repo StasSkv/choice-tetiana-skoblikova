@@ -18,14 +18,14 @@ export const Favorites = () => {
         ) : (
           <div className={s.isNotFavorite}>
             <p className={s.isNotFavoriteText}>У вас ще немає улюблених товарів</p>
-            <NavLink to="/products" className={s.goBack}>
-              <span>
-                <GoArrowLeft />
-              </span>
-              Продовжити покупки
-            </NavLink>
           </div>
         )}
+        <NavLink to="/products" className={s.goBack}>
+          <span>
+            <GoArrowLeft />
+          </span>
+          Продовжити покупки
+        </NavLink>
       </div>
     </section>
   );

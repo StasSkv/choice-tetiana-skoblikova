@@ -1,0 +1,38 @@
+.descriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.descriptions li {
+  list-style: none;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
+}
+
+.descriptions li:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.descriptions h4 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+}
+
+.descriptions p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}

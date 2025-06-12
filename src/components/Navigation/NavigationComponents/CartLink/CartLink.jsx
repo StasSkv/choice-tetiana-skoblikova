@@ -42,7 +42,7 @@ export const CartLink = ({ count, totalSum, animate }) => {
         }}
         submitBtn={'Оформити замовлення'}
         order={formatted}
-        children={<Cart />}
+        children={<Cart onClose={() => setModalIsOpen(false)} />}
       ></CustomModal>
     </>
   );
