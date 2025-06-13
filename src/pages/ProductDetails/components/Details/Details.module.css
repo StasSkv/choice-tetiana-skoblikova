@@ -2,34 +2,10 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  background-color: #f7f7f7;
-  border-radius: 12px;
-  max-width: 600px;
+  gap: 8px;
   margin: auto;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.details li {
-  list-style: none;
-  background: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.details p {
-  font-size: 16px;
-  color: #333;
-  margin: 0;
-}
-
-.details p strong {
-  display: inline-block;
-  min-width: 100px;
-  color: #222;
 }
 
 .details p span {
-  color: #666;
+  color: var(--grey-text);
 }

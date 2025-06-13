@@ -3,7 +3,7 @@
   --background: #f4f4f4;
   --white: #fff;
   --accent: #008000;
-  --main-text: #070000;
+  --main-text: #1e293b;
   --grey-text: #8f8f8f;
   --error: #f44336;
 
@@ -12,6 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
