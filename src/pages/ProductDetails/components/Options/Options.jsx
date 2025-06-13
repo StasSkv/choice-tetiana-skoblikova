@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import s from './Options.module.css';
+import { IoIosArrowDropdown } from 'react-icons/io';
 
 const titles = {
-    actions: 'ДІЯ АКТИВНИХ КОМПОНЕНТІВ',
+  actions: 'ДІЯ АКТИВНИХ КОМПОНЕНТІВ',
   using: 'СПОСІБ ВИКОРИСТАННЯ',
   recommendations: 'РЕКОМЕНДАЦІЇ',
   composition: 'СКЛАД',
@@ -25,10 +26,12 @@ export const Options = ({ info }) => {
           <li key={index} className={s.item}>
             <button className={s.header} onClick={() => toggle(index)}>
               {item.name ? titles[item.name] : 'ДІЯ АКТИВНИХ КОМПОНЕНТІВ'}
-              <span className={`${s.icon} ${openIndex === index ? s.open : ''}`}>⌄</span>
+              <span className={`${s.icon} ${openIndex === index ? s.openIcon : ''}`}>
+                <IoIosArrowDropdown />{' '}
+              </span>
             </button>
 
-            {openIndex === index && (
+            <div className={`${s.contentWrapper} ${openIndex === index ? s.open : ''}`}>
               <div className={s.content}>
                 {Array.isArray(item.actions) ? (
                   <ul>
@@ -45,7 +48,7 @@ export const Options = ({ info }) => {
                   <p>{item.desc}</p>
                 )}
               </div>
-            )}
+            </div>
           </li>
         ))}
       </ul>

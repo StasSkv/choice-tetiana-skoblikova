@@ -7,7 +7,7 @@ export const Details = ({info}) => {
       {info.map((item, index) => (
         <li key={index}>
           <p>
-            {item.name}: <span>{item.desc}</span>
+            {item.name}<span>{item.desc}</span>
           </p>
         </li>
       ))}
