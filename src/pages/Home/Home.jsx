@@ -7,6 +7,7 @@ const Home = () => {
         <h2>Привіт, я Скоблікова Тетяна</h2>
         <p> Якщо ти будеш замовляти в мене багато продукції, то я куплю собі бібіку!</p>
         <img src={tetiana} alt="" className={s.tetiana} />
+         <img className={s.productImg} />
       </div>
     </section>
   );

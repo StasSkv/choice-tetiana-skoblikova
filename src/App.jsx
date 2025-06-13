@@ -8,7 +8,14 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import { ProductDetails } from './pages/ProductDetails/ProductDetails.jsx';
 
 const App = () => {
+  const update = (id) => {
+    return id.toLowerCase().split(' ').join('-');
+  };
+
+  console.log(update('Enzyme Powder AGE CONTROL'));
+
   return (
+    
     <>
       <Routes>
         <Route path="/" element={<Layout />}>

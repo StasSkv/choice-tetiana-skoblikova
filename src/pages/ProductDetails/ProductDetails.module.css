@@ -40,16 +40,17 @@
   font-size: 18px;
 }
 
-.apoint{
+.apoint {
   background: var(--white);
   font-weight: 500;
+  max-width: 400px;
   padding: 8px 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .wrap {
-    width: 100%;
+  width: 100%;
 }
 .descriptionWrap h2 {
   margin-bottom: 20px;

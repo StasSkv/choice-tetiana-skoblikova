@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js/';
 import s from './ProductDetails.module.css';
-import img from '../../assets/images/shower-gel-mood-pleasure.png';
 import clsx from 'clsx';
 import { Details } from './components/Details/Details.jsx';
 import { Options } from './components/Options/Options.jsx';
@@ -13,6 +12,7 @@ export const ProductDetails = () => {
   const { id } = useParams();
   const products = useSelector(selectAllProducts);
   const product = products.find((product) => product.id === id);
+console.log(id);
 
   if (!product) return <p>Товар не знайдено</p>;
 
@@ -22,7 +22,7 @@ export const ProductDetails = () => {
         <div className={clsx('container', s.productContainer)}>
           <div className={s.productHeaderWrap}>
             <div className={s.productImgWrap}>
-              <img src={img} alt="" className={s.productImg} />
+              <img src={`/images/${product.img}`} alt={ product.name} className={s.productImg} />
             </div>
             <div className={s.descriptionWrap}>
               <div className={s.wrap}>
@@ -43,7 +43,7 @@ export const ProductDetails = () => {
                 <p className={s.apoint}>
                   Призначення: <span>{product.appointment}</span>
                 </p>
-                <Details info={product.details} />
+                {product.detail && <Details info={product.details} />}
               </div>
             </div>
           </div>

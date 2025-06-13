@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
-import img from '../../assets/images/product.png';
 import s from './Cart.module.css';
 import {
   addclearCart,
@@ -63,7 +62,7 @@ export const Cart = ({ onClose }) => {
               className={s.productItem}
               onClick={(e) => handleCardClick(e, product.id)}
             >
-              <img src={img} alt="" className={s.productImg} />
+              <img src={`/images/${product.img}`} alt={product.name} className={s.productImg} />
               <div className={s.description}>
                 <h3>{product.name}</h3>
                 <p>{product.text}</p>

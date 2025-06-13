@@ -1,5 +1,4 @@
 import s from './ProductCard.module.css';
-import image from '../../assets/images/product.png';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { makeSelectIsProductFavorite } from '../../redux/favoritesSlice/favoritesSelectors';
@@ -11,13 +10,13 @@ import { LikeButton } from '../Buttons/LikeButton/LikeButton.jsx';
 import { DeleteButton } from '../Buttons/DeleteButton/DeleteButton.jsx';
 import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
 
-export const ProductCard = ({ id, price, name, text, quantity, isFavoritesPage = false }) => {
+export const ProductCard = ({ id, price, img, name, text, quantity, isFavoritesPage = false }) => {
   const isLoved = useSelector(makeSelectIsProductFavorite(id));
   const isInCart = useSelector(makeSelectIsProductInCart(id));
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
 
-  const productData = { id, name, price, text, quantity };
+  const productData = { id, name, img, price, text, quantity };
 
   const handleCardClick = (e) => {
     if (e.target.closest('button')) return;
@@ -32,7 +31,7 @@ export const ProductCard = ({ id, price, name, text, quantity, isFavoritesPage =
         <LikeButton isLoved={isLoved} productData={productData} />
       )}
 
-      <img src={image} alt={name} className={s.productImage} />
+      <img src={`/images/${img}`} alt={name} className={s.productImage} />
       <div className={s.descriptionWrap}>
         <p className={s.name}>{name}</p>
         <div className={s.textAndOptions}>
