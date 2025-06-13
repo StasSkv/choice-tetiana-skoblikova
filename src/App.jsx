@@ -6,16 +6,13 @@ import { Layout } from './components/Layout/Layout';
 import { Favorites } from './pages/Favorites/Favorites.jsx';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { ProductDetails } from './pages/ProductDetails/ProductDetails.jsx';
+import { useSelector } from 'react-redux';
+import { selectAllProducts } from './redux/productsSlice/productsSelectors.js';
 
 const App = () => {
-  const update = (id) => {
-    return id.toLowerCase().split(' ').join('-');
-  };
-
-  console.log(update('Enzyme Powder AGE CONTROL'));
-
+  const allProducts = useSelector(selectAllProducts)
+  console.log('Products from state:', allProducts);
   return (
-    
     <>
       <Routes>
         <Route path="/" element={<Layout />}>

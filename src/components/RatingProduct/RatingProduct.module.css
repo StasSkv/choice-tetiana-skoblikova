@@ -1,0 +1,19 @@
+.ratingWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.star:last-child {
+  margin-right: 0;
+}
+
+.ratingValue {
+  margin-left: 8px;
+  font-weight: bold;
+  user-select: none;
+}

@@ -26,12 +26,19 @@ const favoritesPersistConfig = {
   storage,
 };
 
+const persistProductsConfig = {
+  key: 'favorites',
+  version: 1,
+  storage,
+};
+
 const persistedReducer = persistReducer(persistConfig, cartSlice);
 const persistedFavoritesReducer = persistReducer(favoritesPersistConfig, favoritesReducer);
+const persistedProductsReducer = persistReducer(persistProductsConfig, productsReducer);
 
 export const store = configureStore({
   reducer: {
-    products: productsReducer,
+    products: persistedProductsReducer,
     cart: persistedReducer,
     favorites: persistedFavoritesReducer,
   },

@@ -7,12 +7,12 @@ import { Details } from './components/Details/Details.jsx';
 import { Options } from './components/Options/Options.jsx';
 import { BsCart4 } from 'react-icons/bs';
 import { InfoSwitcher } from './components/InfoSwitcher/InfoSwitcher.jsx';
+import { RatingProduct } from '../../components/RatingProduct/RatingProduct.jsx';
 
 export const ProductDetails = () => {
   const { id } = useParams();
   const products = useSelector(selectAllProducts);
   const product = products.find((product) => product.id === id);
-console.log(id);
 
   if (!product) return <p>Товар не знайдено</p>;
 
@@ -22,7 +22,7 @@ console.log(id);
         <div className={clsx('container', s.productContainer)}>
           <div className={s.productHeaderWrap}>
             <div className={s.productImgWrap}>
-              <img src={`/images/${product.img}`} alt={ product.name} className={s.productImg} />
+              <img src={`/images/${product.img}`} alt={product.name} className={s.productImg} />
             </div>
             <div className={s.descriptionWrap}>
               <div className={s.wrap}>
@@ -38,6 +38,7 @@ console.log(id);
                     </span>
                   </button>
                 </div>
+                <RatingProduct productId={product.id} />
               </div>
               <div className={s.appointmentWrap}>
                 <p className={s.apoint}>
