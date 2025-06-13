@@ -8,6 +8,7 @@ import { Options } from './components/Options/Options.jsx';
 import { BsCart4 } from 'react-icons/bs';
 import { InfoSwitcher } from './components/InfoSwitcher/InfoSwitcher.jsx';
 import { RatingProduct } from '../../components/RatingProduct/RatingProduct.jsx';
+import { Main } from './components/Main/Main.jsx';
 
 export const ProductDetails = () => {
   const { id } = useParams();
@@ -20,36 +21,10 @@ export const ProductDetails = () => {
     <>
       <section className={s.ProductDetails}>
         <div className={clsx('container', s.productContainer)}>
-          <div className={s.productHeaderWrap}>
-            <div className={s.productImgWrap}>
-              <img src={`/images/${product.img}`} alt={product.name} className={s.productImg} />
-            </div>
-            <div className={s.descriptionWrap}>
-              <div className={s.wrap}>
-                <h2>{product.name}</h2>
-                <p className={s.text}>{product.text}</p>
-                <p className={s.howMany}>{product.howMany}</p>
-                <div className={s.btnWrap}>
-                  <p className={s.price}>{product.price} грн</p>
-                  <button className={s.btnBuy}>
-                    Придбати
-                    <span>
-                      <BsCart4 />
-                    </span>
-                  </button>
-                </div>
-                <RatingProduct productId={product.id} />
-              </div>
-              <div className={s.appointmentWrap}>
-                <p className={s.apoint}>
-                  Призначення: <span>{product.appointment}</span>
-                </p>
-                {product.detail && <Details info={product.details} />}
-              </div>
-            </div>
-          </div>
+          <Main product={product} />
         </div>
       </section>
+      
       <section>
         <div className={clsx('container', s.productContainer)}>
           <InfoSwitcher
