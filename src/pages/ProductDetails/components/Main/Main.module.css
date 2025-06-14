@@ -70,7 +70,7 @@
 }
 
 .btnBuy {
-  width: 200px;
+  width: 210px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -83,6 +83,12 @@
   font-family: var(--font-family);
   border: none;
   transition: opacity 0.4s ease;
+}
+
+.btnBuy span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btnBuy:hover {

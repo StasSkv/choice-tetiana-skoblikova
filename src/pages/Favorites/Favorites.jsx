@@ -4,14 +4,20 @@ import s from './Favorites.module.css';
 import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
 import { ProductsList } from '../../components/ProductList/ProductList.jsx';
+import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 
 export const Favorites = () => {
-  const favoritesProducts = useSelector(selectFavoritesProducts);
+  const allProducts = useSelector(selectAllProducts);
+  const productInFavorites = useSelector(selectFavoritesProducts);
+
+  const favoritesProducts = allProducts.filter((product) =>
+    productInFavorites.includes(product.id)
+  );
 
   return (
     <section className={s.favorites}>
       <div className="container">
-        <h2 className={s.subtitle}>Улюбленні товари</h2>
+        <h2 className={s.subtitle}>Улюблені товари</h2>
 
         {favoritesProducts.length > 0 ? (
           <ProductsList products={favoritesProducts} isFavoritesPage={true} />

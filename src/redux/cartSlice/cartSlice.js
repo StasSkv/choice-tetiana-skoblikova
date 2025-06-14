@@ -1,36 +1,52 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
-  name: 'cartSlice',
+  name: 'cart',
   initialState: {
     products: [],
   },
   reducers: {
     addProductToCart(state, action) {
-      state.products.push(action.payload);
+      const id = action.payload;
+      const item = state.products.find((p) => p.id === id);
+      if (item) {
+        item.quantity += 1;
+      } else {
+        state.products.push({ id, quantity: 1 });
+      }
+    },
+    addPlusQuantity(state, action) {
+      const id = action.payload;
+      const item = state.products.find((p) => p.id === id);
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+    addMinusQuantity(state, action) {
+      const id = action.payload;
+      const item = state.products.find((p) => p.id === id);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+      } else {
+        state.products = state.products.filter((p) => p.id !== id);
+      }
+    },
+    addDeleteProduct(state, action) {
+      const id = action.payload;
+      state.products = state.products.filter((p) => p.id !== id);
     },
     addclearCart(state) {
       state.products = [];
     },
-    addDeleteProduct(state, action) {
-      state.products = state.products.filter((product) => product.id !== action.payload);
-    },
-    addPlusQuantity(state, action) {
-      const id = action.payload;
-      state.products = state.products.map((product) =>
-        product.id === id ? { ...product, quantity: (product.quantity || 1) + 1 } : product
-      );
-    },
-    addMinusQuantity(state, action) {
-      const id = action.payload;
-      state.products = state.products.map((product) =>
-        product.id === id ? { ...product, quantity: (product.quantity || 1) - 1 } : product
-      );
-    },
   },
 });
 
-export const { addProductToCart, addclearCart, addDeleteProduct, addPlusQuantity, addMinusQuantity } =
-  cartSlice.actions;
+export const {
+  addProductToCart,
+  addclearCart,
+  addDeleteProduct,
+  addPlusQuantity,
+  addMinusQuantity,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

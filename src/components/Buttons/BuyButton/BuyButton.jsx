@@ -6,12 +6,11 @@ import { useDispatch } from 'react-redux';
 import { addProductToCart } from '../../../redux/cartSlice/cartSlice.js';
 import { toast } from 'react-toastify';
 
-export const BuyButton = ({ productData, isInCart }) => {
+export const BuyButton = ({ id, quantity, isInCart }) => {
   const dispatch = useDispatch();
 
-  const handleBuy = (e) => {
-    e.stopPropagation();
-    dispatch(addProductToCart(productData));
+  const handleBuy = () => {
+    dispatch(addProductToCart(id, quantity));
     toast.success('Товар додано до кошику');
   };
 

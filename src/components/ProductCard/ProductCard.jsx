@@ -1,25 +1,27 @@
 import s from './ProductCard.module.css';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-import { makeSelectIsProductFavorite } from '../../redux/favoritesSlice/favoritesSelectors';
-import { makeSelectIsProductInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 import { LikeButton } from '../Buttons/LikeButton/LikeButton.jsx';
 import { DeleteButton } from '../Buttons/DeleteButton/DeleteButton.jsx';
 import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
+import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
+import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
+import { useState } from 'react';
+import { RatingProduct } from '../RatingProduct/RatingProduct.jsx';
 
-export const ProductCard = ({ id, price, img, name, text, quantity, isFavoritesPage = false }) => {
-  const isLoved = useSelector(makeSelectIsProductFavorite(id));
-  const isInCart = useSelector(makeSelectIsProductInCart(id));
+export const ProductCard = ({ id, price, quantity, img, name, text, isFavoritesPage = false }) => {
+  const productsInCart = useSelector(selectProductsInCart);
+  const productsInFavorites = useSelector(selectFavoritesProducts);
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
 
-  const productData = { id, name, img, price, text, quantity };
+  const isInCart = productsInCart.some((product) => product && product.id === id);
+  const isInFavorite = productsInFavorites.includes(id);
 
   const handleCardClick = (e) => {
-    if (e.target.closest('button')) return;
+    if (e.target.closest('button') || e.target.closest('.rating')) return;
     navigate(`/product/${id}`);
   };
 
@@ -28,17 +30,22 @@ export const ProductCard = ({ id, price, img, name, text, quantity, isFavoritesP
       {isFavoritesPage ? (
         <DeleteButton id={id} onStartRemove={() => setIsRemoving(true)} />
       ) : (
-        <LikeButton isLoved={isLoved} productData={productData} />
+        <LikeButton isLoved={isInFavorite} id={id} />
       )}
 
       <img src={`/images/${img}`} alt={name} className={s.productImage} />
       <div className={s.descriptionWrap}>
         <p className={s.name}>{name}</p>
         <div className={s.textAndOptions}>
-          <p className={clsx(s.text, { [s.textIsInCart]: isInCart })}>{text}</p>
+          <div>
+            <p className={clsx(s.text, { [s.textIsInCart]: isInCart })}>{text}</p>
+            <div className={clsx('rating', s.rating, {[s.ratingIsInCart]:isInCart})}>
+              <RatingProduct productId={id} />
+            </div>
+          </div>
           <div className={s.options}>
             <p className={clsx(s.price, { [s.priceIsInCart]: isInCart })}>{`${price} грн`}</p>
-            <BuyButton productData={productData} isInCart={isInCart} />
+            <BuyButton id={id} quantity={quantity} isInCart={isInCart} />
           </div>
         </div>
       </div>

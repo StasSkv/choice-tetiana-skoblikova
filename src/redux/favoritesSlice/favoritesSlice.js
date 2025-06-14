@@ -7,12 +7,14 @@ const favoritesSlice = createSlice({
   },
   reducers: {
     addProductToFavorites(state, action) {
-      state.favoritesProducts.push(action.payload);
+      const id = action.payload;
+      if (!state.favoritesProducts.includes(id)) {
+        state.favoritesProducts.push(id);
+      }
     },
     removeProductFromFavorites(state, action) {
-      state.favoritesProducts = state.favoritesProducts.filter(
-        (item) => item.id !== action.payload
-      );
+      const id = action.payload;
+      state.favoritesProducts = state.favoritesProducts.filter((favId) => favId !== id);
     },
   },
 });

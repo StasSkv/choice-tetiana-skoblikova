@@ -50,6 +50,7 @@ export const Navigation = () => {
       <FavoritesLink count={favoriteItems.length} animate={animateFavorites} />
       <AccountLink />
       <CartLink count={productsInCart.length} totalSum={formatted} animate={animateCart} />
+
     </nav>
   );
 };

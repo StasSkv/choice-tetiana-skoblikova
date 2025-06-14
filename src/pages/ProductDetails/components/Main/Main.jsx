@@ -2,12 +2,18 @@ import { BsCart4 } from 'react-icons/bs';
 import { RatingProduct } from '../../../../components/RatingProduct/RatingProduct.jsx';
 import { Details } from '../Details/Details.jsx';
 import s from './Main.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addProductToCart } from '../../../../redux/cartSlice/cartSlice.js';
+import { selectProductsInCart } from '../../../../redux/cartSlice/cartSelectors.js';
+import clsx from 'clsx';
+import { GiCheckMark } from 'react-icons/gi';
 
 export const Main = ({ product }) => {
   const dispatch = useDispatch();
+  const productsInCart = useSelector(selectProductsInCart);
+
+  const isInCart = productsInCart.some(({ id }) => id === product.id);
 
   const handleBuy = () => {
     dispatch(addProductToCart(product.id));
@@ -26,8 +32,13 @@ export const Main = ({ product }) => {
           <p className={s.howMany}>{product.howMany}</p>
           <div className={s.btnWrap}>
             <p className={s.price}>{product.price} грн</p>
-            <button className={s.btnBuy} onClick={handleBuy}>
-              Придбати
+            <button className={s.btnBuy} onClick={handleBuy} disabled={isInCart}>
+              {isInCart ? 'В кошику' : 'Придбати'}
+              {isInCart && (
+                <span>
+                  <GiCheckMark className={clsx(s.check, s.checkVisible)} />
+                </span>
+              )}
               <span>
                 <BsCart4 />
               </span>

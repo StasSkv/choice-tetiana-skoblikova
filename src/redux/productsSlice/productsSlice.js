@@ -20,8 +20,6 @@ const productsSlice = createSlice({
   },
 });
 
-console.log(products);
-
 export const { addUpdateProductRating } = productsSlice.actions;
 
 export default productsSlice.reducer;

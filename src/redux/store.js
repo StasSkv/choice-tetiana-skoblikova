@@ -14,8 +14,8 @@ import cartSlice from './cartSlice/cartSlice.js';
 import productsReducer from './productsSlice/productsSlice.js';
 import favoritesReducer from './favoritesSlice/favoritesSlice.js';
 
-const persistConfig = {
-  key: 'root',
+const cartPersistConfig = {
+  key: 'cart',
   version: 1,
   storage,
 };
@@ -26,21 +26,17 @@ const favoritesPersistConfig = {
   storage,
 };
 
-const persistProductsConfig = {
-  key: 'favorites',
+const productsPersistConfig = {
+  key: 'products',
   version: 1,
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, cartSlice);
-const persistedFavoritesReducer = persistReducer(favoritesPersistConfig, favoritesReducer);
-const persistedProductsReducer = persistReducer(persistProductsConfig, productsReducer);
-
 export const store = configureStore({
   reducer: {
-    products: persistedProductsReducer,
-    cart: persistedReducer,
-    favorites: persistedFavoritesReducer,
+    cart: persistReducer(cartPersistConfig, cartSlice),
+    favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
+    products: persistReducer(productsPersistConfig, productsReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -50,4 +46,4 @@ export const store = configureStore({
     }),
 });
 
-export let persistor = persistStore(store);
+export const persistor = persistStore(store);

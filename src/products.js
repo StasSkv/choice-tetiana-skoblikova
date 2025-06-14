@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 'day-cream-age-control',
-    quantity: 1,
+    quantity: 0,
     rating: [],
     img: 'day-cream-age-control.png',
     category: 'white-mandarine',
@@ -116,7 +116,7 @@ export const products = [
   {
     id: 'enzyme-powder-age-control',
     img: 'enzyme-powder-age-control.png',
-    quantity: 1,
+    quantity: 0,
     rating: [],
     category: 'white-mandarine',
     name: 'ENZYME POWDER AGE CONTROL',
@@ -227,7 +227,7 @@ export const products = [
   {
     id: 'night-cream-age-control',
     img: 'night-cream-age-control.png',
-    quantity: 1,
+    quantity: 0,
     rating: [],
     category: 'white-mandarine',
     name: 'NIGHT CREAM AGE CONTROL',
@@ -335,7 +335,7 @@ export const products = [
   {
     id: 'toner-age-control',
     img: 'toner-age-control.png',
-    quantity: 1,
+    quantity: 0,
     rating: [],
     category: 'white-mandarine',
     name: 'TONER AGE CONTROL',
@@ -437,7 +437,7 @@ export const products = [
   {
     id: 'shower-gel-mood-creative',
     img: 'shower-gel-mood-creative.png',
-    quantity: 1,
+    quantity: 0,
     rating: [],
     category: 'white-mandarine',
     name: 'SHOWER GEL MOOD CREATIVE',
@@ -566,7 +566,7 @@ export const products = [
   {
     id: 'shower-gel-mood-energy',
     img: 'shower-gel-mood-energy.png',
-    quantity: 1,
+    quantity: 0,
     rating: [],
     category: 'white-mandarine',
     name: 'SHOWER GEL MOOD ENERGY',
@@ -694,7 +694,7 @@ export const products = [
   {
     id: 'shower-gel-mood-pleasure',
     img: 'shower-gel-mood-pleasure.png',
-    quantity: 1,
+    quantity: 0,
     rating: [],
     category: 'white-mandarine',
     name: 'SHOWER GEL MOOD PLEASURE',

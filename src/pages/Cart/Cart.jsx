@@ -10,12 +10,21 @@ import {
 } from '../../redux/cartSlice/cartSlice.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 
 export const Cart = ({ onClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector(selectProductsInCart);
+  const allProducts = useSelector(selectAllProducts);
+  const productsInCart = useSelector(selectProductsInCart);
 
+  const products = productsInCart
+    .map((cartItem) => {
+      const product = allProducts.find((p) => p.id === cartItem.id);
+      return product ? { ...product, quantity: cartItem.quantity } : null;
+    })
+    .filter(Boolean);
+  
   const handleClickClearCart = () => {
     dispatch(addclearCart());
     toast.warning('Кошик очищенно');
