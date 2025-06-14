@@ -4,14 +4,16 @@ import styles from './RatingProduct.module.css';
 import { addUpdateProductRating } from '../../redux/productsSlice/productsSlice';
 import { useState } from 'react';
 import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
+import { toast } from 'react-toastify';
 
 export const RatingProduct = ({ productId }) => {
   const dispatch = useDispatch();
+  const [hoverRating, setHoverRating] = useState(0);
   const allProducts = useSelector(selectAllProducts);
+
   const product = allProducts.find((p) => p.id === productId);
-
   const ratings = product?.rating || [];
-
+  
   const getAvgRating = (ratings) => {
     if (!ratings.length) return 0;
     const sum = ratings.reduce((acc, r) => acc + r, 0);
@@ -20,10 +22,9 @@ export const RatingProduct = ({ productId }) => {
 
   const avgRating = getAvgRating(ratings);
 
-  const [hoverRating, setHoverRating] = useState(0);
-
-    const handleClick = (value) => {
+  const handleClick = (value) => {
     dispatch(addUpdateProductRating({ id: productId, value }));
+    toast.success('Ваша оцінка зарахована');
   };
 
   const renderStar = (starValue) => {

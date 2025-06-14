@@ -12,7 +12,6 @@ import { GiCheckMark } from 'react-icons/gi';
 export const Main = ({ product }) => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(selectProductsInCart);
-
   const isInCart = productsInCart.some(({ id }) => id === product.id);
 
   const handleBuy = () => {
@@ -50,7 +49,7 @@ export const Main = ({ product }) => {
           <p className={s.apoint}>
             Призначення: <span>{product.appointment}</span>
           </p>
-          {product.detail && <Details info={product.details} />}
+          {product.details && <Details info={product.details} />}
         </div>
       </div>
     </div>

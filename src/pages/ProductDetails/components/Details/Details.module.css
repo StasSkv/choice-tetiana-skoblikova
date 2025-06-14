@@ -4,6 +4,8 @@
   flex-direction: column;
   gap: 8px;
   margin: auto;
+  line-height: 1.6;
+
 }
 
 .details p span {

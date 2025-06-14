@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { Options } from './components/Options/Options.jsx';
 import { InfoSwitcher } from './components/InfoSwitcher/InfoSwitcher.jsx';
 import { Main } from './components/Main/Main.jsx';
+import {MySwiper} from '../../components/MySwiper/MySwiper.jsx';
 
 export const ProductDetails = () => {
   const { id } = useParams();
@@ -35,6 +36,12 @@ export const ProductDetails = () => {
       <section className={s.optionsSection}>
         <div className={clsx('container', s.productContainer)}>
           <Options info={product.options} />
+        </div>
+      </section>
+
+      <section>
+        <div className={clsx('container', s.productContainer)}>
+          <MySwiper />
         </div>
       </section>
     </>

@@ -24,7 +24,7 @@ export const Cart = ({ onClose }) => {
       return product ? { ...product, quantity: cartItem.quantity } : null;
     })
     .filter(Boolean);
-  
+
   const handleClickClearCart = () => {
     dispatch(addclearCart());
     toast.warning('Кошик очищенно');
