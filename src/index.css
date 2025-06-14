@@ -90,3 +90,33 @@ img {
     padding: 0 12px;
   }
 }
+
+.swiper {
+  position: relative;
+}
+
+
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: var(--white);
+  background-color: var(--accent);
+  width: 30px;
+  height: 30px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  font-size: 30px !important;
+}
+
+.swiper-button-next::after {
+  position: absolute;
+  right: -10px;
+}
+
+.swiper-button-prev::after {
+  position: absolute;
+  left: -10px;
+}

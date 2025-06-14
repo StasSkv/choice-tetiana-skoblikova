@@ -1,7 +1,3 @@
-.optionsSection {
-  margin-bottom: 100px;
-}
-
 .productContainer {
   padding: 20px 100px;
 }
@@ -99,4 +95,17 @@
   font-size: 40px;
   font-weight: 600;
   margin-bottom: auto;
+}
+
+.optionsSection {
+  margin-bottom: 50px;
+}
+
+.swiperTitle {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.mySwiper {
+  margin-bottom: 50px;
 }

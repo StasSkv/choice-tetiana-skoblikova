@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -8,32 +8,33 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import s from './MySwiper.module.css';
-
-const images = [
-  '/images/day-cream-age-control.png',
-  '/images/enzyme-powder-age-control.png',
-  '/images/night-cream-age-control.png',
-  '/images/shower-gel-mood-creative.png',
-  '/images/toner-age-control.png',
-];
+import { useSelector } from 'react-redux';
+import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
+import { ProductCard } from '../ProductCard/ProductCard.jsx';
 
 export const MySwiper = () => {
-  
+  const products = useSelector(selectAllProducts);
   return (
     <Swiper
       direction="horizontal"
       loop={true}
-      pagination={{ clickable: true }}
       navigation={true}
-      scrollbar={{ draggable: true }}
-      modules={[Navigation, Pagination, Scrollbar]}
-      style={{ height: '400px', width: '300px' }}
+      slidesPerView={4.4}
+      spaceBetween={20}
+      speed={800}
+      modules={[Navigation, Pagination, Scrollbar, Autoplay]}
+      style={{ height: '400px', width: '100%' }}
+      breakpoints={{
+        320: { slidesPerView: 1 },
+        678: { slidesPerView: 2 },
+        968: { slidesPerView: 4.4 },
+      }}
       className={s.swiper}
     >
-      {images.map((src, index) => (
-        <SwiperSlide key={index}>
+      {products.map((product) => (
+        <SwiperSlide key={product.id} className={s.slideWrap}>
           <div className={s.slide}>
-            <img src={src} alt={`product ${index + 1}`} />
+            <ProductCard {...product} />
           </div>
         </SwiperSlide>
       ))}

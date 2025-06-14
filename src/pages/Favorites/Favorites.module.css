@@ -3,10 +3,13 @@
   margin-bottom: 50px;
 }
 
+.productContainer {
+  padding: 20px 100px;
+}
+
 .subtitle {
   margin-bottom: 24px;
-  padding-left: 50px;
-  font-size: 38px;
+  font-size: 32px;
 }
 
 .productList {
@@ -56,4 +59,15 @@
 
 .goBack:active {
   transform: scale(1.1);
+}
+
+
+
+.swiperTitle {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.mySwiper {
+  margin-bottom: 50px;
 }
