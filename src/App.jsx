@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Home from './pages/Home/Home';
 import { Team } from './pages/Team/Team';
 import { Products } from './pages/Products/Products';
@@ -8,19 +9,22 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import { ProductDetails } from './pages/ProductDetails/ProductDetails.jsx';
 
 const App = () => {
+  const location = useLocation();
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="team" element={<Team />} />
-          <Route path="products" element={<Products />} />
-          <Route path="product/:id" element={<ProductDetails />} />
-          <Route path="favorites" element={<Favorites />} />
-        </Route>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="team" element={<Team />} />
+            <Route path="products" element={<Products />} />
+            <Route path="product/:id" element={<ProductDetails />} />
+            <Route path="favorites" element={<Favorites />} />
+          </Route>
 
-        <Route path="*" element={<Navigate to="/team" replace />} />
-      </Routes>
+          <Route path="*" element={<Navigate to="/team" replace />} />
+        </Routes>
+      </AnimatePresence>
 
       <ToastContainer
         position="bottom-left"

@@ -3,13 +3,29 @@
     margin-bottom: 50px;
 }
 
+.hero h2 {
+font-size: 48px;
+font-weight: 600;
+margin-bottom: 24px;
+}
+
+.hero p{
+    font-size: 28px;
+    font-weight: 400;
+}
+
+
 .container {
+    align-items: center;
+    justify-content: center;
      display: flex;
-     flex-direction: column;
      gap: 36px;
 }
 
 .tetiana {
     max-width: 400px;
-    margin: 0 auto;
+}
+
+.hello {
+    max-width: 600px;
 }

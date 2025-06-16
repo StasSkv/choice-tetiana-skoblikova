@@ -79,6 +79,7 @@ export const Cart = ({ onClose }) => {
               <div className={s.options}>
                 <div className={s.quantity}>
                   <button
+                    disabled={product.quantity === 1}
                     className={s.minus}
                     onClick={() => {
                       handleClickMinusQuantity(product.id);

@@ -7,7 +7,9 @@ export const AppBar = () => {
     <header className={s.header}>
       <div className={`container ${s.container}`}>
         <div className={s.logoWrap}>
-         <a href='/'> <img className={s.logoImg} src={logo} alt="logo" /></a>
+          <a href="/">
+            <img className={s.logoImg} src={logo} alt="logo" />
+          </a>
         </div>
         <Navigation />
       </div>

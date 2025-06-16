@@ -12,16 +12,10 @@
   font-size: 32px;
 }
 
-.productList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+.list {
+  margin-bottom: 50px;
 }
 
-.productCard {
-  max-width: calc((100% - 60px) / 4);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
 
 .isNotFavorite {
   padding: 50px;
@@ -60,8 +54,6 @@
 .goBack:active {
   transform: scale(1.1);
 }
-
-
 
 .swiperTitle {
   font-size: 32px;

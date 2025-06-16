@@ -137,6 +137,11 @@
   background-color: var(--main-text);
 }
 
+.minus:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .deleteBtn {
   padding: 0;
   display: flex;

@@ -1,11 +1,18 @@
-.navLinkAccount {
+.userBtn {
   height: 24px;
   margin-right: 8px;
   margin-left: 8px;
   transition: transform 0.4s ease;
+  border: none;
+  background-color: transparent;
+  position: relative;
 }
 
-.navLinkAccount:hover {
+.modalWrap {
+  position: relative;
+}
+
+.userBtn:hover {
   transform: scale(1.2);
 }
 
