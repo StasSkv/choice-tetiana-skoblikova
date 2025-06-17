@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import s from './UserWindow.module.css';
 import { IoExitOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
+import { FaArrowRightFromBracket } from 'react-icons/fa6';
 
 export const UserWindow = ({ user, onClose }) => {
   const navLinkStyle = ({ isActive }) => (isActive ? `${s.link} ${s.active}` : s.link);
@@ -25,7 +26,7 @@ export const UserWindow = ({ user, onClose }) => {
     <div className={s.backdrop} onClick={handleClose}>
       <div className={`${s.modal} ${animationClass}`} onClick={(e) => e.stopPropagation()}>
         <button className={s.closeButton} onClick={handleClose}>
-          ×
+          <FaArrowRightFromBracket  />
         </button>
         <div className={s.avatarWrapper}>
           <div className={s.notAvatar}>

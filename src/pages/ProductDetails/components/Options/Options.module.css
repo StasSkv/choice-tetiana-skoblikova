@@ -40,23 +40,23 @@
   transform-origin: center;
 }
 
-.openIcon {
-  transform: rotate(180deg);
-}
-
 .contentWrapper {
   overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.4s ease, padding 0.4s ease;
+  height: 0;
+  transition: height 0.4s ease;
+}
+
+.content {
+  padding: 8px 0;
+}
+
+.openIcon {
+  transform: rotate(180deg);
 }
 
 .contentWrapper.open {
   max-height: 1100px;
   padding-bottom: 16px;
-}
-
-.content {
-  animation: fadeIn 0.4s ease;
 }
 
 .content p {

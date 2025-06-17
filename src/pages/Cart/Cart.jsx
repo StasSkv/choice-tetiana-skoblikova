@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 
-export const Cart = ({ onClose }) => {
+export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const allProducts = useSelector(selectAllProducts);
@@ -45,7 +45,6 @@ export const Cart = ({ onClose }) => {
 
   const handleCardClick = (e, id) => {
     if (e.target.closest('button')) return;
-    if (onClose) onClose();
     navigate(`/product/${id}`);
   };
 

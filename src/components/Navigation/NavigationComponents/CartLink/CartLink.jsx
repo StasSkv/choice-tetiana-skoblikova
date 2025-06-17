@@ -50,10 +50,9 @@ export const CartLink = ({ animate }) => {
         onClose={() => {
           setModalIsOpen(false);
         }}
-        submitBtn={'Оформити замовлення'}
         order={formatted}
       >
-        <Cart onClose={() => setModalIsOpen(false)} />
+        <Cart />
       </CustomModal>
     </>
   );

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import s from './Options.module.css';
 import { IoIosArrowDropdown } from 'react-icons/io';
 
@@ -12,11 +12,27 @@ const titles = {
 };
 
 export const Options = ({ info }) => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndexes, setOpenIndexes] = useState([]);
+  const contentRefs = useRef([]);
 
   const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndexes((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
   };
+
+  useEffect(() => {
+    info.forEach((_, index) => {
+      const el = contentRefs.current[index];
+      if (!el) return;
+
+      if (openIndexes.includes(index)) {
+        el.style.height = el.scrollHeight + 'px';
+      } else {
+        el.style.height = '0px';
+      }
+    });
+  }, [openIndexes, info]);
 
   return (
     <div className={s.container}>
@@ -26,12 +42,12 @@ export const Options = ({ info }) => {
           <li key={index} className={s.item}>
             <button className={s.header} onClick={() => toggle(index)}>
               {item.name ? titles[item.name] : 'ДІЯ АКТИВНИХ КОМПОНЕНТІВ'}
-              <span className={`${s.icon} ${openIndex === index ? s.openIcon : ''}`}>
-                <IoIosArrowDropdown />{' '}
+              <span className={`${s.icon} ${openIndexes.includes(index) ? s.openIcon : ''}`}>
+                <IoIosArrowDropdown />
               </span>
             </button>
 
-            <div className={`${s.contentWrapper} ${openIndex === index ? s.open : ''}`}>
+            <div ref={(el) => (contentRefs.current[index] = el)} className={s.contentWrapper}>
               <div className={s.content}>
                 {Array.isArray(item.actions) ? (
                   <ul>

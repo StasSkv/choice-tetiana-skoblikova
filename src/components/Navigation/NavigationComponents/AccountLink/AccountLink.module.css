@@ -8,9 +8,7 @@
   position: relative;
 }
 
-.modalWrap {
-  position: relative;
-}
+
 
 .userBtn:hover {
   transform: scale(1.2);

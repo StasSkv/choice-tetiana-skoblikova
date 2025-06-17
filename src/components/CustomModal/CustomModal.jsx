@@ -3,8 +3,9 @@ import Modal from 'react-modal';
 import s from './CustomModal.module.css';
 import { TfiClose } from 'react-icons/tfi';
 import { GoArrowLeft } from 'react-icons/go';
+import { NavLink } from 'react-router-dom';
 
-const CustomModal = ({ isOpen, onClose, submitBtn, order, children }) => {
+const CustomModal = ({ isOpen, onClose, order, children }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
@@ -68,11 +69,7 @@ const CustomModal = ({ isOpen, onClose, submitBtn, order, children }) => {
             </p>
           </div>
         )}
-        {submitBtn && (
-          <button className={s.submitBtn} onClick={onClose}>
-            {submitBtn}
-          </button>
-        )}
+        <NavLink to="placing" className={s.submitBtn}>Оформити замовлення</NavLink>
       </div>
     </Modal>
   );
