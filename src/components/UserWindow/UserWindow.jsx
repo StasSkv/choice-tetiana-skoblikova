@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import s from './userModal.module.css';
+import s from './UserWindow.module.css';
 import { IoExitOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 
