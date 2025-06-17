@@ -20,7 +20,8 @@ export const AccountLink = () => {
         <UserModal
           user={{
             avatar: 'https://i.pravatar.cc/150?img=3',
-            name: 'Тетяна Скоблікова',
+            name: 'Тетяна',
+            lastName: 'Скоблікова',
             email: 'tetyana@example.com',
             info: 'Постійний клієнт з 2023 року',
           }}

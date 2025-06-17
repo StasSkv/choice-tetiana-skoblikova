@@ -1,7 +1,9 @@
 .backdrop {
-  position: absolute;
-  top: 100%;
-  right: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,19 +11,45 @@
 }
 
 .modal {
+  left: 30%;
+  top: -13%;
   background: var(--white);
   padding: 2rem;
   border-radius: 1rem;
   width: 300px;
   position: relative;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modalOpen {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.modalClose {
+  animation: fadeOut 0.3s ease-in-out forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(50%);
+  }
 }
 
 .closeButton {
@@ -35,15 +63,20 @@
 }
 
 .avatarWrapper {
-  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 32px;
+  gap: 8px;
 }
 
 .notAvatar {
-display: flex;
-align-items: center;
-justify-content: center;
-color: var(--white);
-font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--white);
+  font-size: 32px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -51,12 +84,99 @@ font-size: 32px;
   background-color: var(--accent);
 }
 
+.userNameWrap {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+}
 
+.userNameWrap .lastName {
+  margin-left: auto;
+}
 
-.name {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
+.mainBlock {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.link {
+  font-family: var(--font-family);
+  color: var(--main-text);
+  padding: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: color 0.4s ease-in-out, letter-spacing 0.4s ease-in-out;
+  position: relative;
+}
+
+.link:hover {
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.link::after {
+  content: '';
+  display: block;
+  height: 1.5px;
+  background-color: var(--accent);
+  width: 0;
+  opacity: 0;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 10px rgb(30, 181, 30);
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.link.active {
+  color: var(--accent);
+}
+
+.link.active::after {
+  width: 90%;
+  opacity: 1;
+}
+
+.exitBtn {
+  width: 100px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  background-color: transparent;
+  color: var(--main-text);
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.exitBtn span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: transform 0.4s ease;
+}
+
+.exitBtn:hover {
+  color: var(--error);
+  transform: scale(1.2);
+}
+
+.exitBtn:hover span {
+  transform: rotate(90deg);
 }
 
 .email {
