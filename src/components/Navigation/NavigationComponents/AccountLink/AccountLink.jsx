@@ -1,7 +1,8 @@
 import { VscAccount } from 'react-icons/vsc';
 import s from './AccountLink.module.css';
 import { useState } from 'react';
-import { UserModal } from '../../../userModal/userModal.jsx';
+import { UserWindow } from '../../../UserWindow/UserWindow.jsx';
+
 
 export const AccountLink = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,7 +18,7 @@ export const AccountLink = () => {
         <VscAccount className={s.acoount} />
       </button>
       {showModal && (
-        <UserModal
+        <UserWindow
           user={{
             avatar: 'https://i.pravatar.cc/150?img=3',
             name: 'Тетяна',

@@ -3,7 +3,7 @@ import s from './userModal.module.css';
 import { IoExitOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 
-export const UserModal = ({ user, onClose }) => {
+export const UserWindow = ({ user, onClose }) => {
   const navLinkStyle = ({ isActive }) => (isActive ? `${s.link} ${s.active}` : s.link);
 
   const [animationClass, setAnimationClass] = useState(s.modalOpen);
