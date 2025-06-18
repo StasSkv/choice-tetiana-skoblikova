@@ -53,12 +53,16 @@
 }
 
 .closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   position: absolute;
   top: 10px;
   right: 10px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 16px;
   cursor: pointer;
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -165,6 +169,8 @@ transform: scale(1.1);
   border: none;
   background-color: transparent;
   color: var(--main-text);
+  padding: 5px;
+  margin-top: 12px;
   transition: color 0.4s ease, transform 0.4s ease;
 }
 
@@ -187,11 +193,11 @@ transform: scale(1.1);
 
 .email {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--grey-text);
   margin-bottom: 0.5rem;
 }
 
 .info {
   font-size: 0.85rem;
-  color: #777;
+  color: var(--grey-text);
 }

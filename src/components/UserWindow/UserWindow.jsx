@@ -26,7 +26,7 @@ export const UserWindow = ({ user, onClose }) => {
     <div className={s.backdrop} onClick={handleClose}>
       <div className={`${s.modal} ${animationClass}`} onClick={(e) => e.stopPropagation()}>
         <button className={s.closeButton} onClick={handleClose}>
-          <FaArrowRightFromBracket  />
+          сховати <FaArrowRightFromBracket />
         </button>
         <div className={s.avatarWrapper}>
           <div className={s.notAvatar}>
@@ -42,7 +42,7 @@ export const UserWindow = ({ user, onClose }) => {
           <NavLink className={navLinkStyle}>Мій кабінет</NavLink>
           <NavLink
             className={navLinkStyle}
-            to="/favorites"
+            to="/"
             onClick={(e) => {
               e.stopPropagation();
               onClose();
@@ -50,15 +50,16 @@ export const UserWindow = ({ user, onClose }) => {
           >
             Улюбленні товари
           </NavLink>
-          <NavLink className={navLinkStyle} to="/favorites">
+          <NavLink className={navLinkStyle} to="/">
             Переглянуті товари
           </NavLink>
-          <NavLink className={navLinkStyle} to="/favorites">
+          <NavLink className={navLinkStyle} to="/">
             Історія замовлень
           </NavLink>
-          <NavLink className={navLinkStyle} to="/favorites">
-            Кошик
+          <NavLink className={navLinkStyle} to="/">
+            Оформити замовлення
           </NavLink>
+       
 
           <button className={s.exitBtn} onClick={onClose}>
             <span>

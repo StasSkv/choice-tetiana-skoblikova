@@ -14,6 +14,10 @@ export const ProductsList = ({ products, isFavoritesPage = false }) => {
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
