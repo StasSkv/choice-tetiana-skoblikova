@@ -1,0 +1,102 @@
+.header {
+  width: 100%;
+  background-color: var(--white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.header::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: var(--accent);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.main {
+  background-color: var(--white);
+  margin-bottom: 100px;
+  padding-top: 40px;
+}
+
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 16px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    max-width: 1280px;
+    padding: 0 60px;
+  }
+}
+
+.goBack button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+}
+
+.logoWrap {
+  overflow: hidden;
+}
+
+.logoImg {
+  width: 300px;
+  max-height: 100px;
+  object-fit: cover;
+}
+
+.main h2 {
+  margin-bottom: 24px;
+  font-size: 32px;
+}
+
+
+
+.form {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.formInfoWrap {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+  min-width: 55%;
+  gap: 80px;
+}
+
+.main h3 {
+  font-size: 24px;
+}
+
+.sendWindow {
+  position: sticky;
+  top: 24px;
+  height: fit-content;
+  overflow: visible;
+}

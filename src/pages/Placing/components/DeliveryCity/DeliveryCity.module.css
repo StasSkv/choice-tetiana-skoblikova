@@ -1,0 +1,24 @@
+
+.popularCities {
+  margin-top: 8px;
+}
+
+.cityList {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 4px 0 0 0;
+}
+
+.cityList li button {
+  padding: 4px 4px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cityList li button:hover {
+  background-color: #d4d4d4;
+}

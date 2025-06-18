@@ -1,0 +1,25 @@
+.wrapper {
+  margin-top: 32px;
+}
+
+.wrapper h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.option input {
+  margin-right: 12px;
+}
+
+.option label {
+  font-size: 16px;
+  color: var(--main-text-color);
+}
