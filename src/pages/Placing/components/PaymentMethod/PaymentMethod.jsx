@@ -1,9 +1,10 @@
 import s from './PaymentMethod.module.css';
 
 export const PaymentMethod = ({ formik }) => {
-  return (
+    return (
+      
     <div className={s.wrapper}>
-      <h3 className={s.title}>Спосіб оплати</h3>
+     
 
       <div className={s.option}>
         <input

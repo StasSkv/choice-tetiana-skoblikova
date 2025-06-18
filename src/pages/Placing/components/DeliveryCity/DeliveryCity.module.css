@@ -1,13 +1,22 @@
 
+
+
+.recipient {
+    margin-bottom: 12px;
+}
+
+.inputCityWrap {
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
 .popularCities {
-  margin-top: 8px;
+    margin-top: 4px;
 }
 
 .cityList {
-  list-style: none;
   display: flex;
-  padding: 0;
-  margin: 4px 0 0 0;
+  gap: 4px;
 }
 
 .cityList li button {

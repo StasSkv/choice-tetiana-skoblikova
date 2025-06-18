@@ -71,15 +71,17 @@ export const Placing = () => {
         </div>
       </header>
 
-      
       <section className={s.main}>
         <div className={`container ${s.mainContainer}`}>
-          <h2>Оформлення замовлення</h2>
           <form onSubmit={formik.handleSubmit} className={s.form}>
             <div className={s.formInfoWrap}>
+              <h2>Оформлення замовлення</h2>
               <Client formik={formik} />
-              <DeliveryCity formik={formik} />
-              <DeliveryWay formik={formik} />
+              <h3>2. Доставка</h3>
+              <div className={s.delivery}>
+                <DeliveryCity formik={formik} />
+              </div>
+               <h3>3. Спосіб оплати</h3>
               <PaymentMethod formik={formik} />
             </div>
 

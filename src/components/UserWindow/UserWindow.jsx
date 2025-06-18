@@ -56,10 +56,9 @@ export const UserWindow = ({ user, onClose }) => {
           <NavLink className={navLinkStyle} to="/">
             Історія замовлень
           </NavLink>
-          <NavLink className={navLinkStyle} to="/">
+          <NavLink className={navLinkStyle} to="/placing">
             Оформити замовлення
           </NavLink>
-       
 
           <button className={s.exitBtn} onClick={onClose}>
             <span>

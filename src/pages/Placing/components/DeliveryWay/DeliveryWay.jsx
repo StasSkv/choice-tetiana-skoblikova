@@ -4,7 +4,7 @@ import s from "./DeliveryWay.module.css"
 export const DeliveryWay = ({ formik }) => {
     return (
       <div className={s.deliveryOptions}>
-        <h3>Як доставити?</h3>
+        <h4>Як доставити?</h4>
 
         <label>
           <input

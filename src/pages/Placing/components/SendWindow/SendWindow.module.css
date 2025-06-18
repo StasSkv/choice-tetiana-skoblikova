@@ -4,6 +4,10 @@
   border-radius: 12px;
   padding: 32px 40px;
   top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .promocod {
@@ -11,17 +15,22 @@
   background-color: #ebebeb;
   min-width: 360px;
   height: 40px;
-  padding: 20px;
+  padding: 28px 20px;
   font-size: 18px;
   border-radius: 12px;
   letter-spacing: 1.3px;
   margin-bottom: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.submitBtn {
-  width: 200px;
-  height: fit-content;
-  background-color: var(--accent);
+
+
+.orderWrap {
+    margin-bottom: 24px;
+}
+
+.orderLine:not(:last-child) {
+  margin-bottom: 20px;
 }
 
 .orderLine {
@@ -31,21 +40,87 @@
   justify-content: space-between;
 }
 
+.order {
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 3px;
+}
 .orderLine p {
   white-space: nowrap;
+  padding-right: 3px;
 }
-
-
 
 .line {
   display: block;
   width: 100%;
   border-top: 3px dotted #999;
-  padding-bottom: 5px;
+  padding-bottom: 3px;
 }
 
-.order {
-    font-size: 28px;
-    font-weight: 600;
-    color: var(--accent);
+.delivery {
+    font-size: 16px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+    margin-bottom: 32px;
 }
+
+.rover {
+    font-size: 36px;
+}
+
+.poster {
+    width: 100%;
+    padding: 24px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: rgb(135, 206, 135);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    gap: 12px;
+    margin-bottom: 32px;
+     box-shadow: 0 4px 16px rgba(0, 128, 0, 0.2);
+}
+
+.poster div {
+    width: 100%;
+}
+
+.poster span {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.posterIcon {
+    font-size: 42px;
+    color: var(--white);
+}
+
+
+
+.total {
+    font-size: 32px;
+
+}
+
+.totalOrder {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.submitBtn {
+  width: 100%;
+padding: 16px 32px;
+  background-color: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+

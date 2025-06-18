@@ -1,3 +1,4 @@
+import { DeliveryWay } from '../DeliveryWay/DeliveryWay.jsx';
 import s from './DeliveryCity.module.css';
 import Select from 'react-select';
 
@@ -23,38 +24,40 @@ const departmentOptions = [
 export const DeliveryCity = ({ formik }) => {
   return (
     <div className={s.deliveryCity}>
-      <span>
+      <span className={s.recipient}>
         <input type="checkbox" defaultChecked />Я отримувач замовлення
       </span>
-      <h3>2. Доставка</h3>
+      <DeliveryWay formik={formik} />
 
-      <label htmlFor="city">Місто</label>
-      <Select
-        id="city"
-        name="city"
-        options={cityOptions}
-        value={cityOptions.find((option) => option.value === formik.values.city)}
-        onChange={(option) => {
-          formik.setFieldValue('city', option.value);
-          formik.setFieldValue('department', '');
-        }}
-        onBlur={() => formik.setFieldTouched('city', true)}
-        placeholder="Оберіть місто..."
-      />
-      {formik.touched.city && formik.errors.city && (
-        <div className={s.error}>{formik.errors.city}</div>
-      )}
+      <div className={s.inputCityWrap}>
+        <label htmlFor="city">Місто</label>
+        <Select
+          id="city"
+          name="city"
+          options={cityOptions}
+          value={cityOptions.find((option) => option.value === formik.values.city)}
+          onChange={(option) => {
+            formik.setFieldValue('city', option.value);
+            formik.setFieldValue('department', '');
+          }}
+          onBlur={() => formik.setFieldTouched('city', true)}
+          placeholder="Оберіть місто..."
+        />
+        {formik.touched.city && formik.errors.city && (
+          <div className={s.error}>{formik.errors.city}</div>
+        )}
 
-      <div className={s.popularCities}>
-        <ul className={s.cityList}>
-          {popularCities.map((city) => (
-            <li key={city}>
-              <button type="button" onClick={() => formik.setFieldValue('city', city)}>
-                {city}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className={s.popularCities}>
+          <ul className={s.cityList}>
+            {popularCities.map((city) => (
+              <li key={city}>
+                <button type="button" onClick={() => formik.setFieldValue('city', city)}>
+                  {city}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <label htmlFor="department">Відділення</label>
