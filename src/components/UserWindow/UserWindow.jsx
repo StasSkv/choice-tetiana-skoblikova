@@ -39,10 +39,12 @@ export const UserWindow = ({ user, onClose }) => {
           </div>
         </div>
         <div className={s.mainBlock}>
-          <NavLink className={navLinkStyle}>Мій кабінет</NavLink>
+          <NavLink className={navLinkStyle} to="/office">
+            Мій кабінет
+          </NavLink>
           <NavLink
             className={navLinkStyle}
-            to="/"
+            to="/favorites"
             onClick={(e) => {
               e.stopPropagation();
               onClose();
@@ -50,10 +52,10 @@ export const UserWindow = ({ user, onClose }) => {
           >
             Улюбленні товари
           </NavLink>
-          <NavLink className={navLinkStyle} to="/">
+          <NavLink className={navLinkStyle} to="/office">
             Переглянуті товари
           </NavLink>
-          <NavLink className={navLinkStyle} to="/">
+          <NavLink className={navLinkStyle} to="/office">
             Історія замовлень
           </NavLink>
           <NavLink className={navLinkStyle} to="/placing">

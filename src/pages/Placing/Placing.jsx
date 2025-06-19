@@ -7,27 +7,21 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Client } from './components/Client/Client.jsx';
 import { DeliveryCity } from './components/DeliveryCity/DeliveryCity.jsx';
-import { DeliveryWay } from './components/DeliveryWay/DeliveryWay.jsx';
 import { PaymentMethod } from './components/PaymentMethod/PaymentMethod.jsx';
 import { SendWindow } from './components/SendWindow/SendWindow.jsx';
 
 export const Placing = () => {
   const navigate = useNavigate();
-
-  const user = {
-    fullName: 'Тетяна Скоблікова',
-    email: 'stas000123@gmail.com',
-    phone: '095-383-54-92',
-  };
+  
   const handleClickBack = () => {
     navigate(-1);
   };
 
   const formik = useFormik({
     initialValues: {
-      fullName: user.fullName,
-      email: user.email,
-      phone: user.phone,
+      fullName: 'Тетяна Скоблікова',
+      email: 'stas000123@gmail.com',
+      phone: '095-383-54-92',
       city: 'Kiyv',
       order: 2223,
       deliveryMethod: 'novaPoshta',
@@ -81,10 +75,9 @@ export const Placing = () => {
               <div className={s.delivery}>
                 <DeliveryCity formik={formik} />
               </div>
-               <h3>3. Спосіб оплати</h3>
+              <h3>3. Спосіб оплати</h3>
               <PaymentMethod formik={formik} />
             </div>
-
             <div className={s.sendWindow}>
               <SendWindow formik={formik} />
             </div>

@@ -1,0 +1,39 @@
+.container {
+}
+
+.main {
+  display: flex;
+}
+.mainWrap {
+  width: 100%;
+  padding: 20px;
+}
+
+.info {
+  display: block;
+  width: 300px;
+}
+
+.container h2 {
+  margin-bottom: 24px;
+  font-size: 32px;
+  margin-left: 80px;
+}
+
+.history {
+  width: 100%;
+  padding-top: 80px;
+}
+
+.reviews {
+  width: 100%;
+  padding-top: 80px;
+}
+
+.favorites {
+  padding-top: 80px;
+}
+.views {
+  padding-top: 80px;
+  margin-bottom: 100px;
+}

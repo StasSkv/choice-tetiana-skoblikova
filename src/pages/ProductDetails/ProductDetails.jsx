@@ -49,7 +49,7 @@ export const ProductDetails = () => {
         <section>
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
             <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
-            <MySwiper />
+            <MySwiper products={products} />
           </div>
         </section>
       </>

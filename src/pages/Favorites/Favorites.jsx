@@ -31,7 +31,6 @@ export const Favorites = () => {
 
             {favoritesProducts.length > 0 ? (
               <div className={s.list}>
-                {' '}
                 <ProductsList products={favoritesProducts} isFavoritesPage={true} />
               </div>
             ) : (
@@ -51,7 +50,7 @@ export const Favorites = () => {
         <section>
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
             <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
-            <MySwiper />
+            <MySwiper products={allProducts} slidesPerView={4.4} />
           </div>
         </section>
       </>

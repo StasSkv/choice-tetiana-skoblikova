@@ -20,7 +20,7 @@ export const Products = () => {
           <h2 className={s.subtitle}>Каталог товарів</h2>
 
           <div className={s.mainWrap}>
-            <Catalog />
+            <Catalog/>
             <ProductsList products={allProducts} isFavoritesPage={false} />
           </div>
         </div>

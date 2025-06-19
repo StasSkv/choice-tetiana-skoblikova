@@ -8,6 +8,7 @@ import { Favorites } from './pages/Favorites/Favorites.jsx';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { ProductDetails } from './pages/ProductDetails/ProductDetails.jsx';
 import { Placing } from './pages/Placing/Placing.jsx';
+import { UserOffice } from './pages/UserOffice/UserOffice.jsx';
 
 const App = () => {
   const location = useLocation();
@@ -22,8 +23,11 @@ const App = () => {
             <Route path="product/:id" element={<ProductDetails />} />
             <Route path="favorites" element={<Favorites />} />
           </Route>
-          <Route path="placing" element={<Placing />} />
-          <Route path="*" element={<Navigate to="/team" replace />} />
+          <Route path="/office" element={<Layout />}>
+            <Route path="/office" element={<UserOffice />} />
+          </Route>
+          <Route path="/placing" element={<Placing />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
 

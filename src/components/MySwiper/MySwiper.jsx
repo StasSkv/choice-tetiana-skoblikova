@@ -8,27 +8,24 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import s from './MySwiper.module.css';
-import { useSelector } from 'react-redux';
-import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 import { ProductCard } from '../ProductCard/ProductCard.jsx';
 
-export const MySwiper = () => {
-  const products = useSelector(selectAllProducts);
+export const MySwiper = ({ products, slidesPerView = 4.4}) => {
   return (
     <Swiper
       direction="horizontal"
       loop={true}
       navigation={true}
-      slidesPerView={4.4}
+      slidesPerView={slidesPerView}
       spaceBetween={20}
-      speed={800}
+      speed={400}
       modules={[Navigation, Pagination, Scrollbar, Autoplay]}
       style={{ height: '400px', width: '100%' }}
-      breakpoints={{
-        320: { slidesPerView: 1 },
-        678: { slidesPerView: 2 },
-        968: { slidesPerView: 4.4 },
-      }}
+      // breakpoints={{
+      //   320: { slidesPerView: 1 },
+      //   678: { slidesPerView: 2 },
+      //   968: { slidesPerView: 4.4 },
+      // }}
       className={s.swiper}
     >
       {products.map((product) => (
