@@ -2,7 +2,7 @@ export const products = [
   {
     id: 'day-cream-age-control',
     quantity: 0,
-    rating: [],
+    rating: [3,4,5,3,3],
     img: 'day-cream-age-control.png',
     category: 'white-mandarine',
     name: 'Day Cream AGE CONTROL',

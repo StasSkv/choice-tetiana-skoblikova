@@ -17,3 +17,7 @@
   font-weight: bold;
   user-select: none;
 }
+
+.value {
+  margin-left: 8px;
+}

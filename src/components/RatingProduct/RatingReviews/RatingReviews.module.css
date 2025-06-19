@@ -1,0 +1,13 @@
+.starsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  display: inline-block;
+}
+
+.value {
+  margin-left: 8px;
+}
