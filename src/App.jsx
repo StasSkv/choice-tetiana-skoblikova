@@ -31,7 +31,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
-<TestCors/>
+
       <ToastContainer
         position="bottom-left"
         autoClose={3000}
