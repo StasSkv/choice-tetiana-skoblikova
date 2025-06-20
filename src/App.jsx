@@ -9,6 +9,7 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import { ProductDetails } from './pages/ProductDetails/ProductDetails.jsx';
 import { Placing } from './pages/Placing/Placing.jsx';
 import { UserOffice } from './pages/UserOffice/UserOffice.jsx';
+import { TestCors } from './testCors.jsx';
 
 const App = () => {
   const location = useLocation();
@@ -30,7 +31,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
-
+<TestCors/>
       <ToastContainer
         position="bottom-left"
         autoClose={3000}

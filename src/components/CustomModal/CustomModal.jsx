@@ -69,7 +69,7 @@ const CustomModal = ({ isOpen, onClose, order, children }) => {
             </p>
           </div>
         )}
-        <NavLink to="placing" className={s.submitBtn}>Оформити замовлення</NavLink>
+        <NavLink to="/placing" className={s.submitBtn}>Оформити замовлення</NavLink>
       </div>
     </Modal>
   );

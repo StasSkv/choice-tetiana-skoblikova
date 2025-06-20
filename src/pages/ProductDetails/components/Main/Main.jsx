@@ -13,8 +13,9 @@ export const Main = ({ product }) => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(selectProductsInCart);
   const isInCart = productsInCart.some(({ id }) => id === product.id);
-  const avgRating = product.rating.reduce((sum, val) => sum + val, 0) / product.rating.length;
-        
+  const avgRating =
+    Math.round((product.rating.reduce((sum, val) => sum + val, 0) / product.rating.length) * 10) /
+    10;
 
   const handleBuy = () => {
     dispatch(addProductToCart(product.id));
@@ -46,7 +47,6 @@ export const Main = ({ product }) => {
             </button>
           </div>
           <RatingReviews value={avgRating || 0} />
-          
         </div>
         <div className={s.appointmentWrap}>
           <p className={s.apoint}>

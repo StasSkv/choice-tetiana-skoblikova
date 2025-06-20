@@ -9,9 +9,18 @@ import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
 import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import { useState } from 'react';
-import { RatingProduct } from '../RatingProduct/RatingProduct.jsx';
+import { RatingReviews } from '../RatingProduct/RatingReviews/RatingReviews.jsx';
 
-export const ProductCard = ({ id, price, quantity, img, name, text, isFavoritesPage = false }) => {
+export const ProductCard = ({
+  id,
+  price,
+  quantity,
+  rating,
+  img,
+  name,
+  text,
+  isFavoritesPage = false,
+}) => {
   const productsInCart = useSelector(selectProductsInCart);
   const productsInFavorites = useSelector(selectFavoritesProducts);
   const [isRemoving, setIsRemoving] = useState(false);
@@ -19,6 +28,8 @@ export const ProductCard = ({ id, price, quantity, img, name, text, isFavoritesP
 
   const isInCart = productsInCart.some((product) => product && product.id === id);
   const isInFavorite = productsInFavorites.includes(id);
+  const avgRating =
+    Math.round((rating.reduce((sum, val) => sum + val, 0) / rating.length) * 10) / 10;
 
   const handleCardClick = (e) => {
     if (e.target.closest('button') || e.target.closest('.rating')) return;
@@ -39,8 +50,8 @@ export const ProductCard = ({ id, price, quantity, img, name, text, isFavoritesP
         <div className={s.textAndOptions}>
           <div>
             <p className={clsx(s.text, { [s.textIsInCart]: isInCart })}>{text}</p>
-            <div className={clsx('rating', s.rating, {[s.ratingIsInCart]:isInCart})}>
-              <RatingProduct productId={id} />
+            <div className={clsx('rating', s.rating, { [s.ratingIsInCart]: isInCart })}>
+              <RatingReviews value={avgRating || 0} />
             </div>
           </div>
           <div className={s.options}>

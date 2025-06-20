@@ -2,7 +2,7 @@ export const products = [
   {
     id: 'day-cream-age-control',
     quantity: 0,
-    rating: [3,4,5,3,3],
+    rating: [],
     img: 'day-cream-age-control.png',
     category: 'white-mandarine',
     name: 'Day Cream AGE CONTROL',
@@ -1670,4 +1670,127 @@ export const products = [
       },
     ],
   },
+
+  {
+    id: 'night-cream-plant-peptides',
+    quantity: 0,
+    rating: [],
+    img: 'night-cream-plant-peptides.png',
+    category: 'white-mandarine',
+    name: 'КРЕМ НІЧНИЙ РОСЛИННІ ПЕПТИДИ',
+    text: 'Живлення / Зволоження / Регенерація',
+    howMany: '50 мл',
+    price: '709',
+    appointment: 'Підвищення тургору шкіри, глибоке зволоження, розгладжування зморшок.',
+  },
+
+  {
+    id: 'microemulsion-for-the-eye-contour-plant-peptides',
+    quantity: 0,
+    rating: [],
+    img: 'microemulsion-for-the-eye-contour-plant-peptides.png',
+    category: 'white-mandarine',
+    name: 'МІКРОЕМУЛЬСІЯ-ДЛЯ-КОНТУРУ-ОЧЕЙ-РОСЛИННІ-ПЕПТИДИ',
+    text: 'Зволоження / Омолодження / Ліфтинг',
+    howMany: '30 мл',
+    price: '792',
+    appointment:
+      'Підвищення тургору і тонусу шкіри навколо очей та губ, попередження появи мімічних зморшок, при перших ознаках вікових змін шкіри, освітлення темних кіл та усунення набряків під очима. Для всіх типів шкіри.',
+  },
+
+  {
+    id: 'serum-plant-peptides',
+    quantity: 0,
+    rating: [],
+    img: 'serum-plant-peptides.png',
+    category: 'white-mandarine',
+    name: 'СИРОВАТКА РОСЛИННІ ПЕПТИДИ',
+    text: 'Живлення / Омолодження / Ліфтинг',
+    howMany: '30 мл',
+    price: '758',
+    appointment:
+      'Підвищення тургору та еластичності шкіри, при перших ознаках появи зморшок, зволоження шкіри, попередження стоншування епідермісу, розгладження зморшок. Для всіх типів шкіри.',
+  },
+
+  {
+    id: 'whitening-cream-mask',
+    quantity: 0,
+    rating: [],
+    img: 'whitening-cream-mask.png',
+    category: 'white-mandarine',
+    name: 'ВІДБІЛЮВАЛЬНА КРЕМ-МАСКА',
+    text: 'Вирівнювання тону / Відлущенняr',
+    howMany: '2*6 мл',
+    price: '117',
+    appointment:
+      'Для тьмяної шкіри, яка втратила тонус, при перших ознаках вікової пігментації, для вирівнювання тону обличчя, омолодження шкіри. Для шкіри з першими проявами старіння.',
+  },
+
+  {
+    id: 'calcium-hydroxyapatite-toothpaste',
+    quantity: 0,
+    rating: [],
+    img: 'calcium-hydroxyapatite-toothpaste.png',
+    category: 'biox',
+    name: 'ЗУБНА ПАСТА ГІДРОКСИАПАТИТ КАЛЬЦІЮ',
+    text: 'Попередження карієсу',
+    howMany: '75 мл',
+    price: '346',
+    appointment:
+      'Протидія та попередження карієсу. Відновлення зубної емалі. Догляд за ротовою порожниною.',
+  },
+
+  {
+    id: 'toothpaste-marine-calcium-&-d3',
+    quantity: 0,
+    rating: [],
+    img: 'toothpaste-marine-calcium-&-d3.png',
+    category: 'biox',
+    name: 'ЗУБНА ПАСТА МОРСЬКИЙ КАЛЬЦІЙ & D3',
+    text: 'Ремінералізація',
+    howMany: '75 мл',
+    price: '255',
+    appointment:
+      'Очищення та догляд за ротовою порожниною. Відновлення мінерального складу дентину та емалі зубів. Ремінералізація.',
+  },
+
+  {
+    id: 'fennels-&-cinnamon-toothpaste',
+    quantity: 0,
+    rating: [],
+    img: 'fennels-&-cinnamon-toothpaste.png',
+    category: 'biox',
+    name: 'ЗУБНА ПАСТА ФЕНХЕЛЬ & КОРИЦЯ',
+    text: 'Антибактеріальна для ясен',
+    howMany: '75 мл',
+    price: '203',
+    appointment: 'Очищення й антибактеріальний догляд.',
+  },
+
+  {
+    id: "children's-toothpaste",
+    quantity: 0,
+    rating: [],
+    img: "children's-toothpaste.png",
+    category: 'biox',
+    name: 'ЗУБНА ПАСТА ДИТЯЧА',
+    text: 'Безпечне очищення / 6-12 років',
+    howMany: '50 мл',
+    price: '177',
+    appointment:
+      'Безпечне очищення, комплексний догляд і захист дитячих зубів. Рекомендується дітям у період інтенсивного росту та зміни зубів у віці 6-12 років.',
+  },
 ];
+
+const a = (b) => {
+  return b
+    .split(' ')
+    .map((word) => word.toLowerCase())
+    .join('-');
+};
+
+console.log(a("CHILDREN'S TOOTHPASTE"));
+
+const c = 'Зубна паста дитяча';
+const b = c.toUpperCase();
+console.log(b);
