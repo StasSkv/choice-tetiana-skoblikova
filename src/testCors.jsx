@@ -4,7 +4,7 @@ export const TestCors = () => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3000/')
+    fetch('https://tetiana-choice-back-app.onrender.com/')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Помилка мережі');
