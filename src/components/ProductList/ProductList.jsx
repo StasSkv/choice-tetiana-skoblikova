@@ -2,15 +2,19 @@ import { useState } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard.jsx';
 import s from './ProductList.module.css';
 import ReactPaginate from 'react-paginate';
+import { useSelector } from 'react-redux';
+import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 
-export const ProductsList = ({ products, isFavoritesPage = false }) => {
+export const ProductsList = ({ products: propProducts, isFavoritesPage = false }) => {
+  const allProducts = useSelector(selectAllProducts);
+
+  const products = isFavoritesPage ? propProducts : allProducts;
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
 
   const pageCount = Math.ceil(products.length / itemsPerPage);
   const startIndex = currentPage * itemsPerPage;
   const selectedProducts = products.slice(startIndex, startIndex + itemsPerPage);
-  console.log(products);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -25,7 +29,7 @@ export const ProductsList = ({ products, isFavoritesPage = false }) => {
       <ul className={s.productList}>
         {selectedProducts.map((product) => (
           <li key={product.id} className={s.productCard}>
-            <ProductCard {...product} isFavoritesPage={isFavoritesPage} />
+            <ProductCard product={product} isFavoritesPage={isFavoritesPage} />
           </li>
         ))}
       </ul>

@@ -25,13 +25,13 @@ export const Main = ({ product }) => {
   return (
     <div className={s.productHeaderWrap}>
       <div className={s.productImgWrap}>
-        <img src={`/images/${product.img}`} alt={product.name} className={s.productImg} />
+        <img src={`/images/${product.imgL}`} alt={product.name} className={s.productImg} />
       </div>
       <div className={s.descriptionWrap}>
         <div className={s.wrap}>
           <h2>{product.name}</h2>
-          <p className={s.text}>{product.text}</p>
-          <p className={s.howMany}>{product.howMany}</p>
+          <p className={s.text}>{product.brief}</p>
+          <p className={s.howMany}>{product.volume}</p>
           <div className={s.btnWrap}>
             <p className={s.price}>{product.price} грн</p>
             <button className={s.btnBuy} onClick={handleBuy} disabled={isInCart}>
@@ -52,7 +52,7 @@ export const Main = ({ product }) => {
           <p className={s.apoint}>
             Призначення: <span>{product.appointment}</span>
           </p>
-          {product.details && <Details info={product.details} />}
+          {product.details ? <Details info={product.details} /> : null}
         </div>
       </div>
     </div>

@@ -10,9 +10,9 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { configureStore } from '@reduxjs/toolkit';
-import cartSlice from './cartSlice/cartSlice.js';
-import productsReducer from './productsSlice/productsSlice.js';
-import favoritesReducer from './favoritesSlice/favoritesSlice.js';
+import { cartReducer } from './cartSlice/cartSlice.js';
+import { productsReducer } from './productsSlice/productsSlice.js';
+import { favoritesReducer } from './favoritesSlice/favoritesSlice.js';
 
 const cartPersistConfig = {
   key: 'cart',
@@ -26,17 +26,11 @@ const favoritesPersistConfig = {
   storage,
 };
 
-const productsPersistConfig = {
-  key: 'products',
-  version: 1,
-  storage,
-};
-
 export const store = configureStore({
   reducer: {
-    cart: persistReducer(cartPersistConfig, cartSlice),
+    products: productsReducer,
+    cart: persistReducer(cartPersistConfig, cartReducer),
     favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
-    products: persistReducer(productsPersistConfig, productsReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

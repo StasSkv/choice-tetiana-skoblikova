@@ -14,6 +14,7 @@ export const CartLink = ({ animate }) => {
 
   const order = productInCart.reduce((total, cartItem) => {
     const product = allProducts.find((p) => p.id === cartItem.id);
+
     if (product) {
       return total + product.price * cartItem.quantity;
     }

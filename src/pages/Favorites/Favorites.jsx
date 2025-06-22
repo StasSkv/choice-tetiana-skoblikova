@@ -6,13 +6,12 @@ import { NavLink } from 'react-router-dom';
 import { ProductsList } from '../../components/ProductList/ProductList.jsx';
 import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 import clsx from 'clsx';
-import { MySwiper } from '../../components/MySwiper/MySwiper.jsx';
+// import { MySwiper } from '../../components/MySwiper/MySwiper.jsx';
 import { motion } from 'framer-motion';
 
 export const Favorites = () => {
   const allProducts = useSelector(selectAllProducts);
   const productInFavorites = useSelector(selectFavoritesProducts);
-
   const favoritesProducts = allProducts.filter((product) =>
     productInFavorites.includes(product.id)
   );
@@ -47,12 +46,12 @@ export const Favorites = () => {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
             <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
             <MySwiper products={allProducts} slidesPerView={4.4} />
           </div>
-        </section>
+        </section> */}
       </>
     </motion.div>
   );

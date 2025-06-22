@@ -1,4 +1,9 @@
-export const selectAllProducts = (state) => state.products.products;
+export const selectLoading = (state) => state.products.loading;
 
+export const selectAllProducts = (state) => state.products.items;
 
-
+export const selectProductById = (id) => (state) => {
+  return state.products.currentItem?.id === id
+    ? state.products.currentItem
+    : state.products.items.find((p) => p.id === id);
+};

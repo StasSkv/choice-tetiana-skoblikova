@@ -23,13 +23,26 @@ export const InfoSwitcher = ({ advantagesData, descriptionData, actionsData }) =
   const renderContent = () => {
     switch (activeTab) {
       case 'description':
-        return <Description info={descriptionData} />;
+        return descriptionData && descriptionData.length > 0 ? (
+          <Description info={descriptionData} />
+        ) : (
+          <p>Завантаження опису...</p>
+        );
 
       case 'advantages':
-        return <Advantages info={advantagesData} />;
+        return advantagesData && advantagesData.length > 0 ? (
+          <Advantages info={advantagesData} />
+        ) : (
+          <p>Завантаження переваг...</p>
+        );
 
       case 'actions':
-        return <Actions info={actionsData} />;
+        return actionsData && actionsData.length > 0 ? (
+          <Actions info={actionsData} />
+        ) : (
+          <p>Завантаження дій...</p>
+        );
+
       default:
         return null;
     }
@@ -80,7 +93,7 @@ export const InfoSwitcher = ({ advantagesData, descriptionData, actionsData }) =
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.4 }}
           >
-            {renderContent('')}
+            {renderContent()}
           </motion.div>
         </AnimatePresence>
       </div>

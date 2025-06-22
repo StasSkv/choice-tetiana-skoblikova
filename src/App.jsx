@@ -9,9 +9,18 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import { ProductDetails } from './pages/ProductDetails/ProductDetails.jsx';
 import { Placing } from './pages/Placing/Placing.jsx';
 import { UserOffice } from './pages/UserOffice/UserOffice.jsx';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchProducts } from './redux/productsSlice/productsOperations.js';
 
 const App = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   return (
     <>
       <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
@@ -20,7 +29,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path="team" element={<Team />} />
             <Route path="products" element={<Products />} />
-            <Route path="product/:id" element={<ProductDetails />} />
+            <Route path="products/:id" element={<ProductDetails />} />
             <Route path="favorites" element={<Favorites />} />
           </Route>
           <Route path="/office" element={<Layout />}>

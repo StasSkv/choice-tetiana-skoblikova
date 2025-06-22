@@ -53,7 +53,7 @@ export const Cart = () => {
       <h2 className={s.title}>Кошик товарів</h2>
       <div className={s.header}>
         <p className={s.totalProducts}>
-          Всього товарів: <span>{products.length}</span>
+          Всього позицій: <span>{products.length}</span>
         </p>
         <button className={s.cleanCart} onClick={handleClickClearCart}>
           <span>
@@ -70,10 +70,10 @@ export const Cart = () => {
               className={s.productItem}
               onClick={(e) => handleCardClick(e, product.id)}
             >
-              <img src={`/images/${product.img}`} alt={product.name} className={s.productImg} />
+              <img src={`/images/${product.imgS}`} alt={product.name} className={s.productImg} />
               <div className={s.description}>
                 <h3>{product.name}</h3>
-                <p>{product.text}</p>
+                <p>{product.brief}</p>
               </div>
               <div className={s.options}>
                 <div className={s.quantity}>
