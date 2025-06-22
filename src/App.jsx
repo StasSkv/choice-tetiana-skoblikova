@@ -17,6 +17,22 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+
+
+
+  const name = 'Фітомус для вмивання';
+
+const imgName = 'PHYTOMOUSS FOR WASHING';
+
+
+
+
+
+  console.log(name.toUpperCase());
+  console.log(imgName.toLowerCase().split(' ').join('-'));
+  
+    
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
