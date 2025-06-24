@@ -3,14 +3,14 @@ import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { LikeButton } from '../Buttons/LikeButton/LikeButton.jsx';
-import { DeleteButton } from '../Buttons/DeleteButton/DeleteButton.jsx';
+import DeleteButton from '../Buttons/DeleteButton/DeleteButton.jsx';
 import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
   import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { selectFavoritesProductsIds } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import { useState } from 'react';
 import { RatingReviews } from '../RatingProduct/RatingReviews/RatingReviews.jsx';
 
-export const ProductCard = ({ product,  isFavoritesPage = false }) => {
+const ProductCard = ({ product,  isFavoritesPage = false }) => {
   const productsInCart = useSelector(selectProductsInCart);
   const productsInFavorites = useSelector(selectFavoritesProductsIds);
   const [isRemoving, setIsRemoving] = useState(false);
@@ -27,7 +27,7 @@ const avgRating =
     : 0;
   
   const handleCardClick = (e) => {
-    if (e.target.closest('button') || e.target.closest('.rating')) return;
+    if (e.target.closest('button') || e.target.closest('.rating') || e.target.closest('.deleteBtn')) return;
     navigate(`/products/${product.id}`);
   };
 
@@ -61,3 +61,5 @@ const avgRating =
     </div>
   );
 };
+
+export default ProductCard;

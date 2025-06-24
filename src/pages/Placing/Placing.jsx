@@ -10,7 +10,7 @@ import { DeliveryCity } from './components/DeliveryCity/DeliveryCity.jsx';
 import { PaymentMethod } from './components/PaymentMethod/PaymentMethod.jsx';
 import { SendWindow } from './components/SendWindow/SendWindow.jsx';
 
-export const Placing = () => {
+const Placing = () => {
   const navigate = useNavigate();
   
   const handleClickBack = () => {
@@ -87,3 +87,5 @@ export const Placing = () => {
     </motion.div>
   );
 };
+
+export default Placing; 

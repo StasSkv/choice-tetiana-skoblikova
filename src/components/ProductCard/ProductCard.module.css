@@ -12,7 +12,7 @@
   padding: 16px;
   gap: 8px;
   opacity: 1;
-  transition: color 0.4s ease, opacity 300ms ease, transform 0.4s ease;
+  transition: color 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
 }
 
 .productCard:hover {

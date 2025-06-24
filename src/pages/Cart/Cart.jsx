@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
+import { selectCartProducts } from '../../redux/cartSlice/cartSelectors.js';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import s from './Cart.module.css';
 import {
@@ -10,21 +10,12 @@ import {
 } from '../../redux/cartSlice/cartSlice.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const allProducts = useSelector(selectAllProducts);
-  const productsInCart = useSelector(selectProductsInCart);
-
-  const products = productsInCart
-    .map((cartItem) => {
-      const product = allProducts.find((p) => p.id === cartItem.id);
-      return product ? { ...product, quantity: cartItem.quantity } : null;
-    })
-    .filter(Boolean);
+  const products = useSelector(selectCartProducts);
 
   const handleClickClearCart = () => {
     dispatch(addclearCart());
@@ -45,8 +36,15 @@ export const Cart = () => {
   };
 
   const handleCardClick = (e, id) => {
-    if (e.target.closest('button')) return;
-    navigate(`/product/${id}`);
+    e.preventDefault();
+    if (
+      e.target.closest('button') ||
+      e.target.closest('.rating') ||
+      e.target.closest('.deleteBtn')
+    ) {
+      return;
+    }
+    navigate(`/products/${id}`);
   };
 
   return (
@@ -54,7 +52,7 @@ export const Cart = () => {
       <h2 className={s.title}>Кошик товарів</h2>
       <div className={s.header}>
         <p className={s.totalProducts}>
-          Всього позицій: <span>{productsInCart.length}</span>
+          Всього позицій: <span>{products.length}</span>
         </p>
         <button className={s.cleanCart} onClick={handleClickClearCart}>
           <span>
@@ -70,6 +68,8 @@ export const Cart = () => {
               key={product.id}
               className={s.productItem}
               onClick={(e) => handleCardClick(e, product.id)}
+              role="button"
+              tabIndex={0}
             >
               <img src={`/images/${product.imgS}`} alt={product.name} className={s.productImg} />
               <div className={s.description}>

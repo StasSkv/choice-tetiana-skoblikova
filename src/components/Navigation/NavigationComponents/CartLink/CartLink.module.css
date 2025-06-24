@@ -1,5 +1,4 @@
 .navLinkCart {
-  width: 115px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -17,6 +16,7 @@ opacity: 85%;
 .cart {
   color: var(--white);
   font-size: 20px;
+  flex-shrink: 0;
 }
 
 .counter {

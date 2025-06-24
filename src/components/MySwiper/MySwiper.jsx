@@ -8,9 +8,9 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import s from './MySwiper.module.css';
-import { ProductCard } from '../ProductCard/ProductCard.jsx';
+import ProductCard from '../ProductCard/ProductCard.jsx';
 
-export const MySwiper = ({ products, slidesPerView = 4.4}) => {
+const MySwiper = ({ products, slidesPerView = 4 }) => {
   return (
     <Swiper
       direction="horizontal"
@@ -21,20 +21,22 @@ export const MySwiper = ({ products, slidesPerView = 4.4}) => {
       speed={400}
       modules={[Navigation, Pagination, Scrollbar, Autoplay]}
       style={{ height: '400px', width: '100%' }}
-      // breakpoints={{
-      //   320: { slidesPerView: 1 },
-      //   678: { slidesPerView: 2 },
-      //   968: { slidesPerView: 4.4 },
-      // }}
+      breakpoints={{
+        320: { slidesPerView: 1 },
+        678: { slidesPerView: 2 },
+        968: { slidesPerView: 4 },
+      }}
       className={s.swiper}
     >
       {products.map((product) => (
         <SwiperSlide key={product.id} className={s.slideWrap}>
           <div className={s.slide}>
-            <ProductCard {...product} />
+            <ProductCard product={product} />
           </div>
         </SwiperSlide>
       ))}
     </Swiper>
   );
 };
+
+export default MySwiper;

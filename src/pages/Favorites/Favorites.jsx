@@ -3,13 +3,21 @@ import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSel
 import s from './Favorites.module.css';
 import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
-import { ProductsList } from '../../components/ProductList/ProductList.jsx';
+import ProductsList from '../../components/ProductList/ProductList.jsx';
 import clsx from 'clsx';
-// import { MySwiper } from '../../components/MySwiper/MySwiper.jsx';
+import MySwiper from '../../components/MySwiper/MySwiper.jsx';
 import { motion } from 'framer-motion';
+import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 
-export const Favorites = () => {
+const Favorites = () => {
   const favoritesProducts = useSelector(selectFavoritesProducts);
+  const allProducts = useSelector(selectAllProducts);
+
+  const validFavoriteProducts = favoritesProducts?.filter(Boolean) || [];
+  const otherProducts =
+    allProducts?.filter(
+      (product) => !validFavoriteProducts.some((favProduct) => favProduct?.id === product.id)
+    ) || [];
 
   return (
     <motion.div
@@ -23,9 +31,9 @@ export const Favorites = () => {
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
             <h2 className={s.subtitle}>Улюблені товари</h2>
 
-            {favoritesProducts.length > 0 ? (
+            {validFavoriteProducts.length > 0 ? (
               <div className={s.list}>
-                <ProductsList products={favoritesProducts} isFavoritesPage={true} />
+                <ProductsList products={validFavoriteProducts} isFavoritesPage={true} />
               </div>
             ) : (
               <div className={s.isNotFavorite}>
@@ -41,13 +49,17 @@ export const Favorites = () => {
           </div>
         </section>
 
-        {/* <section>
-          <div className={clsx('container', s.productContainer, s.mySwiper)}>
-            <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
-            <MySwiper products={allProducts} slidesPerView={4.4} />
-          </div>
-        </section> */}
+        {otherProducts.length > 0 && (
+          <section>
+            <div className={clsx('container', s.productContainer, s.mySwiper)}>
+              <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
+              <MySwiper products={otherProducts} slidesPerView={4.4} />
+            </div>
+          </section>
+        )}
       </>
     </motion.div>
   );
 };
+
+export default Favorites;

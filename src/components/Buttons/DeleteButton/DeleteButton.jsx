@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { removeProductFromFavorites } from '../../../redux/favoritesSlice/favoritesSlice.js';
 import { toast } from 'react-toastify';
 
-export const DeleteButton = ({ id, onStartRemove }) => {
+const DeleteButton = ({ id, onStartRemove }) => {
   const dispatch = useDispatch();
 
   const handleRemove = (e) => {
@@ -22,3 +22,5 @@ export const DeleteButton = ({ id, onStartRemove }) => {
     </button>
   );
 };
+
+export default DeleteButton;

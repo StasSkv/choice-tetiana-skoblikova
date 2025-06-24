@@ -1,7 +1,7 @@
 import s from './Team.module.css';
 import { motion } from 'framer-motion';
 
-export const Team = () => {
+const Team = () => {
   return (
     <motion.div
       initial={{ opacity: 0, x: -100 }}
@@ -17,3 +17,5 @@ export const Team = () => {
     </motion.div>
   );
 };
+
+export default Team;

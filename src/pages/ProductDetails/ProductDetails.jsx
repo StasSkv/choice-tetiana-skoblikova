@@ -5,21 +5,20 @@ import clsx from 'clsx';
 import { Options } from './components/Options/Options.jsx';
 import { InfoSwitcher } from './components/InfoSwitcher/InfoSwitcher.jsx';
 import { Main } from './components/Main/Main.jsx';
-// import { MySwiper } from '../../components/MySwiper/MySwiper.jsx';
+import MySwiper from '../../components/MySwiper/MySwiper.jsx';
 import { motion } from 'framer-motion';
 import { FormReviews } from './components/FormReviews/FormReviews.jsx';
 import {
-  // selectAllProducts,
+  selectAllProducts,
   selectProductById,
-  selectLoading,
 } from '../../redux/productsSlice/productsSelectors.js';
 import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
 import { useEffect } from 'react';
+import { Loader } from '../../components/Loader/Loader.jsx';
 
-export const ProductDetails = () => {
+const ProductDetails = () => {
   const dispatch = useDispatch();
-  // const products = useSelector(selectAllProducts);
-  const isLoading = useSelector(selectLoading);
+  const products = useSelector(selectAllProducts);
   const { id } = useParams();
 
   const product = useSelector(selectProductById(id));
@@ -28,13 +27,7 @@ export const ProductDetails = () => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
 
-  if (isLoading) return <p>Завантаження...</p>;
-
-  if (!product || Object.keys(product).length === 0) return <p>Товар не знайдено</p>;
-
-  if (!product.description || !product.advantages || !product.actions) {
-    return <p>Завантаження даних продукту...</p>;
-  }
+  if (!product || Object.keys(product).length === 0) return <Loader />;
 
   return (
     <motion.div
@@ -72,13 +65,15 @@ export const ProductDetails = () => {
           </div>
         </section>
 
-        {/* <section>
+        <section>
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
             <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
             <MySwiper products={products} />
           </div>
-        </section> */}
+        </section>
       </>
     </motion.div>
   );
 };
+
+export default ProductDetails;

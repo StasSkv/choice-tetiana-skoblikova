@@ -20,7 +20,6 @@ export const Catalog = () => {
 
   const handleChangeBrends = (index) => {
     const updated = [...checkedBrends];
-
     if (index === 0) {
       updated.fill(false);
       updated[0] = true;
@@ -30,7 +29,6 @@ export const Catalog = () => {
       const anyChecked = updated.some((val, idx) => idx !== 0 && val);
       if (!anyChecked) updated[0] = true;
     }
-
     setCheckedBrends(updated);
   };
 

@@ -8,7 +8,7 @@ import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.j
 import { History } from './History/History.jsx';
 import { Reviews } from './Reviews/Reviews.jsx';
 
-export const UserOffice = () => {
+const UserOffice = () => {
   const products = useSelector(selectAllProducts);
 
   return (
@@ -49,3 +49,5 @@ export const UserOffice = () => {
     </motion.div>
   );
 };
+
+export default UserOffice;
