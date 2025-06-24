@@ -15,6 +15,7 @@ import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.j
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const allProducts = useSelector(selectAllProducts);
   const productsInCart = useSelector(selectProductsInCart);
 
@@ -53,7 +54,7 @@ export const Cart = () => {
       <h2 className={s.title}>Кошик товарів</h2>
       <div className={s.header}>
         <p className={s.totalProducts}>
-          Всього позицій: <span>{products.length}</span>
+          Всього позицій: <span>{productsInCart.length}</span>
         </p>
         <button className={s.cleanCart} onClick={handleClickClearCart}>
           <span>
@@ -97,7 +98,10 @@ export const Cart = () => {
                   </button>
                 </div>
                 <p className={s.quantityPrice}>
-                  {(product.quantity * product.price).toLocaleString('uk-UA')} <span>грн</span>
+                  {(product.quantity * product.price).toLocaleString('uk-UA', {
+                    style: 'currency',
+                    currency: 'UAH',
+                  })}
                 </p>
                 <button
                   className={s.deleteBtn}

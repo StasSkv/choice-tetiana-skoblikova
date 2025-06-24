@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { LikeButton } from '../Buttons/LikeButton/LikeButton.jsx';
 import { DeleteButton } from '../Buttons/DeleteButton/DeleteButton.jsx';
 import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
-import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
-import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
+  import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
+import { selectFavoritesProductsIds } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import { useState } from 'react';
 import { RatingReviews } from '../RatingProduct/RatingReviews/RatingReviews.jsx';
 
 export const ProductCard = ({ product,  isFavoritesPage = false }) => {
   const productsInCart = useSelector(selectProductsInCart);
-  const productsInFavorites = useSelector(selectFavoritesProducts);
+  const productsInFavorites = useSelector(selectFavoritesProductsIds);
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
 
@@ -53,7 +53,7 @@ const avgRating =
             <p
               className={clsx(s.price, { [s.priceIsInCart]: isInCart })}
             >{`${product.price} грн`}</p>
-            <BuyButton id={product.id} quantity={0} isInCart={isInCart} />
+                <BuyButton id={product.id} quantity={isInCart ? productsInCart.find((item) => item.id === product.id).quantity : 0} isInCart={isInCart} />
           </div>
         </div>
       </div>

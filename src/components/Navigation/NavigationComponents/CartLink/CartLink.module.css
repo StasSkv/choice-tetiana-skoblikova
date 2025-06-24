@@ -31,6 +31,7 @@ opacity: 85%;
   flex-direction: column;
   align-items: start;
   justify-content: space-between;
+  padding: 12px;
 }
 
 .totalSum {
@@ -39,7 +40,7 @@ opacity: 85%;
   font-weight: 600;
 }
 
-.currency {
+  .orderCurrency {
   font-size: 12px;
   font-weight: 400;
 }

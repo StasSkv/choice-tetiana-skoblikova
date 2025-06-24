@@ -4,8 +4,12 @@ import s from './CustomModal.module.css';
 import { TfiClose } from 'react-icons/tfi';
 import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCartTotal } from '../../redux/cartSlice/cartSelectors.js';
 
-const CustomModal = ({ isOpen, onClose, order, children }) => {
+const CustomModal = ({ isOpen, onClose, children }) => {
+  const cartSum = useSelector(selectCartTotal);
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
@@ -60,11 +64,14 @@ const CustomModal = ({ isOpen, onClose, order, children }) => {
           </span>
           Продовжити покупки
         </button>
-        {order && (
+        {cartSum > 0 && (
           <div className={s.orderWrap}>
             <p className={s.orderText}>Сумма замовлення</p>
             <p className={s.orderSum}>
-              {order}
+              {cartSum.toLocaleString('uk-UA', {
+                style: 'currency',
+                currency: 'UAH',
+              })}
               <span className={s.orderCurrency}> грн</span>
             </p>
           </div>
