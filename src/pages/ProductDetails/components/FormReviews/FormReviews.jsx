@@ -4,10 +4,13 @@ import s from './FormReviews.module.css';
 import * as Yup from 'yup';
 import { RatingReviews } from '../../../../components/RatingProduct/RatingReviews/RatingReviews.jsx';
 import { getFormattedDate } from './formattedDate.js';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectReviewsById } from '../../../../redux/reviewsSlice/reviewsSelectors.js';
+import { addReview } from '../../../../redux/reviewsSlice/reviewsSlice.js';
 
 export const FormReviews = ({ product }) => {
-  const [reviews, setReviews] = useState([]);
+  const dispatch = useDispatch();
+  const reviews = useSelector(selectReviewsById(product.id));
 
   const initialValues = {
     id: product.id,
@@ -29,7 +32,9 @@ export const FormReviews = ({ product }) => {
       ...values,
       date,
     };
-    setReviews((prev) => [newReview, ...prev]);
+    dispatch(addReview(newReview));
+    console.log(reviews);
+
     resetForm();
   };
 
@@ -39,18 +44,16 @@ export const FormReviews = ({ product }) => {
         <h2 className={s.title}>Відгуки про товар</h2>
         <div className={s.listWrap}>
           <ul>
-            {reviews.map(({ id, name, review, date, rating }) => {
-              return (
-                <li key={id} className={s.item}>
-                  <div>
-                    <h3>{name}</h3>
-                    <RatingReviews value={rating} />
-                    <span className={s.date}>{date}</span>
-                  </div>
-                  <p>{review}</p>
-                </li>
-              );
-            })}
+            {reviews?.map(({ id, name, review, date, rating }) => (
+              <li key={id} className={s.item}>
+                <div>
+                  <h3>{name}</h3>
+                  <RatingReviews value={rating} />
+                  <span className={s.date}>{date}</span>
+                </div>
+                <p>{review}</p>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -64,7 +67,7 @@ export const FormReviews = ({ product }) => {
           {({ values, setFieldValue }) => (
             <Form className={s.form}>
               <label className={s.label}>
-                Ім’я:
+                Ім'я:
                 <Field type="text" name="name" className={s.input} />
                 <ErrorMessage name="name" component="div" className={s.error} />
               </label>

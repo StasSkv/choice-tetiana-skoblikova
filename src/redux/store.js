@@ -13,6 +13,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { cartReducer } from './cartSlice/cartSlice.js';
 import { productsReducer } from './productsSlice/productsSlice.js';
 import { favoritesReducer } from './favoritesSlice/favoritesSlice.js';
+import { reviewsReducer } from './reviewsSlice/reviewsSlice.js';
 
 const cartPersistConfig = {
   key: 'cart',
@@ -31,6 +32,7 @@ export const store = configureStore({
     products: productsReducer,
     cart: persistReducer(cartPersistConfig, cartReducer),
     favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
+    reviews: reviewsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
