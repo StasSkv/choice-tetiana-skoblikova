@@ -2,21 +2,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import s from './Cart.module.css';
-// import {
-//   addMinusQuantity,
-//   addPlusQuantity,
-// } from '../../redux/cartSlice/cartSlice.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { clearCart, deleteProductFromCart } from '../../redux/cartSlice/cartOperations.js';
-// import { addPlusQuantity, addMinusQuantity } from '../../redux/cartSlice/cartSlice.js';
+import {
+  clearCart,
+  deleteProductFromCart,
+  addPlusQuantity,
+  addMinusQuantity,
+} from '../../redux/cartSlice/cartOperations.js';
 
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const products = useSelector(selectProductsInCart);
-  const cartSum = useSelector(selectProductsInCart);
 
   const handleClickClearCart = () => {
     dispatch(clearCart());
@@ -25,18 +24,7 @@ export const Cart = () => {
 
   const handleClickDeleteProduct = (id) => {
     dispatch(deleteProductFromCart(id));
-
     toast.warning('Товар видалено з кошику');
-  };
-
-  const handleClickPlusQuantity = (id) => {
-    // dispatch(addPlusQuantity(id));
-    console.log('id', id);
-  };
-
-  const handleClickMinusQuantity = (id) => {
-    // dispatch(addMinusQuantity(id));
-    console.log('id', id);
   };
 
   const handleCardClick = (e, id) => {
@@ -57,12 +45,6 @@ export const Cart = () => {
       <div className={s.header}>
         <p className={s.totalProducts}>
           Всього позицій: <span>{products.length}</span>
-          <span>
-            {cartSum.toLocaleString('uk-UA', {
-              style: 'currency',
-              currency: 'UAH',
-            })}
-          </span>
         </p>
         <button className={s.cleanCart} onClick={handleClickClearCart}>
           <span>
@@ -75,9 +57,9 @@ export const Cart = () => {
         <ul className={s.productList}>
           {products.map((product) => (
             <li
-              key={product._id}
+              key={product.productId}
               className={s.productItem}
-              onClick={(e) => handleCardClick(e, product.id)}
+              onClick={(e) => handleCardClick(e, product.productId)}
               role="button"
               tabIndex={0}
             >
@@ -92,7 +74,12 @@ export const Cart = () => {
                     disabled={product.quantity === 1}
                     className={s.minus}
                     onClick={() => {
-                      handleClickMinusQuantity(product.id);
+                      dispatch(
+                        addMinusQuantity({
+                          productId: product.productId,
+                          quantity: product.quantity - 1,
+                        })
+                      );
                     }}
                   >
                     <span></span>
@@ -100,9 +87,14 @@ export const Cart = () => {
                   <p>{product.quantity}</p>
                   <button
                     className={s.plus}
-                    onClick={() => {
-                      handleClickPlusQuantity(product.id);
-                    }}
+                    onClick={() =>
+                      dispatch(
+                        addPlusQuantity({
+                          productId: product.productId,
+                          quantity: product.quantity + 1,
+                        })
+                      )
+                    }
                   >
                     +
                   </button>

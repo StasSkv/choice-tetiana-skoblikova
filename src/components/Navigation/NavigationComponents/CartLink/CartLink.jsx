@@ -8,9 +8,9 @@ import { selectProductsInCart } from '../../../../redux/cartSlice/cartSelectors.
 
 export const CartLink = ({ animate }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const productInCart = useSelector(selectProductsInCart);
-  const cartSum = useSelector(selectProductsInCart);
+  const cartSum = 1;
+
   const count = productInCart.length;
 
   return (

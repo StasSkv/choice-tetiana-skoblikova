@@ -4,6 +4,8 @@ import {
   deleteProductFromCart,
   fetchProductsInCart,
   clearCart,
+  addPlusQuantity,
+  addMinusQuantity,
 } from './cartOperations';
 
 const initialState = { products: [], isLoading: false, error: null };
@@ -55,6 +57,29 @@ const cartSlice = createSlice({
     builder.addCase(clearCart.fulfilled, (state) => {
       state.products = [];
       state.isLoading = false;
+    });
+    builder.addCase(addPlusQuantity.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(addPlusQuantity.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.isLoading = false;
+    });
+    builder.addCase(addPlusQuantity.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder
+      .addCase(addMinusQuantity.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(addMinusQuantity.fulfilled, (state, action) => {
+        state.products = action.payload.products;
+        state.isLoading = false;
+      });
+    builder.addCase(addMinusQuantity.pending, (state) => {
+      state.isLoading = true;
     });
   },
 });
