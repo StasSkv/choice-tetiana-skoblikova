@@ -1,38 +1,42 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCartProducts } from '../../redux/cartSlice/cartSelectors.js';
+import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import s from './Cart.module.css';
-import {
-  addclearCart,
-  addDeleteProduct,
-  addMinusQuantity,
-  addPlusQuantity,
-} from '../../redux/cartSlice/cartSlice.js';
+// import {
+//   addMinusQuantity,
+//   addPlusQuantity,
+// } from '../../redux/cartSlice/cartSlice.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { clearCart, deleteProductFromCart } from '../../redux/cartSlice/cartOperations.js';
+// import { addPlusQuantity, addMinusQuantity } from '../../redux/cartSlice/cartSlice.js';
 
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const products = useSelector(selectCartProducts);
+  const products = useSelector(selectProductsInCart);
+  const cartSum = useSelector(selectProductsInCart);
 
   const handleClickClearCart = () => {
-    dispatch(addclearCart());
+    dispatch(clearCart());
     toast.warning('Кошик очищенно');
   };
 
   const handleClickDeleteProduct = (id) => {
-    dispatch(addDeleteProduct(id));
+    dispatch(deleteProductFromCart(id));
+
     toast.warning('Товар видалено з кошику');
   };
 
   const handleClickPlusQuantity = (id) => {
-    dispatch(addPlusQuantity(id));
+    // dispatch(addPlusQuantity(id));
+    console.log('id', id);
   };
 
   const handleClickMinusQuantity = (id) => {
-    dispatch(addMinusQuantity(id));
+    // dispatch(addMinusQuantity(id));
+    console.log('id', id);
   };
 
   const handleCardClick = (e, id) => {
@@ -53,6 +57,12 @@ export const Cart = () => {
       <div className={s.header}>
         <p className={s.totalProducts}>
           Всього позицій: <span>{products.length}</span>
+          <span>
+            {cartSum.toLocaleString('uk-UA', {
+              style: 'currency',
+              currency: 'UAH',
+            })}
+          </span>
         </p>
         <button className={s.cleanCart} onClick={handleClickClearCart}>
           <span>
@@ -65,7 +75,7 @@ export const Cart = () => {
         <ul className={s.productList}>
           {products.map((product) => (
             <li
-              key={product.id}
+              key={product._id}
               className={s.productItem}
               onClick={(e) => handleCardClick(e, product.id)}
               role="button"
@@ -106,7 +116,7 @@ export const Cart = () => {
                 <button
                   className={s.deleteBtn}
                   onClick={() => {
-                    handleClickDeleteProduct(product.id);
+                    handleClickDeleteProduct(product.productId);
                   }}
                 >
                   {<MdOutlineDeleteOutline />}

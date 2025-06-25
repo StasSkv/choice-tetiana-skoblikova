@@ -5,29 +5,29 @@ import { useNavigate } from 'react-router-dom';
 import { LikeButton } from '../Buttons/LikeButton/LikeButton.jsx';
 import DeleteButton from '../Buttons/DeleteButton/DeleteButton.jsx';
 import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
-  import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
+import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 import { selectFavoritesProductsIds } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import { useState } from 'react';
 import { RatingReviews } from '../RatingProduct/RatingReviews/RatingReviews.jsx';
 
-const ProductCard = ({ product,  isFavoritesPage = false }) => {
+const ProductCard = ({ product, isFavoritesPage = false }) => {
   const productsInCart = useSelector(selectProductsInCart);
   const productsInFavorites = useSelector(selectFavoritesProductsIds);
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
-
-const isInCart = product ? productsInCart.some((item) => item && item.id === product.id) : false;
   
-const isInFavorite = product ? productsInFavorites.includes(product.id) : false;
+  const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
+  const isInFavorite = product ? productsInFavorites.includes(product.id) : false;
 
-const avgRating =
-  product && product.rating && product.rating.length > 0
-    ? Math.round((product.rating.reduce((sum, val) => sum + val, 0) / product.rating.length) * 10) /
-      10
-    : 0;
-  
+  const avgRating =
+    product && product.rating && product.rating.length > 0
+      ? Math.round(
+          (product.rating.reduce((sum, val) => sum + val, 0) / product.rating.length) * 10
+        ) / 10
+      : 0;
   const handleCardClick = (e) => {
-    if (e.target.closest('button') || e.target.closest('.rating') || e.target.closest('.deleteBtn')) return;
+    if (e.target.closest('button') || e.target.closest('.rating') || e.target.closest('.deleteBtn'))
+      return;
     navigate(`/products/${product.id}`);
   };
 
@@ -53,7 +53,7 @@ const avgRating =
             <p
               className={clsx(s.price, { [s.priceIsInCart]: isInCart })}
             >{`${product.price} грн`}</p>
-                <BuyButton id={product.id} quantity={isInCart ? productsInCart.find((item) => item.id === product.id).quantity : 0} isInCart={isInCart} />
+            <BuyButton productId={product._id} isInCart={isInCart} />
           </div>
         </div>
       </div>

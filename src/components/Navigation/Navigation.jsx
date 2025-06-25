@@ -15,19 +15,13 @@ export const Navigation = () => {
   const [animateCart, setAnimateCart] = useState(false);
   const [animateFavorites, setAnimateFavorites] = useState(false);
 
-  const prevCartRef = useRef(productsInCart.length);
+  const prevCartRef = useRef(productsInCart);
   const prevFavoritesRef = useRef(favoriteItems.length);
 
-  const order = productsInCart.reduce((total, product) => {
-    return total + product.price * product.quantity;
-  }, 0);
-
-  const formatted = order.toLocaleString('uk-UA');
-
   useEffect(() => {
-    if (productsInCart.length !== prevCartRef.current) {
+    if (productsInCart !== prevCartRef.current) {
       setAnimateCart(true);
-      prevCartRef.current = productsInCart.length;
+      prevCartRef.current = productsInCart;
       const timeout = setTimeout(() => setAnimateCart(false), 400);
       return () => clearTimeout(timeout);
     }
@@ -49,7 +43,7 @@ export const Navigation = () => {
       <NavLinkItem to="/products">Каталог</NavLinkItem>
       <FavoritesLink count={favoriteItems.length} animate={animateFavorites} />
       <AccountLink />
-      <CartLink count={productsInCart.length} totalSum={formatted} animate={animateCart} />
+      <CartLink count={productsInCart.length} animate={animateCart} />
     </nav>
   );
 };

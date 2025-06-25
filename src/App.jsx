@@ -5,8 +5,9 @@ import { Layout } from './components/Layout/Layout';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { lazy, Suspense, useEffect } from 'react';
-import { fetchProducts } from './redux/productsSlice/productsOperations.js';
 import { Loader } from './components/Loader/Loader.jsx';
+import { fetchProductsInCart } from './redux/cartSlice/cartOperations.js';
+import { fetchProducts } from './redux/productsSlice/productsOperations.js';
 
 const LazyTeam = lazy(() => import('./pages/Team/Team.jsx'));
 const LazyProductDetails = lazy(() => import('./pages/ProductDetails/ProductDetails.jsx'));
@@ -19,16 +20,17 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchProductsInCart());
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   // const name = 'Фітомус для вмивання';
 
   // const imgName = 'PHYTOMOUSS FOR WASHING';
 
   // console.log(name.toUpperCase());
   // console.log(imgName.toLowerCase().split(' ').join('-'));
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   return (
     <>

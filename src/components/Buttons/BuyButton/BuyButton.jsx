@@ -3,14 +3,14 @@ import { GiCheckMark } from 'react-icons/gi';
 import s from './BuyButton.module.css';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
-import { addProductToCart } from '../../../redux/cartSlice/cartSlice.js';
+import { addProductToCart } from '../../../redux/cartSlice/cartOperations.js';
 import { toast } from 'react-toastify';
 
-export const BuyButton = ({ id, quantity, isInCart }) => {
+export const BuyButton = ({ productId, isInCart }) => {
   const dispatch = useDispatch();
 
   const handleBuy = () => {
-    dispatch(addProductToCart(id, quantity));
+    dispatch(addProductToCart(productId));
     toast.success('Товар додано до кошику');
   };
 

@@ -1,52 +1,62 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  addProductToCart,
+  deleteProductFromCart,
+  fetchProductsInCart,
+  clearCart,
+} from './cartOperations';
+
+const initialState = { products: [], isLoading: false, error: null };
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState: {
-    products: [],
-  },
-  reducers: {
-    addProductToCart(state, action) {
-      const id = action.payload;
-      const item = state.products.find((p) => p.id === id);
-      if (item) {
-        item.quantity += 1;
-      } else {
-        state.products.push({ id, quantity: 1 });
-      }
-    },
-    addPlusQuantity(state, action) {
-      const id = action.payload;
-      const item = state.products.find((p) => p.id === id);
-      if (item) {
-        item.quantity += 1;
-      }
-    },
-    addMinusQuantity(state, action) {
-      const id = action.payload;
-      const item = state.products.find((p) => p.id === id);
-      if (item && item.quantity > 1) {
-        item.quantity -= 1;
-      } else {
-        state.products = state.products.filter((p) => p.id !== id);
-      }
-    },
-    addDeleteProduct(state, action) {
-      const id = action.payload;
-      state.products = state.products.filter((p) => p.id !== id);
-    },
-    addclearCart(state) {
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(fetchProductsInCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProductsInCart.fulfilled, (state, action) => {
+      state.products = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchProductsInCart.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(addProductToCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addProductToCart.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.isLoading = false;
+    });
+    builder.addCase(addProductToCart.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(deleteProductFromCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteProductFromCart.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.isLoading = false;
+    });
+    builder.addCase(deleteProductFromCart.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(clearCart.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(clearCart.rejected, (state) => {
       state.products = [];
-    },
+      state.isLoading = false;
+    });
+    builder.addCase(clearCart.fulfilled, (state) => {
+      state.products = [];
+      state.isLoading = false;
+    });
   },
 });
-
-export const {
-  addProductToCart,
-  addclearCart,
-  addDeleteProduct,
-  addPlusQuantity,
-  addMinusQuantity,
-} = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

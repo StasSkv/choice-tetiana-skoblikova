@@ -27,8 +27,8 @@ const ProductsList = ({ products: propProducts, isFavoritesPage = false }) => {
       <div className={s.productListWrap}>
         <ul className={s.productList}>
           {selectedProducts.map((product, index) => (
-            <li
-              key={product.id}
+            <li 
+              key={product._id}
               className={s.productCard}
               style={{ animationDelay: `${index * 0.1}s` }}
             >

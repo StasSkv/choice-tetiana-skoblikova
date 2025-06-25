@@ -5,11 +5,11 @@ import { TfiClose } from 'react-icons/tfi';
 import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCartTotal } from '../../redux/cartSlice/cartSelectors.js';
+import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 
 const CustomModal = ({ isOpen, onClose, children }) => {
-  const cartSum = useSelector(selectCartTotal);
-  
+  const cartSum = useSelector(selectProductsInCart);
+    
   const [modalVisible, setModalVisible] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
