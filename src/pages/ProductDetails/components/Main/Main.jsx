@@ -3,7 +3,7 @@ import { Details } from '../Details/Details.jsx';
 import s from './Main.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { addProductToCart } from '../../../../redux/cartSlice/cartSlice.js';
+import  {addProductToCart}  from '../../../../redux/cartSlice/cartOperations.js';
 import { selectProductsInCart } from '../../../../redux/cartSlice/cartSelectors.js';
 import clsx from 'clsx';
 import { GiCheckMark } from 'react-icons/gi';
