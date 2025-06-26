@@ -15,10 +15,8 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
   const productsInFavorites = useSelector(selectFavoritesProductsIds);
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
-  
   const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
   const isInFavorite = product ? productsInFavorites.includes(product.id) : false;
-
   const avgRating =
     product && product.rating && product.rating.length > 0
       ? Math.round(
@@ -53,7 +51,7 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
             <p
               className={clsx(s.price, { [s.priceIsInCart]: isInCart })}
             >{`${product.price} грн`}</p>
-            <BuyButton productId={product._id} isInCart={isInCart} />
+            <BuyButton productId={product._id} price={product.price} isInCart={isInCart} />
           </div>
         </div>
       </div>

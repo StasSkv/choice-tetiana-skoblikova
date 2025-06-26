@@ -11,6 +11,13 @@ import {
   addMinusQuantity,
 } from '../../redux/cartSlice/cartOperations.js';
 
+import {
+  clearCartLocal,
+  deleteProductFromCartLocal,
+  addMinusQuantityLocal,
+  addPlusQuantityLocal,
+} from '../../redux/cartSlice/cartSlice.js';
+
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,13 +25,30 @@ export const Cart = () => {
   const products = useSelector(selectProductsInCart);
 
   const handleClickClearCart = () => {
+    dispatch(clearCartLocal());
     dispatch(clearCart());
     toast.warning('Кошик очищенно');
   };
 
-  const handleClickDeleteProduct = (id) => {
-    dispatch(deleteProductFromCart(id));
+  const handleClickDeleteProduct = (productId, price) => {
+    dispatch(deleteProductFromCartLocal(productId, price));
+    dispatch(deleteProductFromCart(productId));
     toast.warning('Товар видалено з кошику');
+  };
+
+  const handlePlusQuantity = (product) => {
+    dispatch(addPlusQuantityLocal(product.productId));
+    dispatch(addPlusQuantity({ productId: product.productId, quantity: product.quantity + 1 }));
+  };
+
+  const handleMinusQuantity = (product) => {
+    dispatch(addMinusQuantityLocal(product.productId));
+    dispatch(
+      addMinusQuantity({
+        productId: product.productId,
+        quantity: product.quantity - 1,
+      })
+    );
   };
 
   const handleCardClick = (e, id) => {
@@ -74,41 +98,21 @@ export const Cart = () => {
                     disabled={product.quantity === 1}
                     className={s.minus}
                     onClick={() => {
-                      dispatch(
-                        addMinusQuantity({
-                          productId: product.productId,
-                          quantity: product.quantity - 1,
-                        })
-                      );
+                      handleMinusQuantity(product);
                     }}
                   >
                     <span></span>
                   </button>
                   <p>{product.quantity}</p>
-                  <button
-                    className={s.plus}
-                    onClick={() =>
-                      dispatch(
-                        addPlusQuantity({
-                          productId: product.productId,
-                          quantity: product.quantity + 1,
-                        })
-                      )
-                    }
-                  >
+                  <button className={s.plus} onClick={() => handlePlusQuantity(product)}>
                     +
                   </button>
                 </div>
-                <p className={s.quantityPrice}>
-                  {(product.quantity * product.price).toLocaleString('uk-UA', {
-                    style: 'currency',
-                    currency: 'UAH',
-                  })}
-                </p>
+                <p className={s.quantityPrice}>{(product.price * product.quantity).toFixed(2)}</p>
                 <button
                   className={s.deleteBtn}
                   onClick={() => {
-                    handleClickDeleteProduct(product.productId);
+                    handleClickDeleteProduct(product.productId, product.price);
                   }}
                 >
                   {<MdOutlineDeleteOutline />}

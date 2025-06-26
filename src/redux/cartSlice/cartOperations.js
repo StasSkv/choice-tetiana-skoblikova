@@ -7,7 +7,7 @@ export const fetchProductsInCart = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get('/cart');
-      return response.data.products;
+      return response.data;
     } catch (error) {
       toast.error('Помилка при завантаженні кошику');
       return thunkAPI.rejectWithValue(error.message);

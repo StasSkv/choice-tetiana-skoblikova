@@ -4,13 +4,12 @@ import CustomModal from '../../../CustomModal/CustomModal.jsx';
 import { useState } from 'react';
 import { Cart } from '../../../../pages/Cart/Cart.jsx';
 import { useSelector } from 'react-redux';
-import { selectProductsInCart } from '../../../../redux/cartSlice/cartSelectors.js';
+import { selectProductsInCart, selectTotalPriceCart } from '../../../../redux/cartSlice/cartSelectors.js';
 
 export const CartLink = ({ animate }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const productInCart = useSelector(selectProductsInCart);
-  const cartSum = 1;
-
+  const totalPriceCart = useSelector(selectTotalPriceCart);
   const count = productInCart.length;
 
   return (
@@ -28,7 +27,10 @@ export const CartLink = ({ animate }) => {
             </span>
           )}
           <p className={s.totalSum}>
-            {cartSum.toLocaleString('uk-UA', {
+            {totalPriceCart ? totalPriceCart.toLocaleString('uk-UA', {
+              style: 'currency',
+              currency: 'UAH',
+            }) : Number(0).toLocaleString('uk-UA', {
               style: 'currency',
               currency: 'UAH',
             })}

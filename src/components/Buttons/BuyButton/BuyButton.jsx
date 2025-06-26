@@ -5,11 +5,13 @@ import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
 import { addProductToCart } from '../../../redux/cartSlice/cartOperations.js';
 import { toast } from 'react-toastify';
+import { addProductToCartLocal } from '../../../redux/cartSlice/cartSlice.js';
 
-export const BuyButton = ({ productId, isInCart }) => {
+export const BuyButton = ({ productId, price, isInCart }) => {
   const dispatch = useDispatch();
 
   const handleBuy = () => {
+    dispatch(addProductToCartLocal({ productId, price }));
     dispatch(addProductToCart(productId));
     toast.success('Товар додано до кошику');
   };

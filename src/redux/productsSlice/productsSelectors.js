@@ -7,3 +7,7 @@ export const selectProductById = (id) => (state) => {
     ? state.products.currentItem
     : state.products.items.find((p) => p.id === id);
 };
+
+export const selectPriceProduct = (state, id) => {
+  return state.products.items.find((product) => product.id === id)?.price;
+};
