@@ -25,10 +25,9 @@ const App = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-      useEffect(() => {
-        dispatch(fetchProductsInFavorites()); 
-      }, [dispatch]);
-
+  useEffect(() => {
+    dispatch(fetchProductsInFavorites());
+  }, [dispatch]);
 
   // const name = 'Фітомус для вмивання';
 

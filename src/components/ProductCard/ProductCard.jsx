@@ -25,11 +25,11 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
           (product.rating.reduce((sum, val) => sum + val, 0) / product.rating.length) * 10
         ) / 10
       : 0;
-  
+
   const handleCardClick = (e) => {
     if (e.target.closest('button') || e.target.closest('.rating') || e.target.closest('.deleteBtn'))
       return;
-    navigate(`/products/${product.id}`);
+    navigate(`/products/${product._id}`);
   };
 
   return (

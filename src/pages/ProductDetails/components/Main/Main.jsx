@@ -3,8 +3,9 @@ import { Details } from '../Details/Details.jsx';
 import s from './Main.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import  {addProductToCart}  from '../../../../redux/cartSlice/cartOperations.js';
+import { addProductToCart } from '../../../../redux/cartSlice/cartOperations.js';
 import { selectProductsInCart } from '../../../../redux/cartSlice/cartSelectors.js';
+import { addProductToCartLocal } from '../../../../redux/cartSlice/cartSlice.js';
 import clsx from 'clsx';
 import { GiCheckMark } from 'react-icons/gi';
 import { RatingReviews } from '../../../../components/RatingProduct/RatingReviews/RatingReviews.jsx';
@@ -12,13 +13,15 @@ import { RatingReviews } from '../../../../components/RatingProduct/RatingReview
 export const Main = ({ product }) => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(selectProductsInCart);
-  const isInCart = productsInCart.some(({ id }) => id === product.id);
+  const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
+  // const isInFavorite = product ? favoritesProducts.some((item) => item === product._id) : false;
   const avgRating =
     Math.round((product.rating.reduce((sum, val) => sum + val, 0) / product.rating.length) * 10) /
     10;
 
   const handleBuy = () => {
-    dispatch(addProductToCart(product.id));
+    dispatch(addProductToCartLocal({ productId: product._id, price: product.price }));
+    dispatch(addProductToCart(product._id));
     toast.success('Товар додано до кошику');
   };
 

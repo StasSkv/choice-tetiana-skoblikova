@@ -21,8 +21,7 @@ import {
 export const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const products = useSelector(selectProductsInCart);
+  const products = useSelector(selectProductsInCart); 
 
   const handleClickClearCart = () => {
     dispatch(clearCartLocal());

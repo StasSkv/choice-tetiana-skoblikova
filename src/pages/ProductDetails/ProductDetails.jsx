@@ -20,12 +20,12 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
   const { id } = useParams();
-
-  const product = useSelector(selectProductById(id));
+  const product = useSelector(selectProductById());
 
   useEffect(() => {
     dispatch(fetchProductById(id));
   }, [dispatch, id]);
+
 
   if (!product || Object.keys(product).length === 0) return <Loader />;
 
@@ -61,7 +61,7 @@ const ProductDetails = () => {
 
         <section>
           <div className={clsx('container', s.productContainer)}>
-            <FormReviews product={product.id} />
+            <FormReviews product={product._id} />
           </div>
         </section>
 

@@ -37,7 +37,7 @@
   background: var(--white);
   font-weight: 600;
   max-width: 400px;
-  padding: 8px 16px;
+  padding: 4px 16px;
   border-radius: 8px;
   line-height: 1.6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -49,9 +49,10 @@
 
 .wrap {
   width: 100%;
+  margin-bottom: 12px;
 }
 .descriptionWrap h2 {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .text {
