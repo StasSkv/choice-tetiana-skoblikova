@@ -13,11 +13,9 @@ const Favorites = () => {
   const favoritesProducts = useSelector(selectFavoritesProducts);
   const allProducts = useSelector(selectAllProducts);
 
-  const validFavoriteProducts = favoritesProducts?.filter(Boolean) || [];
-  const otherProducts =
-    allProducts?.filter(
-      (product) => !validFavoriteProducts.some((favProduct) => favProduct?.id === product.id)
-    ) || [];
+  const productsToRender = allProducts.filter((product) =>
+    favoritesProducts.includes(product._id)
+  );
 
   return (
     <motion.div
@@ -31,9 +29,9 @@ const Favorites = () => {
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
             <h2 className={s.subtitle}>Улюблені товари</h2>
 
-            {validFavoriteProducts.length > 0 ? (
+            {productsToRender.length > 0 ? (
               <div className={s.list}>
-                <ProductsList products={validFavoriteProducts} isFavoritesPage={true} />
+                <ProductsList products={productsToRender} isFavoritesPage={true} />
               </div>
             ) : (
               <div className={s.isNotFavorite}>
@@ -49,11 +47,11 @@ const Favorites = () => {
           </div>
         </section>
 
-        {otherProducts.length > 0 && (
+        {allProducts.length > 0 && (
           <section>
             <div className={clsx('container', s.productContainer, s.mySwiper)}>
               <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
-              <MySwiper products={otherProducts} slidesPerView={4.4} />
+              <MySwiper products={allProducts} slidesPerView={4.4} />
             </div>
           </section>
         )}

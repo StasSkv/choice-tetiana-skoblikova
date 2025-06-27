@@ -8,7 +8,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Loader } from './components/Loader/Loader.jsx';
 import { fetchProductsInCart } from './redux/cartSlice/cartOperations.js';
 import { fetchProducts } from './redux/productsSlice/productsOperations.js';
-
+import { fetchProductsInFavorites } from './redux/favoritesSlice/favoritesOperations.js';
 const LazyTeam = lazy(() => import('./pages/Team/Team.jsx'));
 const LazyProductDetails = lazy(() => import('./pages/ProductDetails/ProductDetails.jsx'));
 const LazyPlacing = lazy(() => import('./pages/Placing/Placing.jsx'));
@@ -24,6 +24,11 @@ const App = () => {
     dispatch(fetchProductsInCart());
     dispatch(fetchProducts());
   }, [dispatch]);
+
+      useEffect(() => {
+        dispatch(fetchProductsInFavorites()); 
+      }, [dispatch]);
+
 
   // const name = 'Фітомус для вмивання';
 

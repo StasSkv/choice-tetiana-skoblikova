@@ -1,18 +1,20 @@
 import { MdDelete } from 'react-icons/md';
 import s from './DeleteButton.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteProductFromCart } from '../../../redux/cartSlice/cartOperations.js';
 import { toast } from 'react-toastify';
+import { removeProductFromFavoritesLocal } from '../../../redux/favoritesSlice/favoritesSlice.js';
+import { removeProductFromFavorites } from '../../../redux/favoritesSlice/favoritesOperations.js';
 
 const DeleteButton = ({ id, onStartRemove }) => {
   const dispatch = useDispatch();
-
+  
   const handleRemove = (e) => {
     e.stopPropagation();
     onStartRemove();
     setTimeout(() => {
-      dispatch(deleteProductFromCart(id));
+      dispatch(removeProductFromFavorites(id));
     }, 300);
+    dispatch(removeProductFromFavoritesLocal(id));
     toast.warning('Товар видалено з улюблених');
   };
 
