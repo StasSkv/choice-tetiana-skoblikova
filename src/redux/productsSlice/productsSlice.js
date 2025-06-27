@@ -18,6 +18,11 @@ const productsSlice = createSlice({
     isLoading: false,
     error: null,
   },
+  reducers: {
+    setCurrentItem: (state, action) => {
+      state.currentItem = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, handlePending)
@@ -38,3 +43,5 @@ const productsSlice = createSlice({
 });
 
 export const productsReducer = productsSlice.reducer;
+
+export const { setCurrentItem } = productsSlice.actions;

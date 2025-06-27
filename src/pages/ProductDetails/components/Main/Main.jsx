@@ -1,23 +1,29 @@
-import { BsCart4 } from 'react-icons/bs';
-import { Details } from '../Details/Details.jsx';
 import s from './Main.module.css';
+import clsx from 'clsx';
+import { BsCart4 } from 'react-icons/bs';
+import { GiCheckMark } from 'react-icons/gi';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { Details } from '../Details/Details.jsx';
 import { toast } from 'react-toastify';
+import { RatingReviews } from '../../../../components/RatingProduct/RatingReviews/RatingReviews.jsx';
+
+import { fetchReviewsByProductId } from '../../../../redux/reviewsSlice/reviewsOperations.js';
+import { addProductToCartLocal } from '../../../../redux/cartSlice/cartSlice.js';
 import { addProductToCart } from '../../../../redux/cartSlice/cartOperations.js';
 import { selectProductsInCart } from '../../../../redux/cartSlice/cartSelectors.js';
-import { addProductToCartLocal } from '../../../../redux/cartSlice/cartSlice.js';
-import clsx from 'clsx';
-import { GiCheckMark } from 'react-icons/gi';
-import { RatingReviews } from '../../../../components/RatingProduct/RatingReviews/RatingReviews.jsx';
 
 export const Main = ({ product }) => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(selectProductsInCart);
   const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
-  // const isInFavorite = product ? favoritesProducts.some((item) => item === product._id) : false;
-  const avgRating =
-    Math.round((product.rating.reduce((sum, val) => sum + val, 0) / product.rating.length) * 10) /
-    10;
+
+  useEffect(() => {
+    if (product && product._id && product.ratingsCount === 0) {
+      dispatch(fetchReviewsByProductId(product._id));
+    }
+  }, [dispatch, product._id]);
 
   const handleBuy = () => {
     dispatch(addProductToCartLocal({ productId: product._id, price: product.price }));
@@ -49,7 +55,8 @@ export const Main = ({ product }) => {
               </span>
             </button>
           </div>
-          <RatingReviews value={avgRating || 0} />
+          <RatingReviews value={product.averageRating || 0} />
+          <p className={s.reviewsCount}>Відгуків: {product.ratingsCount}</p>
         </div>
         <div className={s.appointmentWrap}>
           <p className={s.apoint}>

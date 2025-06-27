@@ -45,7 +45,7 @@ export const CartLink = ({ animate }) => {
           setModalIsOpen(false);
         }}
       >
-        <Cart />
+        <Cart onClose={() => setModalIsOpen(false)} />
       </CustomModal>
     </>
   );

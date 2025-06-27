@@ -1,5 +1,4 @@
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import s from './ProductDetails.module.css';
 import clsx from 'clsx';
 import { Options } from './components/Options/Options.jsx';
@@ -12,20 +11,11 @@ import {
   selectAllProducts,
   selectProductById,
 } from '../../redux/productsSlice/productsSelectors.js';
-import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
-import { useEffect } from 'react';
 import { Loader } from '../../components/Loader/Loader.jsx';
 
 const ProductDetails = () => {
-  const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
-  const { id } = useParams();
   const product = useSelector(selectProductById());
-
-  useEffect(() => {
-    dispatch(fetchProductById(id));
-  }, [dispatch, id]);
-
 
   if (!product || Object.keys(product).length === 0) return <Loader />;
 
@@ -34,7 +24,7 @@ const ProductDetails = () => {
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 100 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.4 }}
     >
       <>
         <section className={s.ProductDetails}>

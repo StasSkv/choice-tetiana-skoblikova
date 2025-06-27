@@ -7,11 +7,12 @@
 
 .leaveRewievs {
   background-color: var(--white);
-  padding: 24px;
+  padding: 12px 12px;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  min-height: 570px;
+  max-height: 570px;
+  overflow-x: hidden;
 }
 
 .formWrap {
@@ -74,7 +75,8 @@
 
 .ratingBlock {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: start;
   gap: 8px;
 }
 
@@ -112,13 +114,36 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
+.scrollBox {  
+  max-height: 450px; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px; 
+}
+
+.scrollBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollBox::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.scrollBox::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
 
 .listWrap {
-  overflow-y: auto;
   padding-right: 8px;
 }
 
-.listWrap li {
+.list {
+  overflow-y: auto;
+}
+
+.list li {
   background-color: #fff;
   padding: 16px 20px;
   border-radius: 12px;
@@ -126,19 +151,26 @@
   margin-bottom: 16px;
 }
 
-.listWrap li > div {
+.list li > div {
 display: flex;
 justify-content: space-between;
 align-items: center;
 margin-bottom: 8px;
 }
 
-.listWrap h3 {
+.headerReview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.list h3 {
   font-size: 18px;
   font-weight: 600;
 }
 
-.listWrap p {
+.list p {
   font-size: 16px;
   line-height: 1.4;
 }
@@ -146,3 +178,12 @@ margin-bottom: 8px;
 .date {
   color: var(--grey-text);
 }
+
+.noReviews {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--grey-text);
+  text-align: center;
+}
+
+

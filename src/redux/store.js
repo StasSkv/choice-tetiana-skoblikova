@@ -15,6 +15,12 @@ import { productsReducer } from './productsSlice/productsSlice.js';
 import { favoritesReducer } from './favoritesSlice/favoritesSlice.js';
 import { reviewsReducer } from './reviewsSlice/reviewsSlice.js';
 
+const productsPersistConfig = {
+  key: 'products',
+  storage,
+  whitelist: ['currentItem'],
+};
+
 const cartPersistConfig = {
   key: 'cart',
   version: 1,
@@ -29,7 +35,7 @@ const favoritesPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    products: productsReducer,
+    products: persistReducer(productsPersistConfig, productsReducer),
     cart: persistReducer(cartPersistConfig, cartReducer),
     favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
     reviews: reviewsReducer,

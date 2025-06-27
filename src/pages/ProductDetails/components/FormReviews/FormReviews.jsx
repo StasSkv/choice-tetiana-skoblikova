@@ -1,40 +1,37 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { RatingProduct } from '../../../../components/RatingProduct/RatingProduct.jsx';
 import s from './FormReviews.module.css';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+
 import { RatingReviews } from '../../../../components/RatingProduct/RatingReviews/RatingReviews.jsx';
+import { RatingProduct } from '../../../../components/RatingProduct/RatingProduct.jsx';
+
 import { getFormattedDate } from './formattedDate.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectReviewsById } from '../../../../redux/reviewsSlice/reviewsSelectors.js';
-import { addReview } from '../../../../redux/reviewsSlice/reviewsSlice.js';
+import { useParams } from 'react-router-dom';
+import { selectProductReviews } from '../../../../redux/reviewsSlice/reviewsSelectors.js';
+import { createReview } from '../../../../redux/reviewsSlice/reviewsOperations.js';
 
-export const FormReviews = ({ product }) => {
+export const FormReviews = () => {
+  const userId = '60f8c2d5a3b2c826d8e8b123';
+
   const dispatch = useDispatch();
-  const reviews = useSelector(selectReviewsById(product.id));
-
-  const initialValues = {
-    id: product.id,
-    name: '',
-    review: '',
-    date: '',
-    rating: 0,
-  };
+  const reviews = useSelector(selectProductReviews);
+  const { id } = useParams();
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Введіть ім'я"),
-    review: Yup.string().required('Введіть відгук'),
+    userName: Yup.string().required("Введіть ім'я"),
+    comment: Yup.string()
+      .min(10, 'Розкажіть трошки більше')
+      .max(500, 'Занадто багато символів')
+      .required('Введіть відгук'),
     rating: Yup.number().min(1, 'Оцініть товар').required('Оцініть товар'),
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    const date = getFormattedDate();
     const newReview = {
       ...values,
-      date,
     };
-    dispatch(addReview(newReview));
-    console.log(reviews);
-
+    dispatch(createReview(newReview));
     resetForm();
   };
 
@@ -42,42 +39,54 @@ export const FormReviews = ({ product }) => {
     <div className={s.reviews}>
       <div className={s.leaveRewievs}>
         <h2 className={s.title}>Відгуки про товар</h2>
-        <div className={s.listWrap}>
-          <ul>
-            {reviews?.map(({ id, name, review, date, rating }) => (
-              <li key={id} className={s.item}>
-                <div>
-                  <h3>{name}</h3>
-                  <RatingReviews value={rating} />
-                  <span className={s.date}>{date}</span>
-                </div>
-                <p>{review}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {reviews.length > 0 ? (
+          <div className={s.scrollBox}>
+            <ul className={s.list}>
+              {reviews?.map(({ _id, userName, comment, rating, createdAt }) => (
+                <li key={_id} className={s.item}>
+                  <div className={s.headerReview}>
+                    <h3>{userName}</h3>
+                    <span className={s.date}>{getFormattedDate(createdAt)}</span>
+                  </div>
+                  <div className={s.ratingBlock}>
+                    <RatingReviews value={rating} />
+                  </div>
+                  <p>{comment}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p className={s.noReviews}>Якщо вам є що розповісти про цей товар, залиште свій відгук</p>
+        )}
       </div>
       <div className={s.formWrap}>
         <h2 className={s.title}>Залишити відгук</h2>
         <Formik
-          initialValues={initialValues}
+          initialValues={{
+            userId: userId,
+            productId: id,
+            userName: '',
+            comment: '',
+            rating: 0,
+          }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           {({ values, setFieldValue }) => (
             <Form className={s.form}>
+              <Field type="hidden" name="userId" />
+              <Field type="hidden" name="productId" />
               <label className={s.label}>
                 Ім'я:
-                <Field type="text" name="name" className={s.input} />
-                <ErrorMessage name="name" component="div" className={s.error} />
+                <Field type="text" name="userName" className={s.input} />
+                <ErrorMessage name="userName" component="div" className={s.error} />
               </label>
-
               <label className={s.label}>
                 Відгук:
-                <Field as="textarea" name="review" rows="4" className={s.textarea} />
-                <ErrorMessage name="review" component="div" className={s.error} />
+                <Field as="textarea" name="comment" rows="4" className={s.textarea} />
+                <ErrorMessage name="comment" component="div" className={s.error} />
               </label>
-
               <div className={s.ratingBlock}>
                 <p>Оцініть товар:</p>
                 <RatingProduct
@@ -86,7 +95,6 @@ export const FormReviews = ({ product }) => {
                 />
                 <ErrorMessage name="rating" component="div" className={s.error} />
               </div>
-
               <button type="submit" className={s.submitBtn}>
                 Надіслати відгук
               </button>

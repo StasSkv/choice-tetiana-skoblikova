@@ -17,11 +17,13 @@ import {
   addMinusQuantityLocal,
   addPlusQuantityLocal,
 } from '../../redux/cartSlice/cartSlice.js';
+import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
+import { setCurrentItem } from '../../redux/productsSlice/productsSlice.js';
 
-export const Cart = () => {
+export const Cart = ({ onClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector(selectProductsInCart); 
+  const products = useSelector(selectProductsInCart);
 
   const handleClickClearCart = () => {
     dispatch(clearCartLocal());
@@ -59,7 +61,15 @@ export const Cart = () => {
     ) {
       return;
     }
-    navigate(`/products/${id}`);
+    dispatch(setCurrentItem(products.find((product) => product.productId === id)));
+    dispatch(fetchProductById(id));
+    if (e.target.productId !== id) {
+      navigate(`/products/${id}`);
+      onClose();
+    } else {
+      dispatch(setCurrentItem(null));
+      onClose();
+    }
   };
 
   return (

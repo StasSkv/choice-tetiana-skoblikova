@@ -2,8 +2,7 @@
 .productHeaderWrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 24px;
+  justify-content: space-evenly;
   align-items: flex-start;
 }
 
@@ -34,6 +33,7 @@
 }
 
 .apoint {
+  width: 100%;
   background: var(--white);
   font-weight: 600;
   max-width: 400px;
@@ -105,3 +105,10 @@
   font-weight: 600;
   margin-bottom: auto;
 }
+
+.reviewsCount {
+  font-size: 18px;
+  color: var(--main-text);
+  margin-top: 8px
+}
+

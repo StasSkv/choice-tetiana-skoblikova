@@ -1,6 +1,6 @@
-import { createSelector } from '@reduxjs/toolkit';
 
-export const selectReviews = (state) => state.reviews.items;
+export const selectUserReviews = (state) => state.reviews.userReviews;
 
-export const selectReviewsById = (id) =>
-  createSelector([selectReviews], (reviews) => reviews[id] || []);
+export const selectProductReviews = (state) => state.reviews.productReviews;
+
+export const selectAllReviews = (state) => state.reviews.reviews;

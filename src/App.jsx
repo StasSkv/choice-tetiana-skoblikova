@@ -1,14 +1,16 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { lazy, Suspense, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Home from './pages/Home/Home';
 import { Layout } from './components/Layout/Layout';
 import { ToastContainer, Zoom } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { lazy, Suspense, useEffect } from 'react';
 import { Loader } from './components/Loader/Loader.jsx';
+
 import { fetchProductsInCart } from './redux/cartSlice/cartOperations.js';
 import { fetchProducts } from './redux/productsSlice/productsOperations.js';
 import { fetchProductsInFavorites } from './redux/favoritesSlice/favoritesOperations.js';
+
 const LazyTeam = lazy(() => import('./pages/Team/Team.jsx'));
 const LazyProductDetails = lazy(() => import('./pages/ProductDetails/ProductDetails.jsx'));
 const LazyPlacing = lazy(() => import('./pages/Placing/Placing.jsx'));
@@ -21,11 +23,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProductsInCart());
     dispatch(fetchProducts());
-  }, [dispatch]);
-
-  useEffect(() => {
+    dispatch(fetchProductsInCart());
     dispatch(fetchProductsInFavorites());
   }, [dispatch]);
 

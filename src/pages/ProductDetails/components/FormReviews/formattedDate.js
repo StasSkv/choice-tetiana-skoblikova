@@ -1,6 +1,5 @@
-  export const getFormattedDate = () => {
-    const now = new Date();
-
+  export const getFormattedDate = (date) => {
+    const now = new Date(date);
     const options = {
       day: 'numeric',
       month: 'long',
