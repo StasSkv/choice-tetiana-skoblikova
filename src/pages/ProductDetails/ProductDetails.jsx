@@ -12,10 +12,22 @@ import {
   selectProductById,
 } from '../../redux/productsSlice/productsSelectors.js';
 import { Loader } from '../../components/Loader/Loader.jsx';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchReviewsByProductId } from '../../redux/reviewsSlice/reviewsOperations.js';
+import { useParams } from 'react-router-dom';
 
 const ProductDetails = () => {
   const products = useSelector(selectAllProducts);
   const product = useSelector(selectProductById());
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  useEffect(() => {
+    if (product) {
+      dispatch(fetchReviewsByProductId(params.id));
+    }
+  }, [params.id, dispatch, product]);
 
   if (!product || Object.keys(product).length === 0) return <Loader />;
 

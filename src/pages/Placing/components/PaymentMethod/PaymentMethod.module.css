@@ -27,3 +27,42 @@
   font-size: 16px;
   color: var(--main-text-color);
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.radioInput {
+  display: none;
+}
+
+.customRadio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--main-text);
+  border-radius: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+}
+
+.radioInput:checked + .customRadio::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border-radius: 100%;
+  background-color: var(--accent);
+}

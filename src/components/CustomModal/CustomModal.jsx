@@ -8,8 +8,7 @@ import { useSelector } from 'react-redux';
 import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 
 const CustomModal = ({ isOpen, onClose, children }) => {
-  const cartSum = useSelector(selectProductsInCart);
-    
+  const productsInCart = useSelector(selectProductsInCart);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
@@ -64,19 +63,25 @@ const CustomModal = ({ isOpen, onClose, children }) => {
           </span>
           Продовжити покупки
         </button>
-        {cartSum > 0 && (
+        {productsInCart.length > 0 && (
           <div className={s.orderWrap}>
             <p className={s.orderText}>Сумма замовлення</p>
             <p className={s.orderSum}>
-              {cartSum.toLocaleString('uk-UA', {
-                style: 'currency',
-                currency: 'UAH',
-              })}
+              {productsInCart
+                .reduce((acc, product) => acc + product.price * product.quantity, 0)
+                .toLocaleString('uk-UA', {
+                  style: 'currency',
+                  currency: 'UAH',
+                })}
               <span className={s.orderCurrency}> грн</span>
             </p>
           </div>
         )}
-        <NavLink to="/placing" className={s.submitBtn}>Оформити замовлення</NavLink>
+        {productsInCart.length > 0 && (
+          <NavLink to="/placing" className={s.submitBtn} onClick={onClose}>
+            Оформити замовлення
+          </NavLink>
+        )}
       </div>
     </Modal>
   );

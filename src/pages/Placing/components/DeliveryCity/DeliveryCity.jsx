@@ -1,79 +1,125 @@
+import { useState } from 'react';
 import { DeliveryWay } from '../DeliveryWay/DeliveryWay.jsx';
 import s from './DeliveryCity.module.css';
-import Select from 'react-select';
-
-const cityOptions = [
-  { value: 'Київ', label: 'Київ' },
-  { value: 'Харків', label: 'Харків' },
-  { value: 'Одеса', label: 'Одеса' },
-  { value: 'Львів', label: 'Львів' },
-  { value: 'Глухів', label: 'Глухів' },
-  { value: 'Суми', label: 'Суми' },
-  { value: 'Макарів', label: 'Макарів' },
-  { value: 'Некрасове', label: 'Некрасове' },
-];
 
 const popularCities = ['Київ', 'Харків', 'Одеса', 'Львів', 'Дніпро'];
 
-const departmentOptions = [
-  { value: 'Відділення №1', label: 'Відділення №1 (вул. Шевченка, 12)' },
-  { value: 'Відділення №2', label: 'Відділення №2 (пр. Перемоги, 5)' },
-  { value: 'Поштомат №3', label: 'Поштомат №3 (ТРЦ "SkyMall")' },
-];
-
 export const DeliveryCity = ({ formik }) => {
-  return (
-    <div className={s.deliveryCity}>
-      <span className={s.recipient}>
-        <input type="checkbox" defaultChecked />Я отримувач замовлення
-      </span>
-      <DeliveryWay formik={formik} />
+  const [isRecipient, setIsRecipient] = useState(false);
 
-      <div className={s.inputCityWrap}>
-        <label htmlFor="city">Місто</label>
-        <Select
+  const handleRecipientChange = (e) => {
+    setIsRecipient(e.target.value !== 'self');
+  };
+
+  return (
+    <div className={s.deliveryCityWrap}>
+      <div className={s.recipient}>
+        <label className={s.radioLabel}>
+          <input
+            type="radio"
+            name="recipient"
+            value="self"
+            defaultChecked
+            className={s.radioInput}
+            onChange={handleRecipientChange}
+          />
+          <span className={s.customRadio}></span>Я отримувач замовлення
+        </label>
+
+        <label className={s.radioLabel}>
+          <input
+            type="radio"
+            name="recipient"
+            value="other"
+            className={s.radioInput}
+            onChange={handleRecipientChange}
+          />
+          <span className={s.customRadio}></span>
+          Інший отримувач
+        </label>
+      </div>
+      <div className={s.deliveryWayWrap}>
+        <DeliveryWay formik={formik} />
+        {isRecipient && (
+          <div className={isRecipient ? s.userInfo : s.userInfoHidden}>
+            <label htmlFor="fullName" className={s.label}>
+              Ім'я <span className={s.required}>*</span>
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Введіть ваше ім'я..."
+              className={s.input}
+            />
+            <label htmlFor="phone" className={s.label}>
+              Телефон <span className={s.required}>*</span>
+            </label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder="Введіть ваш телефон..."
+              className={s.input}
+            />
+          </div>
+        )}
+      </div>
+      <div className={s.inputWrap}>
+        <label htmlFor="city" className={s.label}>
+          Місто <span className={s.required}>*</span>
+        </label>
+        <input
+          type="text"
           id="city"
           name="city"
-          options={cityOptions}
-          value={cityOptions.find((option) => option.value === formik.values.city)}
-          onChange={(option) => {
-            formik.setFieldValue('city', option.value);
-            formik.setFieldValue('department', '');
+          className={s.input}
+          value={formik.values.city}
+          onChange={(e) => {
+            formik.setFieldValue('city', e.target.value);
           }}
-          onBlur={() => formik.setFieldTouched('city', true)}
-          placeholder="Оберіть місто..."
+          placeholder="Введіть місто..."
+          autoComplete="address-level2"
         />
         {formik.touched.city && formik.errors.city && (
-          <div className={s.error}>{formik.errors.city}</div>
+          <p className={s.error}>{formik.errors.city}</p>
         )}
-
-        <div className={s.popularCities}>
-          <ul className={s.cityList}>
-            {popularCities.map((city) => (
-              <li key={city}>
-                <button type="button" onClick={() => formik.setFieldValue('city', city)}>
-                  {city}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
 
-      <label htmlFor="department">Відділення</label>
-      <Select
-        id="department"
-        name="department"
-        options={departmentOptions}
-        value={departmentOptions.find((option) => option.value === formik.values.department)}
-        onChange={(option) => formik.setFieldValue('department', option.value)}
-        onBlur={() => formik.setFieldTouched('department', true)}
-        placeholder="Оберіть відділення..."
-        isDisabled={!formik.values.city}
-      />
-      {formik.touched.department && formik.errors.department && (
-        <div className={s.error}>{formik.errors.department}</div>
-      )}
+      <div className={s.popularCities}>
+        <ul className={s.cityList}>
+          {popularCities.map((city) => (
+            <li key={city}>
+              <button
+                type="button"
+                onClick={() => {
+                  formik.setFieldValue('city', city);
+                }}
+              >
+                {city}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className={s.inputWrap}>
+        <label htmlFor="cityDetails" className={s.label}>
+          Відділення <span className={s.required}>*</span>
+        </label>
+        <input
+          type="text"
+          id="cityDetails"
+          name="cityDetails"
+          className={s.input}
+          value={formik.values.cityDetails}
+          onChange={(e) => formik.setFieldValue('cityDetails', e.target.value)}
+          placeholder="Введіть номер відділення..."
+          autoComplete="off"
+        />
+        {formik.touched.cityDetails && formik.errors.cityDetails && (
+          <p className={s.error}>{formik.errors.cityDetails}</p>
+        )}
+      </div>
     </div>
   );
 };

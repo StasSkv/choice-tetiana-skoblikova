@@ -16,6 +16,7 @@ export const CartLink = ({ animate }) => {
     <>
       <button
         className={s.navLinkCart}
+        type="button"
         onClick={() => {
           setModalIsOpen(true);
         }}

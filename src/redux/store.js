@@ -14,6 +14,7 @@ import { cartReducer } from './cartSlice/cartSlice.js';
 import { productsReducer } from './productsSlice/productsSlice.js';
 import { favoritesReducer } from './favoritesSlice/favoritesSlice.js';
 import { reviewsReducer } from './reviewsSlice/reviewsSlice.js';
+import { authReducer } from './authSlice/authSlice.js';
 
 const productsPersistConfig = {
   key: 'products',
@@ -33,12 +34,20 @@ const favoritesPersistConfig = {
   storage,
 };
 
+const authPersistConfig = {
+  key: 'auth',
+  version: 1,
+  storage,
+  whitelist: ['user', 'isLoggedIn', 'isRefreshing'],
+};
+
 export const store = configureStore({
   reducer: {
     products: persistReducer(productsPersistConfig, productsReducer),
     cart: persistReducer(cartPersistConfig, cartReducer),
     favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
     reviews: reviewsReducer,
+    auth: persistReducer(authPersistConfig, authReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

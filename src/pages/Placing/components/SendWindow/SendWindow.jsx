@@ -1,18 +1,25 @@
 import s from './SendWindow.module.css';
 import { RiTakeawayLine } from 'react-icons/ri';
+import { SubmitBtn } from '../../../../components/Buttons/SubmitBtn/SubmitBtn.jsx';
+import { useSelector } from 'react-redux';
+import { selectTotalPriceCart } from '../../../../redux/cartSlice/cartSelectors.js';
+import { DeliveryDate } from '../DeliveryDate/DeliveryDate.jsx';
 
 export const SendWindow = () => {
-  const order = 1131;
+  const totalPriceCart = useSelector(selectTotalPriceCart);
+  const order = totalPriceCart.toLocaleString('uk-UA', {
+    style: 'currency',
+    currency: 'UAH',
+  });
 
   return (
     <div className={s.sendWindow}>
-      <label htmlFor=""></label>
-      <input type="text" placeholder="Ввести промокод" className={s.promocod} />
+      <input id="promocod" type="text" placeholder="Ввести промокод" className={s.promocod} />
       <div className={s.orderWrap}>
         <div className={s.orderLine}>
           <p>Сума замовлення:</p>
           <span className={s.line}></span>
-          <span className={s.order}>{order}грн</span>
+          <span className={s.order}>{order}</span>
         </div>
 
         <div className={s.orderLine}>
@@ -24,9 +31,7 @@ export const SendWindow = () => {
 
       <div className={s.delivery}>
         <RiTakeawayLine className={s.rover} />
-        <p>
-          Орієнтовна дата доставки <span>14.07.2025</span>
-        </p>
+        <DeliveryDate />
       </div>
 
       <div className={s.poster}>
@@ -37,19 +42,15 @@ export const SendWindow = () => {
         </div>
       </div>
 
-<div className={s.submitWrap}>
-          <div className={s.orderLine}>
-            <p className={s.total}>
-              Всього:
-            </p>
-            <span className={s.line}></span>
-            <span className={s.totalOrder}>{order}грн</span>
-          </div>
-    
-          <button className={s.submitBtn} type="submit">
-            Оформити замовлення
-          </button>
-</div>
+      <div className={s.submitWrap}>
+        <div className={s.orderLine}>
+          <p className={s.total}>Всього:</p>
+          <span className={s.line}></span>
+          <span className={s.totalOrder}>{order}</span>
+        </div>
+
+        <SubmitBtn>Відправити замовлення</SubmitBtn>
+      </div>
     </div>
   );
 };

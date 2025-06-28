@@ -79,12 +79,14 @@ export const Cart = ({ onClose }) => {
         <p className={s.totalProducts}>
           Всього позицій: <span>{products.length}</span>
         </p>
-        <button className={s.cleanCart} onClick={handleClickClearCart}>
-          <span>
-            <MdOutlineDeleteOutline />
-          </span>
-          Очистити кошик
-        </button>
+        {products.length > 0 && (
+          <button className={s.cleanCart} onClick={handleClickClearCart}>
+            <span>
+              <MdOutlineDeleteOutline />
+            </span>
+            Очистити кошик
+          </button>
+        )}
       </div>
       {products.length > 0 ? (
         <ul className={s.productList}>

@@ -17,8 +17,8 @@ import { setCurrentItem } from '../../redux/productsSlice/productsSlice.js';
 const ProductCard = ({ product, isFavoritesPage = false }) => {
   const favoritesProducts = useSelector(selectFavoritesProducts);
   const productsInCart = useSelector(selectProductsInCart);
-  const dispatch = useDispatch();
   const [isRemoving, setIsRemoving] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
