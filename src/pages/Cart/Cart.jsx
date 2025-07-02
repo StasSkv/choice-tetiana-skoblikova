@@ -31,8 +31,8 @@ export const Cart = ({ onClose }) => {
     toast.warning('Кошик очищенно');
   };
 
-  const handleClickDeleteProduct = (productId, price) => {
-    dispatch(deleteProductFromCartLocal(productId, price));
+  const handleClickDeleteProduct = (productId) => {
+    dispatch(deleteProductFromCartLocal(productId));
     dispatch(deleteProductFromCart(productId));
     toast.warning('Товар видалено з кошику');
   };
@@ -123,7 +123,7 @@ export const Cart = ({ onClose }) => {
                 <button
                   className={s.deleteBtn}
                   onClick={() => {
-                    handleClickDeleteProduct(product.productId, product.price);
+                    handleClickDeleteProduct(product.productId);
                   }}
                 >
                   {<MdOutlineDeleteOutline />}

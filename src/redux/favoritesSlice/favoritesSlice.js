@@ -4,21 +4,23 @@ import {
   addProductToFavorites,
   removeProductFromFavorites,
   clearFavorites,
+  fetchFavoritesFromLocal,
 } from './favoritesOperations';
 
 const favoritesSlice = createSlice({
   name: 'favoritesSlice',
   initialState: {
     favoritesProducts: [],
+    favoritesIds: [],
     isLoading: false,
     error: null,
   },
   reducers: {
     addProductToFavoritesLocal: (state, action) => {
-      state.favoritesProducts.push(action.payload);
+      state.favoritesIds.push(action.payload);
     },
     removeProductFromFavoritesLocal: (state, action) => {
-      state.favoritesProducts = state.favoritesProducts.filter((favId) => favId !== action.payload);
+      state.favoritesIds = state.favoritesIds.filter((favId) => favId !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -30,6 +32,16 @@ const favoritesSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchProductsInFavorites.rejected, (state, action) => {
+      state.error = action.payload;
+    });
+    builder.addCase(fetchFavoritesFromLocal.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchFavoritesFromLocal.fulfilled, (state, action) => {
+      state.favoritesProducts = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchFavoritesFromLocal.rejected, (state, action) => {
       state.error = action.payload;
     });
     builder.addCase(addProductToFavorites.pending, (state) => {

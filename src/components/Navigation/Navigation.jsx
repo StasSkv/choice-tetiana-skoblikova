@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
+import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
 import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import s from './Navigation.module.css';
 import { NavLinkItem } from './NavigationComponents/NavLinkItem/NavLinkItem.jsx';
@@ -9,7 +9,7 @@ import { CartLink } from './NavigationComponents/CartLink/CartLink.jsx';
 import { AccountLink } from './NavigationComponents/AccountLink/AccountLink.jsx';
 
 export const Navigation = () => {
-  const productsInCart = useSelector(selectProductsInCart);
+  const productsInCart = useSelector(selectProductsIds);
   const favoriteItems = useSelector(selectFavoritesProducts);
 
   const [animateCart, setAnimateCart] = useState(false);

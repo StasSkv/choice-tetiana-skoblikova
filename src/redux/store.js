@@ -26,12 +26,14 @@ const cartPersistConfig = {
   key: 'cart',
   version: 1,
   storage,
+  whitelist: ['productsIds'],
 };
 
 const favoritesPersistConfig = {
   key: 'favorites',
   version: 1,
   storage,
+  whitelist: ['favoritesIds'],
 };
 
 const authPersistConfig = {

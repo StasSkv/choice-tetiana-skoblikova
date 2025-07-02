@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { lazy, Suspense, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Home from './pages/Home/Home';
@@ -7,9 +7,9 @@ import { Layout } from './components/Layout/Layout';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { Loader } from './components/Loader/Loader.jsx';
 
-import { fetchProductsInCart } from './redux/cartSlice/cartOperations.js';
-import { fetchProducts } from './redux/productsSlice/productsOperations.js';
-import { fetchProductsInFavorites } from './redux/favoritesSlice/favoritesOperations.js';
+import { fetchProductsInCart, fetchProductsInCartFromLocal } from './redux/cartSlice/cartOperations.js';
+import { selectIsLoggedIn } from './redux/authSlice/authSelectors.js';
+import { selectProductsIds } from './redux/cartSlice/cartSelectors.js';
 
 const LazyTeam = lazy(() => import('./pages/Team/Team.jsx'));
 const LazyProductDetails = lazy(() => import('./pages/ProductDetails/ProductDetails.jsx'));
@@ -21,13 +21,16 @@ const LazyProducts = lazy(() => import('./pages/Products/Products.jsx'));
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const productsIds = useSelector(selectProductsIds);
   useEffect(() => {
-    dispatch(fetchProducts());
-    dispatch(fetchProductsInCart());
-    dispatch(fetchProductsInFavorites());
-  }, [dispatch]);
-
+    if (isLoggedIn) {
+      dispatch(fetchProductsInCart());
+    } else {
+      dispatch(fetchProductsInCartFromLocal());
+    }
+  }, [dispatch, isLoggedIn, productsIds]);
+  
   // const name = 'Фітомус для вмивання';
 
   // const imgName = 'PHYTOMOUSS FOR WASHING';

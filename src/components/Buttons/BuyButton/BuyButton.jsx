@@ -7,12 +7,12 @@ import { addProductToCart } from '../../../redux/cartSlice/cartOperations.js';
 import { toast } from 'react-toastify';
 import { addProductToCartLocal } from '../../../redux/cartSlice/cartSlice.js';
 
-export const BuyButton = ({ productId, price, isInCart }) => {
+export const BuyButton = ({ productId, quantity, isInCart }) => {
   const dispatch = useDispatch();
 
   const handleBuy = () => {
-    dispatch(addProductToCartLocal({ productId, price }));
-    dispatch(addProductToCart(productId));
+    dispatch(addProductToCartLocal({ productId, quantity }));
+    dispatch(addProductToCart(productId, quantity));
     toast.success('Товар додано до кошику');
   };
 

@@ -8,10 +8,12 @@ import { useSelector } from 'react-redux';
 import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
 
 const CustomModal = ({ isOpen, onClose, children }) => {
-  const productsInCart = useSelector(selectProductsInCart);
-  const [modalVisible, setModalVisible] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
+  const productsInCart = useSelector(selectProductsInCart);
+
+ 
   useEffect(() => {
     let openTimeout;
     let closeTimeout;
@@ -67,8 +69,10 @@ const CustomModal = ({ isOpen, onClose, children }) => {
           <div className={s.orderWrap}>
             <p className={s.orderText}>Сумма замовлення</p>
             <p className={s.orderSum}>
-              {productsInCart
-                .reduce((acc, product) => acc + product.price * product.quantity, 0)
+              {productsInCart.length > 0
+                ? productsInCart
+                  .reduce((acc, product) => acc + product.price * product.quantity, 0)
+                : 0
                 .toLocaleString('uk-UA', {
                   style: 'currency',
                   currency: 'UAH',

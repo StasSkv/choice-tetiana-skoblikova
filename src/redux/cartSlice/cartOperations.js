@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { selectIsLoggedIn } from '../authSlice/authSelectors.js';
 
 export const fetchProductsInCart = createAsyncThunk(
   'cart/fetchProductsInCart',
@@ -15,10 +16,39 @@ export const fetchProductsInCart = createAsyncThunk(
   }
 );
 
+export const fetchProductsInCartFromLocal = createAsyncThunk(
+  'cart/fetchProductsInCartFromLocal',
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      const localProductsIds = state.cart?.productsIds || [];
+      if (!localProductsIds.length) {
+        return [];
+      }
+      const response = await axios.post(
+        '/cart/not-authorized',
+        { productIds: localProductsIds },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      toast.error('Помилка при завантаженні кошику');
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const addProductToCart = createAsyncThunk(
   'cart/addProductToCart',
   async (productId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const isLoggedIn = selectIsLoggedIn(state);
     try {
+      if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
       const response = await axios.post('/cart', { productId });
       return response.data;
     } catch (error) {
@@ -31,7 +61,10 @@ export const addProductToCart = createAsyncThunk(
 export const deleteProductFromCart = createAsyncThunk(
   'cart/deleteProductFromCart',
   async (productId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const isLoggedIn = selectIsLoggedIn(state);
     try {
+      if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
       const response = await axios.delete(`/cart`, { data: { productId } });
       return response.data;
     } catch (error) {
@@ -44,7 +77,10 @@ export const deleteProductFromCart = createAsyncThunk(
 export const addPlusQuantity = createAsyncThunk(
   'cart/addPlusQuantity',
   async ({ productId, quantity }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const isLoggedIn = selectIsLoggedIn(state);
     try {
+      if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
       const response = await axios.patch(`/cart`, { productId, quantity });
       return response.data;
     } catch (error) {
@@ -57,7 +93,10 @@ export const addPlusQuantity = createAsyncThunk(
 export const addMinusQuantity = createAsyncThunk(
   'cart/addMinusQuantity',
   async ({ productId, quantity }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const isLoggedIn = selectIsLoggedIn(state);
     try {
+      if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
       const response = await axios.patch(`/cart`, { productId, quantity });
       return response.data;
     } catch (error) {
@@ -68,7 +107,10 @@ export const addMinusQuantity = createAsyncThunk(
 );
 
 export const clearCart = createAsyncThunk('cart/clearCart', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const isLoggedIn = selectIsLoggedIn(state);
   try {
+    if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
     const response = await axios.put(`/cart`);
     return response.data;
   } catch (error) {

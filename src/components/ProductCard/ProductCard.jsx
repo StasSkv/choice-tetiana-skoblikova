@@ -9,26 +9,25 @@ import DeleteButton from '../Buttons/DeleteButton/DeleteButton.jsx';
 import { BuyButton } from '../Buttons/BuyButton/BuyButton.jsx';
 import { RatingReviews } from '../RatingProduct/RatingReviews/RatingReviews.jsx';
 
-import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
-import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
+import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
+import { selectFavoritesIds } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
 import { setCurrentItem } from '../../redux/productsSlice/productsSlice.js';
 
 const ProductCard = ({ product, isFavoritesPage = false }) => {
-  const favoritesProducts = useSelector(selectFavoritesProducts);
-  const productsInCart = useSelector(selectProductsInCart);
+  const favoritesProducts = useSelector(selectFavoritesIds);
+  const productsInCart = useSelector(selectProductsIds);
   const [isRemoving, setIsRemoving] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const isInFavorite = favoritesProducts.some((item) => item === product._id);
   const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
-  const isInFavorite = product ? favoritesProducts.some((item) => item === product._id) : false;
 
   const handleCardClick = (e) => {
     if (e.target.closest('button') || e.target.closest('.rating') || e.target.closest('.deleteBtn'))
       return;
-    dispatch(setCurrentItem(product));
     dispatch(fetchProductById(product._id));
+    dispatch(setCurrentItem(product));
     navigate(`/products/${product._id}`);
   };
 
@@ -37,7 +36,7 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
       {isFavoritesPage ? (
         <DeleteButton id={product._id} onStartRemove={() => setIsRemoving(true)} />
       ) : (
-        <LikeButton isLoved={isInFavorite} id={product._id} />
+        favoritesProducts && <LikeButton isLoved={isInFavorite} id={product._id} />
       )}
 
       <img src={`/images/${product.imgS}`} alt={product.name} className={s.productImage} />
@@ -54,7 +53,7 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
             <p
               className={clsx(s.price, { [s.priceIsInCart]: isInCart })}
             >{`${product.price} грн`}</p>
-            <BuyButton productId={product._id} price={product.price} isInCart={isInCart} />
+            <BuyButton productId={product._id} quantity={1} isInCart={isInCart} />
           </div>
         </div>
       </div>

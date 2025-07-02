@@ -6,11 +6,12 @@ import {
   clearCart,
   addPlusQuantity,
   addMinusQuantity,
+  fetchProductsInCartFromLocal,
 } from './cartOperations';
-import { recalculateTotal } from './utils';
 
 const initialState = {
   products: [],
+  productsIds: [],
   totalPriceCart: 0,
   isLoading: false,
   error: null,
@@ -21,34 +22,28 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addProductToCartLocal: (state, action) => {
-      state.products.push(action.payload);
-      state.totalPriceCart += Number(action.payload.price);
+      state.productsIds.push(action.payload);
     },
     deleteProductFromCartLocal: (state, action) => {
-      const product = state.products.find((p) => p.productId === action.payload);
-      if (product) {
-        state.products = state.products.filter((product) => product.productId !== action.payload);
-        state.totalPriceCart -= Number(product.price * product.quantity);
+      const productId = state.productsIds.find((p) => p.productId === action.payload);
+      if (productId) {
+        state.productsIds = state.productsIds.filter((productId) => productId.productId !== action.payload);
       }
     },
     clearCartLocal: (state) => {
-      state.products = [];
+      state.productsIds = [];
       state.totalPriceCart = 0;
     },
     addPlusQuantityLocal: (state, action) => {
-      const product = state.products.find((p) => p.productId === action.payload);
-      if (product) {
-        product.quantity += 1;
-        product.totalPriceProduct = product.quantity * Number(product.price);
-        state.totalPriceCart = recalculateTotal(state.products);
+      const productId = state.productsIds.find((p) => p.productId === action.payload);
+      if (productId) {
+        productId.quantity += 1;
       }
     },
     addMinusQuantityLocal: (state, action) => {
-      const product = state.products.find((p) => p.productId === action.payload);
-      if (product) {
-        product.quantity -= 1;
-        product.totalPriceProduct = product.quantity * Number(product.price);
-        state.totalPriceCart = recalculateTotal(state.products);
+      const productId = state.productsIds.find((p) => p.productId === action.payload);
+      if (productId) {
+        productId.quantity -= 1;
       }
     },
   },
@@ -62,6 +57,18 @@ const cartSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(fetchProductsInCart.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchProductsInCartFromLocal.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProductsInCartFromLocal.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.totalPriceCart = action.payload.totalPriceCart;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchProductsInCartFromLocal.rejected, (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
     });
