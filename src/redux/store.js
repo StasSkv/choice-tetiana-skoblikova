@@ -19,7 +19,7 @@ import { authReducer } from './authSlice/authSlice.js';
 const productsPersistConfig = {
   key: 'products',
   storage,
-  whitelist: ['currentItem'],
+  whitelist: ['currentItem', 'filters', 'paginationData'],
 };
 
 const cartPersistConfig = {

@@ -5,11 +5,22 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchAll',
-  async ({ page = 1, perPage = 20 } = {}, thunkAPI) => {
+  async ({ filters = {} } = {}, thunkAPI) => {
     try {
+      const { page = 1, perPage = 20, sortBy = '_id', sortOrder = 'asc', category = 'all' } = filters;
+
+      const queryParams = {
+        page,
+        perPage,
+        sortBy,
+        sortOrder,
+        category,
+      };
+
       const res = await axios.get('/products', {
-        params: { page, perPage },
+        params: queryParams,
       });
+
       return {
         data: {
           products: res.data.data.products,
@@ -21,6 +32,7 @@ export const fetchProducts = createAsyncThunk(
     }
   }
 );
+
 
 export const fetchProductById = createAsyncThunk(
   'products/fetchById',

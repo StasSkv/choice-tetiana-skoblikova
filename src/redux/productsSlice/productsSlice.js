@@ -17,13 +17,26 @@ const productsSlice = createSlice({
   initialState: {
     items: [],
     paginationData: null,
+    filters: {
+      page: 1,
+      perPage: 20,
+      sortBy: '_id',
+      sortOrder: 'asc',
+      category: 'all',
+    },
     currentItem: null,
-    isLoading: false,
+    isLoading: false, 
     error: null,
   },
   reducers: {
     setCurrentItem: (state, action) => {
       state.currentItem = action.payload;
+    },
+    setFilters: (state, action) => {
+      state.filters = {
+        ...state.filters,
+        ...action.payload,
+      };
     },
   },
   extraReducers: (builder) => {
@@ -41,6 +54,7 @@ const productsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.currentItem = action.payload.data;
+        state.paginationData = action.payload.data.paginationData;
       })
       .addCase(fetchProductById.rejected, handleRejected);
   },
@@ -48,4 +62,4 @@ const productsSlice = createSlice({
 
 export const productsReducer = productsSlice.reducer;
 
-export const { setCurrentItem } = productsSlice.actions;
+export const { setCurrentItem, setFilters } = productsSlice.actions;

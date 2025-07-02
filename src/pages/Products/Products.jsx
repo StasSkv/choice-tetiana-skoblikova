@@ -6,23 +6,44 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectAllProducts,
   selectPaginationData,
+  selectFilters,
 } from '../../redux/productsSlice/productsSelectors.js';
 import { useEffect } from 'react';
 import { fetchProducts } from '../../redux/productsSlice/productsOperations.js';
+import { useSearchParams } from 'react-router-dom';
+import { setFilters } from '../../redux/productsSlice/productsSlice.js';
 
 const Products = () => {
   const allProducts = useSelector(selectAllProducts);
   const paginationData = useSelector(selectPaginationData);
-
+  const filters = useSelector(selectFilters);
   const dispatch = useDispatch();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
-    dispatch(fetchProducts({ page: 1, perPage: 20 }));
+    const params = Object.fromEntries(searchParams.entries());
+
+    if (Object.keys(params).length > 0) {
+      const parsed = {
+        page: Number(params.page) || 1,
+        perPage: Number(params.perPage) || 20,
+        sortBy: params.sortBy || '_id',
+        sortOrder: params.sortOrder || 'asc',
+        category: params.category || 'all',
+      };
+      dispatch(setFilters(parsed));
+      dispatch(fetchProducts({ filters: parsed }));
+    } else {
+      setSearchParams(filters);
+      dispatch(fetchProducts({ filters }));
+    }
   }, [dispatch]);
 
-  const handlePageChange = (page) => {
-    dispatch(fetchProducts({ page, perPage: 20 }));
-  };
+  useEffect(() => {
+    setSearchParams(filters);
+    dispatch(fetchProducts({ filters }));
+  }, [dispatch, setSearchParams, searchParams, filters]);
 
   return (
     <motion.div
@@ -36,11 +57,7 @@ const Products = () => {
           <h2 className={s.subtitle}>Каталог товарів</h2>
           <div className={s.mainWrap}>
             <Catalog />
-            <ProductsList
-              products={allProducts}
-              pagination={paginationData}
-              onPageChange={handlePageChange}
-            />
+            <ProductsList products={allProducts} pagination={paginationData} />
           </div>
         </div>
       </section>

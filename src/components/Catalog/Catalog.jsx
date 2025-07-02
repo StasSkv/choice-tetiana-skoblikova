@@ -1,40 +1,49 @@
-import React, { useState } from 'react';
 import s from './Catalog.module.css';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilters } from '../../redux/productsSlice/productsSelectors.js';
+import { setFilters } from '../../redux/productsSlice/productsSlice.js';
 
-const brends = [
-  'Всі товари',
-  'Biox',
-  'White Mandarin',
-  'Choice Phyto',
-  'Pro Healthy',
-  'Green Max',
-  'Добра їжа',
+const categories = [
+  { label: 'Всі товари', value: 'all' },
+  { label: 'Biox', value: 'biox' },
+  { label: 'White Mandarin', value: 'white-mandarine' },
+  { label: 'Choice Phyto', value: 'choice-phyto' },
+  { label: 'Pro Healthy', value: 'pro-healthy' },
+  { label: 'Green Max', value: 'green-max' },
+  { label: 'Добра їжа', value: 'good-food' },
+  { label: 'Набори', value: 'sets' },
 ];
 
-const sort = ['За популярністю', 'Від найдешевших', 'Від найдорожчих', 'За назвою'];
+const sortOptions = [
+  { label: 'За популярністю', name: 'averageRating', sortBy: 'averageRating', sortOrder: 'desc' },
+  { label: 'Від найдешевших', name: 'priceAsc', sortBy: 'price', sortOrder: 'asc' },
+  { label: 'Від найдорожчих', name: 'priceDesc', sortBy: 'price', sortOrder: 'desc' },
+];
 
 export const Catalog = () => {
-  const [checkedBrends, setCheckedBrends] = useState(() => brends.map((_, idx) => idx === 0));
-  const [checkedSort, setCheckedSort] = useState(() => sort.map((_, idx) => idx === 0));
+  const dispatch = useDispatch();
+  const params = useSelector(selectFilters);
+  const [checkedCategories, setCheckedCategories] = useState(params.category);
+const [checkedSort, setCheckedSort] = useState(
+  params.sortBy && params.sortOrder ? `${params.sortBy}-${params.sortOrder}` : ''
+);
 
-  const handleChangeBrends = (index) => {
-    const updated = [...checkedBrends];
-    if (index === 0) {
-      updated.fill(false);
-      updated[0] = true;
-    } else {
-      updated[index] = !updated[index];
-      updated[0] = false;
-      const anyChecked = updated.some((val, idx) => idx !== 0 && val);
-      if (!anyChecked) updated[0] = true;
-    }
-    setCheckedBrends(updated);
+  const handleChangeCategories = (value) => {
+    dispatch(setFilters({ category: value, page: 1 }));
+    setCheckedCategories(value);
   };
 
-  const handleChangeSort = (index) => {
-    const updated = checkedSort.map((_, i) => i === index);
-    setCheckedSort(updated);
+  const handleChangeSort = (sortBy, sortOrder) => {
+    const sortKey = `${sortBy}-${sortOrder}`;
+    if (checkedSort === sortKey) {
+      setCheckedSort('');
+      dispatch(setFilters({ sortBy: '', sortOrder: '', page: 1 }));
+    } else {
+      setCheckedSort(sortKey);
+      dispatch(setFilters({ sortBy, sortOrder, page: 1 }));
+    }
   };
 
   return (
@@ -42,20 +51,20 @@ export const Catalog = () => {
       <div>
         <h3>БРЕНДИ КОМПАНІЇ</h3>
         <motion.ul>
-          {brends.map((name, idx) => (
-            <motion.li key={name}>
+          {categories.map((item) => (
+            <motion.li key={item.value}>
               <motion.label
-                className={`${s.label} ${checkedBrends[idx] ? s.active : ''}`}
+                className={`${s.label} ${checkedCategories === item.value ? s.active : ''}`}
                 whileHover={{ scale: 1.05, color: 'var(--accent)' }}
                 whileTap={{ scale: 0.95 }}
               >
                 <input
                   type="checkbox"
                   className={s.checkbox}
-                  checked={checkedBrends[idx]}
-                  onChange={() => handleChangeBrends(idx)}
+                  checked={checkedCategories === item.value}
+                  onChange={() => handleChangeCategories(item.value)}
                 />
-                <span>{name}</span>
+                <span>{item.label}</span>
               </motion.label>
             </motion.li>
           ))}
@@ -65,23 +74,22 @@ export const Catalog = () => {
       <div>
         <h3>Сортувати за</h3>
         <motion.ul>
-          {sort.map((name, idx) => (
-            <motion.li key={name}>
-              <motion.label
-                className={`${s.label} ${checkedSort[idx] ? s.active : ''}`}
-                whileHover={{ scale: 1.05, color: 'var(--accent)' }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <input
-                  type="checkbox"
-                  className={s.checkbox}
-                  checked={checkedSort[idx]}
-                  onChange={() => handleChangeSort(idx)}
-                />
-                <span>{name}</span>
-              </motion.label>
-            </motion.li>
-          ))}
+          {sortOptions.map(({ label, sortBy, sortOrder }) => {
+            const sortKey = `${sortBy}-${sortOrder}`;
+            return (
+              <li key={label}>
+                <label className={`${s.label} ${checkedSort === sortKey ? s.active : ''}`}>
+                  <input
+                    type="checkbox"
+                    className={s.checkbox}  
+                    checked={checkedSort === sortKey}
+                    onChange={() => handleChangeSort(sortBy, sortOrder)}
+                  />
+                  {label}
+                </label>
+              </li>
+            );
+          })}
         </motion.ul>
       </div>
     </div>

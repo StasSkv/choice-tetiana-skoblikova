@@ -15,3 +15,5 @@ export const selectProductById = (id) => (state) => {
 };
 
 export const selectPaginationData = (state) => state.products.paginationData;
+
+export const selectFilters = (state) => state.products.filters;

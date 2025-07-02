@@ -12,22 +12,19 @@ import { RatingReviews } from '../RatingProduct/RatingReviews/RatingReviews.jsx'
 import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
 import { selectFavoritesIds } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
-import { setCurrentItem } from '../../redux/productsSlice/productsSlice.js';
 
 const ProductCard = ({ product, isFavoritesPage = false }) => {
   const favoritesProducts = useSelector(selectFavoritesIds);
   const productsInCart = useSelector(selectProductsIds);
   const [isRemoving, setIsRemoving] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isInFavorite = favoritesProducts.some((item) => item === product._id);
   const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
-
+  const dispatch = useDispatch();
   const handleCardClick = (e) => {
     if (e.target.closest('button') || e.target.closest('.rating') || e.target.closest('.deleteBtn'))
       return;
     dispatch(fetchProductById(product._id));
-    dispatch(setCurrentItem(product));
     navigate(`/products/${product._id}`);
   };
 
