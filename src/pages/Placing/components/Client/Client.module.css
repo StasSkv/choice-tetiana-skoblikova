@@ -55,7 +55,6 @@
 .error {
   color: var(--error);
   font-size: 14px;
-  margin-left: 10px;
 }
 
 .input:focus {
@@ -85,6 +84,7 @@
   color: var(--grey-text);
   font-weight: 400;
 }
+
 .cart {
   display: flex;
   flex-direction: column;

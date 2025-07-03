@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import logo from '../../assets/images/tetiana-logo.png';
 import { GoArrowLeft } from 'react-icons/go';
 
-import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
+import { Formik, Form } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { toast } from 'react-toastify';
 import { DeliveryCity } from './components/DeliveryCity/DeliveryCity.jsx';
@@ -14,66 +14,66 @@ import { PaymentMethod } from './components/PaymentMethod/PaymentMethod.jsx';
 import { SendWindow } from './components/SendWindow/SendWindow.jsx';
 
 import { clearCartLocal } from '../../redux/cartSlice/cartSlice.js';
-import { clearCart } from '../../redux/cartSlice/cartOperations.js';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser, selectIsLoggedIn } from '../../redux/authSlice/authSelectors.js';
+import { validationSchema } from './validationSchema.js';
+import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
+import { createOrder } from '../../redux/orderSlice/orderOperation.js';
+import { formatPhoneNumber } from './formatedPhone.js';
 
 const Placing = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = useSelector(selectUser);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const productsIds = useSelector(selectProductsIds);
+  console.log(productsIds);
 
   const handleClickBack = () => {
     navigate(-1);
   };
 
-  const initialValues = isLoggedIn
-    ? {
-        fullName: user.firstName + ' ' + user.lastName,
-        email: user.email,
-        phone: user.phone,
-        city: user.deliveryOption.city,
-        deliveryMethod: user.deliveryOption.method,
-        paymentMethod: user.paymentOption.method,
-        department: user.deliveryOption.department,
-      }
-    : {
-        fullName: '',
-        email: '',
-        phone: '',
-        city: '',
-        deliveryMethod: '',
-        paymentMethod: '',
-        department: '',
-      };
+  const initialValues = {
+    name: '',
+    phone: '',
+    email: '',
+    recipient: 'self',
+    recipientName: '',
+    recipientPhone: '',
+    delivery: 'Nova_Poshta',
+    city: '',
+    department: '',
+    paymentMethod: 'overpayment',
+  };
 
-  const formik = useFormik({
-    initialValues,
-    enableReinitialize: true,
-    validationSchema: Yup.object({
-      fullName: Yup.string().required('Введіть ім’я').min(5, 'Ім’я повинно містити не менше 5 символів').max(40, 'Ім’я повинно містити не більше 40 символів'),
-      email: Yup.string().email('Невірний email'),
-      phone: Yup.string().required('Введіть ім’я').min(10, 'Телефон повинен містити не менше 10 символів').max(13, 'Телефон повинен містити не більше 13 символів'),
-      deliveryMethod: Yup.string().oneOf(
-        ['Nova_Poshta', 'Ukrposhta', 'Self'],
-        'Оберіть спосіб доставки'
-      ),
-      city: Yup.string().required('Оберіть місто'),
-      department: Yup.string().required('Оберіть відділення'),
-      paymentMethod: Yup.string().oneOf(['payToCard', 'overpayment'], 'Оберіть спосіб оплати'),
-    }),
-    validateOnChange: false,
-    validateOnBlur: false,
-    onSubmit: (values) => {
-      console.log('Форма надіслана:', values);
-      toast.success('Замовлення надіслано');
-      formik.resetForm();
-      dispatch(clearCartLocal());
-      dispatch(clearCart());
-    },
-  });
+  const handleSubmit = (values, actions) => {
+    const orderData = {
+      name: values.name,
+      phone: formatPhoneNumber(values.phone),
+      paymentMethod: values.paymentMethod,
+      paymentStatus: 'pending',
+      products: productsIds,
+      status: 'pending',
+
+      recipient: {
+        fullName: values.recipient === 'other' ? values.recipientName : values.name,
+        phone:
+          values.recipient === 'other'
+            ? formatPhoneNumber(values.recipientPhone)
+            : formatPhoneNumber(values.phone),
+        city: values.city,
+        deliveryMethod: values.delivery,
+        department: values.department,
+      },
+    };
+    if (values.email === '') {
+      delete orderData.email;
+    }
+
+    console.log('Форма надіслана:', orderData);
+
+    toast.success('Замовлення надіслано');
+    actions.resetForm();
+    dispatch(clearCartLocal());
+    dispatch(createOrder(orderData));
+  };
 
   return (
     <motion.div
@@ -103,21 +103,28 @@ const Placing = () => {
 
       <section className={s.main}>
         <div className={`container ${s.mainContainer}`}>
-          <form onSubmit={formik.handleSubmit} className={s.form}>
-            <div className={s.formInfoWrap}>
-              <h2>Оформлення замовлення</h2>
-              <Client formik={formik} />
-              <h3>2. Доставка</h3>
-              <div className={s.delivery}>
-                <DeliveryCity formik={formik} />
+          <Formik
+            onSubmit={handleSubmit}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            className={s.form}
+          >
+            <Form className={s.form}>
+              <div className={s.formInfoWrap}>
+                <h2>Оформлення замовлення</h2>
+                <Client />
+                <h3>2. Доставка</h3>
+                <div className={s.delivery}>
+                  <DeliveryCity />
+                </div>
+                <h3>3. Спосіб оплати</h3>
+                <PaymentMethod />
               </div>
-              <h3>3. Спосіб оплати</h3>
-              <PaymentMethod formik={formik} />
-            </div>
-            <div className={s.sendWindow}>
-              <SendWindow formik={formik} />
-            </div>
-          </form>
+              <div className={s.sendWindow}>
+                <SendWindow />
+              </div>
+            </Form>
+          </Formik>
         </div>
       </section>
     </motion.div>

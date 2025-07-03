@@ -1,36 +1,27 @@
 .deliveryOptions {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-left: 24px;
+  gap: 14px;
 }
 
 .deliveryOptions label {
-  display: flex;
+    display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--main-text);
 }
 
 .deliveryOptions input {
-  margin-right: 8px;
+  margin-right: 12px;
+  display: none;
 }
 
 .title {
   font-size: 18px;
   font-weight: 600;
   color: var(--main-text);
-}
-
-.radioLabel {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-}
-
-.radioInput {
-  display: none;
 }
 
 .customRadio {
@@ -46,7 +37,7 @@
 }
 
 .radioInput:checked + .customRadio::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 70%;
   height: 70%;

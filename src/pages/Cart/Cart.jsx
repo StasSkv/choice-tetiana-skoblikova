@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProductsInCart } from '../../redux/cartSlice/cartSelectors.js';
+import { selectCartProducts } from '../../redux/cartSlice/cartSelectors.js';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import s from './Cart.module.css';
 import { toast } from 'react-toastify';
@@ -23,7 +23,7 @@ import { setCurrentItem } from '../../redux/productsSlice/productsSlice.js';
 export const Cart = ({ onClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector(selectProductsInCart);
+  const products = useSelector(selectCartProducts);
 
   const handleClickClearCart = () => {
     dispatch(clearCartLocal());

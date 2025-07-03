@@ -3,8 +3,13 @@ import { CartLink } from '../../../../components/Navigation/NavigationComponents
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../../../redux/authSlice/authSelectors.js';
 import clsx from 'clsx';
+import { Field, ErrorMessage } from 'formik';
+import { useId } from 'react';
 
-export const Client = ({ formik }) => {
+export const Client = () => {
+  const nameFieldId = useId();
+  const phoneFieldId = useId();
+  const emailFieldId = useId();
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
@@ -14,56 +19,45 @@ export const Client = ({ formik }) => {
       <div className={s.clientWrap}>
         <div className={s.inputsWrap}>
           <div className={s.inputWrap}>
-            <label className={s.label} htmlFor="fullName">
+            <label className={s.label} htmlFor={nameFieldId}>
               Ім'я <span className={s.required}>*</span>
+              <ErrorMessage name="name" component="span" className={s.error} />
             </label>
-            <input
-              id="fullName"
+            <Field
+              id={nameFieldId}
+              name="name"
               type="text"
-              name="fullName"
               placeholder="Введіть ваше ім'я"
               readOnly={isLoggedIn}
-              value={formik.values.fullName}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
               className={clsx(s.input, isLoggedIn ? s.inputReadOnly : s.inputActive)}
             />
-            {formik.touched.fullName && formik.errors.fullName && (
-              <p className={s.error}>{formik.errors.fullName}</p>
-            )}
           </div>
 
           <div className={s.inputWrap}>
-            <label className={s.label} htmlFor="phone">
+            <label className={s.label} htmlFor={phoneFieldId}>
               Телефон <span className={s.required}>*</span>
+              <ErrorMessage name="phone" component="span" className={s.error} />
             </label>
-            <input
-              id="phone"
-              type="text"
+            <Field
+              id={phoneFieldId}
               name="phone"
+              type="text"
               placeholder="Введіть ваш номер телефону"
               readOnly={isLoggedIn}
-              value={formik.values.phone}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
               className={clsx(s.input, isLoggedIn ? s.inputReadOnly : s.inputActive)}
             />
-            {formik.touched.phone && formik.errors.phone && (
-              <p className={s.error}>{formik.errors.phone}</p>
-            )}
           </div>
           <div className={s.inputWrap}>
-            <label className={s.label} htmlFor="email">
+            <label className={s.label} htmlFor={emailFieldId}>
               E-mail <span className={s.optional}>(не обов'язково)</span>
+              <ErrorMessage name="email" component="span" className={s.error} />
             </label>
-            <input
-              id="email"
-              type="email"
+            <Field
+              id={emailFieldId}
               name="email"
+              type="email"
               placeholder="Введіть вашу електронну пошту"
               readOnly={isLoggedIn}
-              value={formik.values.email}
-              onChange={formik.handleChange}
               className={clsx(s.input, isLoggedIn ? s.inputReadOnly : s.inputActive)}
             />
           </div>

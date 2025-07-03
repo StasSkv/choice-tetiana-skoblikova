@@ -7,10 +7,15 @@ import { DeliveryDate } from '../DeliveryDate/DeliveryDate.jsx';
 
 export const SendWindow = () => {
   const totalPriceCart = useSelector(selectTotalPriceCart);
-  const order = totalPriceCart.toLocaleString('uk-UA', {
+  let order = 0;
+  if (totalPriceCart) {
+    order = totalPriceCart.toLocaleString('uk-UA', {
     style: 'currency',
     currency: 'UAH',
   });
+}
+
+
 
   return (
     <div className={s.sendWindow}>

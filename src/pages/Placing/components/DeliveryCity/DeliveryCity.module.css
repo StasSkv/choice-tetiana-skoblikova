@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: start;
   gap: 24px;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
   padding: 12px;
   border: 1px solid var(--grey-text);
   border-radius: 12px;
@@ -44,9 +44,11 @@
 
 .deliveryWayWrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  padding: 0 24px 24px 24px;
   min-height: 170px;
 }
 
@@ -86,6 +88,7 @@
   color: var(--error);
   font-size: 20px;
 }
+
 .cityList {
   width: 100%;
   flex-direction: row;
@@ -111,7 +114,6 @@
 .error {
   color: var(--error);
   font-size: 14px;
-  margin-left: 10px;
 }
 
 .input:focus {
