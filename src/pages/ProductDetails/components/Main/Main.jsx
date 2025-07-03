@@ -12,12 +12,12 @@ import { RatingReviews } from '../../../../components/RatingProduct/RatingReview
 import { fetchReviewsByProductId } from '../../../../redux/reviewsSlice/reviewsOperations.js';
 import { addProductToCartLocal } from '../../../../redux/cartSlice/cartSlice.js';
 import { addProductToCart } from '../../../../redux/cartSlice/cartOperations.js';
-import { selectProductsInCart } from '../../../../redux/cartSlice/cartSelectors.js';
+import { selectProductsIds } from '../../../../redux/cartSlice/cartSelectors.js';
 
 export const Main = ({ product }) => {
   const dispatch = useDispatch();
-  const productsInCart = useSelector(selectProductsInCart);
-  const isInCart = !!product && productsInCart.some((item) => item?.productId === product._id);
+  const productsIds = useSelector(selectProductsIds);
+  const isInCart = !!product && productsIds.some((item) => item?.productId === product._id);
 
   useEffect(() => {
     if (product && product._id && product.ratingsCount === 0) {
