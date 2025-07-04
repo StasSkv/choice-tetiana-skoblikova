@@ -17,8 +17,6 @@ import {
   addMinusQuantityLocal,
   addPlusQuantityLocal,
 } from '../../redux/cartSlice/cartSlice.js';
-import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
-import { setCurrentItem } from '../../redux/productsSlice/productsSlice.js';
 
 export const Cart = ({ onClose }) => {
   const navigate = useNavigate();
@@ -61,13 +59,10 @@ export const Cart = ({ onClose }) => {
     ) {
       return;
     }
-    dispatch(setCurrentItem(products.find((product) => product.productId === id)));
-    dispatch(fetchProductById(id));
     if (e.target.productId !== id) {
       navigate(`/products/${id}`);
       onClose();
     } else {
-      dispatch(setCurrentItem(null));
       onClose();
     }
   };

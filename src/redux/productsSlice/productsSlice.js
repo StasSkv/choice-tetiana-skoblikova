@@ -25,7 +25,7 @@ const productsSlice = createSlice({
       category: 'all',
     },
     currentItem: null,
-    isLoading: false, 
+    isLoading: false,
     error: null,
   },
   reducers: {
@@ -53,7 +53,7 @@ const productsSlice = createSlice({
       .addCase(fetchProductById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.currentItem = action.payload.data;
+        state.currentItem = action.payload.data.data;
         state.paginationData = action.payload.data.paginationData;
       })
       .addCase(fetchProductById.rejected, handleRejected);

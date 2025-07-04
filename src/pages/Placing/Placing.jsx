@@ -24,7 +24,6 @@ const Placing = () => {
   const dispatch = useDispatch();
 
   const productsIds = useSelector(selectProductsIds);
-  console.log(productsIds);
 
   const handleClickBack = () => {
     navigate(-1);
@@ -66,9 +65,6 @@ const Placing = () => {
     if (values.email === '') {
       delete orderData.email;
     }
-
-    console.log('Форма надіслана:', orderData);
-
     toast.success('Замовлення надіслано');
     actions.resetForm();
     dispatch(clearCartLocal());

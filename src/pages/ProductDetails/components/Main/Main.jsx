@@ -26,7 +26,7 @@ export const Main = ({ product }) => {
   }, [dispatch, product._id]);
 
   const handleBuy = () => {
-    dispatch(addProductToCartLocal({ productId: product._id, price: product.price }));
+    dispatch(addProductToCartLocal({ productId: product._id, quantity: 1 }));
     dispatch(addProductToCart(product._id));
     toast.success('Товар додано до кошику');
   };

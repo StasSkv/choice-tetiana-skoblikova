@@ -9,9 +9,7 @@ export const selectPriceProduct = (state, id) => {
 };
 
 export const selectProductById = (id) => (state) => {
-  return state.products.currentItem?.id === id
-    ? state.products.currentItem
-    : state.products.items.find((p) => p.id === id);
+  return state.products.currentItem?.id === id || state.products.currentItem;
 };
 
 export const selectPaginationData = (state) => state.products.paginationData;

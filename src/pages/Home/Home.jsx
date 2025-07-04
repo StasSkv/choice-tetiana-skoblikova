@@ -1,7 +1,7 @@
 import s from './Home.module.css';
 import tetiana from '../../assets/images/tetiana.jpeg';
 import { motion } from 'framer-motion';
-
+import CustomModal from '../../components/CustomModal/CustomModal.jsx';
 
 const Home = () => {
   return (
@@ -27,6 +27,8 @@ const Home = () => {
         <section className={s.aboutMe}>
           <div className={`container ${s.container}`}></div>
         </section>
+
+        <CustomModal/>
       </>
     </motion.div>
   );
