@@ -6,13 +6,21 @@ import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCartProducts } from '../../redux/cartSlice/cartSelectors.js';
+import clsx from 'clsx';
 
-const CustomModal = ({ isOpen, onClose, children }) => {
-    const [modalVisible, setModalVisible] = useState(false);
+const CustomModal = ({
+  isOpen,
+  onClose,
+  children,
+  isCart = true,
+  overlayClassName = '',
+  contentClassName = '',
+}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const [modalActive, setModalActive] = useState(false);
 
   const productsInCart = useSelector(selectCartProducts);
-  
+
   useEffect(() => {
     let openTimeout;
     let closeTimeout;
@@ -42,8 +50,8 @@ const CustomModal = ({ isOpen, onClose, children }) => {
     return null;
   }
 
-  const overlayClasses = `${s.overlay} ${modalActive ? s.overlayActive : ''}`;
-  const contentClasses = `${s.content} ${modalActive ? s.contentActive : ''}`;
+  const overlayClasses = clsx(s.overlay, modalActive && s.overlayActive, overlayClassName);
+  const contentClasses = clsx(s.content, modalActive && s.contentActive, contentClassName);
 
   return (
     <Modal
@@ -57,35 +65,38 @@ const CustomModal = ({ isOpen, onClose, children }) => {
         <TfiClose />
       </button>
       {children}
-      <div className={s.optionsWrap}>
-        <button className={s.goBack} onClick={onClose}>
-          <span>
-            <GoArrowLeft />
-          </span>
-          Продовжити покупки
-        </button>
-        {productsInCart.length > 0 && (
-          <div className={s.orderWrap}>
-            <p className={s.orderText}>Сумма замовлення</p>
-            <p className={s.orderSum}>
-              {productsInCart.length > 0
-                ? productsInCart
-                  .reduce((acc, product) => acc + product.price * product.quantity, 0)
-                : 0
-                .toLocaleString('uk-UA', {
-                  style: 'currency',
-                  currency: 'UAH',
-                })}
-              <span className={s.orderCurrency}> грн</span>
-            </p>
-          </div>
-        )}
-        {productsInCart.length > 0 && (
-          <NavLink to="/placing" className={s.submitBtn} onClick={onClose}>
-            Оформити замовлення
-          </NavLink>
-        )}
-      </div>
+      {isCart && (
+        <div className={s.optionsWrap}>
+          <button className={s.goBack} onClick={onClose}>
+            <span>
+              <GoArrowLeft />
+            </span>
+            Продовжити покупки
+          </button>
+          {productsInCart.length > 0 && (
+            <div className={s.orderWrap}>
+              <p className={s.orderText}>Сумма замовлення</p>
+              <p className={s.orderSum}>
+                {productsInCart.length > 0
+                  ? productsInCart.reduce(
+                      (acc, product) => acc + product.price * product.quantity,
+                      0
+                    )
+                  : (0).toLocaleString('uk-UA', {
+                      style: 'currency',
+                      currency: 'UAH',
+                    })}
+                <span className={s.orderCurrency}> грн</span>
+              </p>
+            </div>
+          )}
+          {productsInCart.length > 0 && (
+            <NavLink to="/placing" className={s.submitBtn} onClick={onClose}>
+              Оформити замовлення
+            </NavLink>
+          )}
+        </div>
+      )}
     </Modal>
   );
 };

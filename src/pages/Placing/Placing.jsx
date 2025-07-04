@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { toast } from 'react-toastify';
 import { DeliveryCity } from './components/DeliveryCity/DeliveryCity.jsx';
 import { Client } from './components/Client/Client.jsx';
 import { PaymentMethod } from './components/PaymentMethod/PaymentMethod.jsx';
@@ -18,6 +17,7 @@ import { validationSchema } from './validationSchema.js';
 import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
 import { createOrder } from '../../redux/orderSlice/orderOperation.js';
 import { formatPhoneNumber } from './formatedPhone.js';
+import { toast } from 'react-toastify';
 
 const Placing = () => {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Placing = () => {
     paymentMethod: 'overpayment',
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     const orderData = {
       name: values.name,
       phone: formatPhoneNumber(values.phone),
@@ -65,10 +65,15 @@ const Placing = () => {
     if (values.email === '') {
       delete orderData.email;
     }
-    toast.success('Замовлення надіслано');
-    actions.resetForm();
-    dispatch(clearCartLocal());
-    dispatch(createOrder(orderData));
+    try {
+      await dispatch(createOrder(orderData)).unwrap();
+      actions.resetForm();
+      dispatch(clearCartLocal());
+      navigate('/', { state: { showModal: true } });
+    } catch (error) {
+      console.log('error', error);
+      toast.error('Сталася помилка при створенні замовлення');
+    }
   };
 
   return (
