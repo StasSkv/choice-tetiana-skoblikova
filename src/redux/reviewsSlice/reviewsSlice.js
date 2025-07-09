@@ -24,12 +24,13 @@ const reviewsSlice = createSlice({
       .addCase(fetchReviewsByProductId.pending, (state) => {
         state.isLoading = true;
       })
+      .addCase(fetchReviewsByProductId.fulfilled, (state, action) => {
+        state.productReviews = action.payload;
+        state.isLoading = false;
+      })
       .addCase(fetchReviewsByProductId.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      })
-      .addCase(fetchReviewsByProductId.fulfilled, (state, action) => {
-        state.productReviews = action.payload;
       })
       .addCase(createReview.pending, (state) => {
         state.isLoading = true;

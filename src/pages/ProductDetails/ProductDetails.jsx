@@ -19,13 +19,12 @@ import { useEffect } from 'react';
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const product = useSelector(selectProductById(id));
 
   useEffect(() => {
-    if (!product || product.id !== id) {
-      dispatch(fetchProductById(id));
-    }
-  }, [id, product, dispatch]);
+    dispatch(fetchProductById(id));
+  }, [id, dispatch]);
+
+  const product = useSelector(selectProductById);
 
   return product ? (
     <motion.div

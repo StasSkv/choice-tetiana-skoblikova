@@ -71,8 +71,8 @@ const Placing = () => {
       dispatch(clearCartLocal());
       navigate('/', { state: { showModal: true } });
     } catch (error) {
-      console.log('error', error);
       toast.error('Сталася помилка при створенні замовлення');
+      return error;
     }
   };
 

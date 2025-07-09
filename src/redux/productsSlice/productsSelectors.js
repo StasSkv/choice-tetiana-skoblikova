@@ -8,9 +8,7 @@ export const selectPriceProduct = (state, id) => {
   return state.products.items.find((product) => product.id === id)?.price;
 };
 
-export const selectProductById = (id) => (state) => {
-  return state.products.currentItem?.id === id || state.products.currentItem;
-};
+export const selectProductById = (state) => state.products.currentItem;
 
 export const selectPaginationData = (state) => state.products.paginationData;
 

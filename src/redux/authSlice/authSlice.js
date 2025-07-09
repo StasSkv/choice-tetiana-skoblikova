@@ -1,29 +1,85 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loginUser, logoutUser, registerUser } from './authOperations.js';
 
 const initialState = {
   user: {
-    firstName: 'Andriy',
-    lastName: 'Kovalenko',
-    email: 'stas000123@gmail.com',
-    phone: '0953835492',
+    name: null,
+    phone: null,
+    email: null,
     deliveryOption: {
-      method: 'Nova_Poshta',
-      city: 'Глухів',
-      department: 'Відділення №2',
+      method: '',
+      city: '',
+      department: '',
     },
     paymentOption: {
-      method: 'overpayment',
+      method: '',
       cardNumber: '',
       cardExpiration: '',
     },
   },
+  isRegister: false,
   isLoggedIn: false,
   isRefreshing: false,
+  loginModalIsOpen: false,
+  isLoading: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
+  reducers: {
+    setLoginModalIsOpen: (state, action) => {
+      state.loginModalIsOpen = action.payload;
+    },
+  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.isRegister = false;
+        state.isLoading = true;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.isRegister = true;
+        state.isLoggedIn = true;
+        state.user = action.payload.user;
+        state.isLoading = false;
+      })
+      .addCase(registerUser.rejected, (state) => {
+        state.isRegister = false;
+        state.isLoading = false;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoggedIn = false;
+        state.isLoading = true;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.isLoggedIn = false;
+        state.isLoading = true;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = {
+          name: null,
+          phone: null,
+          email: null,
+        };
+        state.isLoggedIn = false;
+        state.isLoading = false;
+      })
+      .addCase(logoutUser.rejected, (state) => {
+        state.isLoggedIn = false;
+        state.isLoading = false;
+      })
 });
 
 export const authReducer = authSlice.reducer;
+
+export const { setLoginModalIsOpen } = authSlice.actions;

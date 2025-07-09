@@ -3,8 +3,12 @@ import s from './UserWindow.module.css';
 import { IoExitOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
+import { logoutUser } from '../../redux/authSlice/authOperations';
+import { useDispatch } from 'react-redux';
 
 export const UserWindow = ({ user, onClose }) => {
+  const dispatch = useDispatch();
+
   const navLinkStyle = ({ isActive }) => (isActive ? `${s.link} ${s.active}` : s.link);
 
   const [animationClass, setAnimationClass] = useState(s.modalOpen);
@@ -21,6 +25,11 @@ export const UserWindow = ({ user, onClose }) => {
       return () => clearTimeout(timer);
     }
   }, [animationClass, onClose]);
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    onClose();
+  };
 
   return (
     <div className={s.backdrop} onClick={handleClose}>
@@ -62,7 +71,7 @@ export const UserWindow = ({ user, onClose }) => {
             Оформити замовлення
           </NavLink>
 
-          <button className={s.exitBtn} onClick={onClose}>
+          <button className={s.exitBtn} onClick={handleLogout}>
             <span>
               <IoExitOutline />
             </span>

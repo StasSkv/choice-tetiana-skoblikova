@@ -10,7 +10,7 @@ export const Recipient = () => {
       <div className={s.userInfo}>
      <div className={s.inputWrap}>
           <label htmlFor={recipientNameFieldId} className={s.label}>
-            Ім'я <span className={s.required}>*</span>
+            Ім'я отримувача <span className={s.required}>*</span>
             <ErrorMessage name="recipientName" component="span" className={s.error} />
           </label>
           <Field
@@ -23,7 +23,7 @@ export const Recipient = () => {
      </div>
      <div className={s.inputWrap}>
         <label htmlFor={recipientPhoneFieldId} className={s.label}>
-          Телефон <span className={s.required}>*</span>
+          Телефон отримувача <span className={s.required}>*</span>
           <ErrorMessage name="recipientPhone" component="span" className={s.error} />
         </label>
         <Field

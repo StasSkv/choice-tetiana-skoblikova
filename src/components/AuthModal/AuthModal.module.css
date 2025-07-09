@@ -1,0 +1,146 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 80px;
+  z-index: 1000;
+  overflow: auto;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  border: none;
+}
+
+.authForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.closeBtn {
+  top: 24px;
+  right: 24px;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.authType {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  border: 3px solid var(--accent);
+  border-radius: 30px;
+  padding: 2px;
+  width: 350px;
+  height: 60px;
+}
+
+.authType label {
+  cursor: pointer;
+}
+
+.authTypeInput {
+  display: none;
+}
+
+.authType label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+}
+
+.authTypeInput:checked + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  border-radius: 30px;
+  color: #fff;
+}
+
+.authInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  height: 260px;
+  margin-bottom: 32px;
+}
+
+.authFormGroup {
+  position: relative;
+  width: 100%;
+}
+
+.authFormInput {
+  width: 100%;
+  height: 65px;
+  border: 1px solid var(--main-text);
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-size: 18px;
+  outline: none;
+  background-color: transparent;
+  color: var(--main-text);
+}
+
+.authFormLabel {
+  position: absolute;
+  left: 24px;
+  top: 0;
+  transform: translateY(-50%);
+  background-color: #fff;
+  padding: 0 5px;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  color: var(--main-text);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.authFormButton {
+  width: 300px;
+  letter-spacing: 0.05em;
+  height: 65px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--accent);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.authFormButton:hover {
+  box-shadow: 0 0 10px 0 rgba(21, 140, 71, 0.5), 0 0 10px 0 rgba(21, 140, 71, 0.5);
+  opacity: 0.9;
+}
+.error {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  font-size: 14px;
+  color: var(--error);
+}

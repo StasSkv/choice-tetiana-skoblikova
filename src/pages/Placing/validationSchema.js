@@ -8,8 +8,9 @@ export const validationSchema = Yup.object({
   email: Yup.string().email('Невірний email'),
   phone: Yup.string()
     .required('Введіть номер телефону')
-    .min(10, 'Телефон повинен містити не менше 10 символів')
-    .max(20, 'Телефон повинен містити не більше 20 символів'),
+      .min(13, 'Телефон повинен містити не менше 13 символів')
+    .max(13, 'Телефон повинен містити не більше 13 символів')
+    .matches(/^\+380\d{9}$/, 'Телефон повинен бути в форматі +380XXXXXXXXX'),
   recipient: Yup.string().oneOf(['self', 'other']).required('Оберіть отримувача'),
 
   recipientName: Yup.string().when('recipient', {

@@ -7,9 +7,13 @@ import { Layout } from './components/Layout/Layout';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { Loader } from './components/Loader/Loader.jsx';
 
-import { fetchProductsInCart, fetchProductsInCartFromLocal } from './redux/cartSlice/cartOperations.js';
-import { selectIsLoggedIn } from './redux/authSlice/authSelectors.js';
+import {
+  fetchProductsInCart,
+  fetchProductsInCartFromLocal,
+} from './redux/cartSlice/cartOperations.js';
+import { selectIsLoggedIn, selectIsOpen } from './redux/authSlice/authSelectors.js';
 import { selectProductsIds } from './redux/cartSlice/cartSelectors.js';
+import { AuthModal } from './components/AuthModal/AuthModal.jsx';
 
 const LazyTeam = lazy(() => import('./pages/Team/Team.jsx'));
 const LazyProductDetails = lazy(() => import('./pages/ProductDetails/ProductDetails.jsx'));
@@ -23,6 +27,8 @@ const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const productsIds = useSelector(selectProductsIds);
+  const isOpenAuthModal = useSelector(selectIsOpen);
+
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(fetchProductsInCart());
@@ -30,7 +36,7 @@ const App = () => {
       dispatch(fetchProductsInCartFromLocal());
     }
   }, [dispatch, isLoggedIn, productsIds]);
-  
+
   // const name = 'Фітомус для вмивання';
 
   // const imgName = 'PHYTOMOUSS FOR WASHING';
@@ -98,6 +104,8 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
+
+      <AuthModal isOpen={isOpenAuthModal} />
 
       <ToastContainer
         position="bottom-left"

@@ -9,14 +9,22 @@ import { getFormattedDate } from './formattedDate.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectProductReviews } from '../../../../redux/reviewsSlice/reviewsSelectors.js';
-import { createReview } from '../../../../redux/reviewsSlice/reviewsOperations.js';
+import {
+  createReview,
+  fetchReviewsByProductId,
+} from '../../../../redux/reviewsSlice/reviewsOperations.js';
+import { useEffect } from 'react';
 
 export const FormReviews = () => {
   const userId = '60f8c2d5a3b2c826d8e8b123';
-
-  const dispatch = useDispatch();
-  const reviews = useSelector(selectProductReviews);
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchReviewsByProductId(id));
+  }, [id, dispatch]);
+
+  const reviews = useSelector(selectProductReviews);
 
   const validationSchema = Yup.object({
     userName: Yup.string().required("Введіть ім'я"),
