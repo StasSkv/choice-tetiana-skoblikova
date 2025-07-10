@@ -1,7 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+import api from '../axiosInstans.js';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchAll',
@@ -16,11 +14,10 @@ export const fetchProducts = createAsyncThunk(
         sortOrder,
         category,
       };
-
-      const res = await axios.get('/products', {
+      const res = await api.get('/products', {
+        requiresAuth: false,
         params: queryParams,
       });
-
       return {
         data: {
           products: res.data.data.products,
@@ -38,7 +35,7 @@ export const fetchProductById = createAsyncThunk(
   'products/fetchById',
   async (productId, thunkAPI) => {
     try {
-      const res = await axios.get(`/products/${productId}`);
+      const res = await api.get(`/products/${productId}`, { requiresAuth: false });
       console.log(res.data.data);
       return { data: res.data.data };
     } catch (error) {

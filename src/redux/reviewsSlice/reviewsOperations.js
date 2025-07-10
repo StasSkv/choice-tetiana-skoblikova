@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import api from '../axiosInstans.js';
 
 export const fetchAllReviews = createAsyncThunk('reviews/fetchAllReviews', async (_, thunkAPI) => {
   try {
-    const response = await axios.get('/reviews');
+    const response = await api.get('/reviews', { requiresAuth: false });
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -12,7 +12,7 @@ export const fetchAllReviews = createAsyncThunk('reviews/fetchAllReviews', async
 
 export const fetchReviewsByUserId = createAsyncThunk('reviews/fetchReviewsByUserId', async (userId, thunkAPI) => {
   try {
-    const response = await axios.get(`/reviews/user/${userId}`);
+    const response = await api.get(`/reviews/user/${userId}`, { requiresAuth: false });
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -21,7 +21,7 @@ export const fetchReviewsByUserId = createAsyncThunk('reviews/fetchReviewsByUser
 
 export const fetchReviewsByProductId = createAsyncThunk('reviews/fetchReviewsByProductId', async (productId, thunkAPI) => {
   try {
-    const response = await axios.get(`/reviews/product/${productId}`);
+    const response = await api.get(`/reviews/product/${productId}`, { requiresAuth: false });
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -30,7 +30,7 @@ export const fetchReviewsByProductId = createAsyncThunk('reviews/fetchReviewsByP
 
 export const createReview = createAsyncThunk('reviews/createReview', async (review, thunkAPI) => {
   try {    
-    const response = await axios.post('/reviews', review);
+    const response = await api.post('/reviews', review);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

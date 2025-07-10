@@ -1,13 +1,22 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+import api from '../axiosInstans.js';
 
 export const createOrder = createAsyncThunk('orders', async (orderData, thunkAPI) => {
   try {
-    const response = await axios.post('/orders', orderData);
+    const response = await api.post('/orders', orderData);
     return response.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data);
+    return thunkAPI.rejectWithValue(error.response?.data || error.message);
+  }
+});
+
+export const createOrderNotAuthorized = createAsyncThunk('orders/notAuthorized', async (orderData, thunkAPI) => {
+  try {
+    const response = await api.post('/orders/not-auth', orderData, {
+      requiresAuth: false,
+    });
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data || error.message);
   }
 });

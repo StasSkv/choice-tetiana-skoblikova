@@ -198,6 +198,30 @@ transform: scale(1.1);
 }
 
 .info {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--grey-text);
+}
+
+.authWindow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px 0 10px 0;
+  gap: 20px;
+}
+
+.authInfo {
+  font-size: 18px;
+  color: var(--grey-text);
+  margin-bottom: 12px;
+}
+
+.authBtn {
+  border: none;
+  background-color: transparent;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
 }

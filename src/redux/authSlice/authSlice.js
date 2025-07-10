@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, logoutUser, registerUser } from './authOperations.js';
+import {
+  getCurrentUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+  refreshSession,
+} from './authOperations.js';
 
 const initialState = {
   user: {
@@ -16,12 +22,14 @@ const initialState = {
       cardNumber: '',
       cardExpiration: '',
     },
+    createdAt: '',
   },
   isRegister: false,
   isLoggedIn: false,
   isRefreshing: false,
   loginModalIsOpen: false,
   isLoading: false,
+  accessToken: null,
 };
 
 const authSlice = createSlice({
@@ -41,7 +49,7 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isRegister = true;
         state.isLoggedIn = true;
-        state.user = action.payload.user;
+        state.user = action.payload.data.user;
         state.isLoading = false;
       })
       .addCase(registerUser.rejected, (state) => {
@@ -53,7 +61,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.accessToken = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
@@ -78,6 +86,26 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isLoading = false;
       })
+      .addCase(getCurrentUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload.data.user;
+        state.isLoading = false;
+      })
+      .addCase(getCurrentUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(refreshSession.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshSession.fulfilled, (state, action) => {
+        state.accessToken = action.payload.data.accessToken;
+        state.isLoading = false;
+      })
+      .addCase(refreshSession.rejected, (state) => {
+        state.isLoading = false;
+      }),
 });
 
 export const authReducer = authSlice.reducer;

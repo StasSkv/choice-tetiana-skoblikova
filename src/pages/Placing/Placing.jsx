@@ -15,14 +15,15 @@ import { SendWindow } from './components/SendWindow/SendWindow.jsx';
 import { clearCartLocal } from '../../redux/cartSlice/cartSlice.js';
 import { validationSchema } from './validationSchema.js';
 import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
-import { createOrder } from '../../redux/orderSlice/orderOperation.js';
+import { createOrder, createOrderNotAuthorized } from '../../redux/orderSlice/orderOperation.js';
 import { formatPhoneNumber } from './formatedPhone.js';
 import { toast } from 'react-toastify';
+import { selectIsLoggedIn } from '../../redux/authSlice/authSelectors.js';
 
 const Placing = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const productsIds = useSelector(selectProductsIds);
 
   const handleClickBack = () => {
@@ -66,7 +67,11 @@ const Placing = () => {
       delete orderData.email;
     }
     try {
-      await dispatch(createOrder(orderData)).unwrap();
+      if (isLoggedIn) {
+        await dispatch(createOrder(orderData)).unwrap();
+      } else {
+        await dispatch(createOrderNotAuthorized(orderData)).unwrap();
+      }
       actions.resetForm();
       dispatch(clearCartLocal());
       navigate('/', { state: { showModal: true } });
