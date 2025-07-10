@@ -8,6 +8,8 @@ import {
   addMinusQuantity,
   fetchProductsInCartFromLocal,
 } from './cartOperations';
+import { logoutUser } from '../authSlice/authOperations';
+import { isEqual } from 'lodash';
 
 const initialState = {
   products: [],
@@ -48,14 +50,22 @@ const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(logoutUser.fulfilled, () => initialState);    
     builder.addCase(fetchProductsInCart.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchProductsInCart.fulfilled, (state, action) => {
-      state.products = action.payload.products;
-      state.totalPriceCart = action.payload.totalPriceCart;
-      state.isLoading = false;
-    });
+  builder.addCase(fetchProductsInCart.fulfilled, (state, action) => {
+    state.products = action.payload.products;
+    state.totalPriceCart = action.payload.totalPriceCart;
+    const newProductsIds = action.payload.products.map((product) => ({
+      productId: product.productId,
+      quantity: product.quantity,
+    }));
+
+    if (!isEqual(state.productsIds, newProductsIds)) {
+      state.productsIds = newProductsIds;
+    }
+  });
     builder.addCase(fetchProductsInCart.rejected, (state, action) => {
       state.error = action.payload;
       state.isLoading = false;

@@ -1,5 +1,27 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api, { setAccessToken } from '../axiosInstans.js';
+import axios from 'axios';
+
+
+export const checkSession = createAsyncThunk(
+  'auth/checkSession',
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/refresh`,
+        {},
+        { withCredentials: true }
+      );
+      const token = res.data?.data?.accessToken;
+      setAccessToken(token);
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      return true;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 
 export const registerUser = createAsyncThunk(
   'auth/register',
@@ -19,7 +41,7 @@ export const loginUser = createAsyncThunk('auth/login', async (dataUser, { rejec
       requiresAuth: false,
     });
     const token = response.data.accessToken;
-    setAccessToken(token);
+    setAccessToken(token);    
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);
@@ -55,8 +77,16 @@ export const getCurrentUser = createAsyncThunk(
 export const refreshSession = createAsyncThunk('auth/refresh', async (_, { rejectWithValue }) => {
   try {
     const response = await api.post('/auth/refresh', {}, { withCredentials: true });
+    console.log('refreshSession response:', response.data);
+    const token = response.data?.data?.accessToken;
+    if (!token) {
+      throw new Error('Токен не знайдений у відповіді сервера');
+    }
+    setAccessToken(token);
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
     return response.data;
   } catch (error) {
-    return rejectWithValue(error.response.data);
+    return rejectWithValue(error.response?.data || error.message);
   }
 });
+

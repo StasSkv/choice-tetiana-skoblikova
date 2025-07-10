@@ -6,6 +6,8 @@ import {
   clearFavorites,
   fetchFavoritesFromLocal,
 } from './favoritesOperations';
+import { logoutUser } from '../authSlice/authOperations';
+import { isEqual } from 'lodash';
 
 const favoritesSlice = createSlice({
   name: 'favoritesSlice',
@@ -24,13 +26,29 @@ const favoritesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(logoutUser.fulfilled, () => {
+      return {
+        favoritesProducts: [],
+        favoritesIds: [],
+        isLoading: false,
+        error: null,
+      };
+    });
     builder.addCase(fetchProductsInFavorites.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchProductsInFavorites.fulfilled, (state, action) => {
-      state.favoritesProducts = action.payload;
       state.isLoading = false;
+      const newFavoritesProducts = action.payload;
+      const newFavoritesIds = newFavoritesProducts.map((product) => product._id);
+      if (!isEqual(state.favoritesProducts, newFavoritesProducts)) {
+        state.favoritesProducts = newFavoritesProducts;
+      }
+      if (!isEqual(state.favoritesIds, newFavoritesIds)) {
+        state.favoritesIds = newFavoritesIds;
+      }
     });
+
     builder.addCase(fetchProductsInFavorites.rejected, (state, action) => {
       state.error = action.payload;
     });

@@ -6,7 +6,6 @@ export const fetchProducts = createAsyncThunk(
   async ({ filters = {} } = {}, thunkAPI) => {
     try {
       const { page = 1, perPage = 20, sortBy = '_id', sortOrder = 'asc', category = 'all' } = filters;
-
       const queryParams = {
         page,
         perPage,
@@ -36,7 +35,6 @@ export const fetchProductById = createAsyncThunk(
   async (productId, thunkAPI) => {
     try {
       const res = await api.get(`/products/${productId}`, { requiresAuth: false });
-      console.log(res.data.data);
       return { data: res.data.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

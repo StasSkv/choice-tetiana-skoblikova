@@ -46,10 +46,13 @@ api.interceptors.response.use(
       }
       isRefreshing = true;
       try {
-        const res = await api.post('/auth/refresh', {
-          baseURL: import.meta.env.VITE_API_URL,
-          withCredentials: true,
-        });
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL}/auth/refresh`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
         const newToken = res.data.accessToken;
         setAccessToken(newToken);
         failedQueue.forEach(({ resolve }) => resolve(newToken));

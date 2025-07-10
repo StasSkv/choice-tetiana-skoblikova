@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchProductById, fetchProducts } from './productsOperations.js';
+import { logoutUser } from '../authSlice/authOperations';
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -41,6 +42,22 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(logoutUser.fulfilled, () => {
+        return {
+          items: [],
+          paginationData: null,
+          filters: {
+            page: 1,
+            perPage: 20,
+            sortBy: '_id',
+            sortOrder: 'asc',
+            category: 'all',
+          },
+          currentItem: null,
+          isLoading: false,
+          error: null,
+        };
+      })
       .addCase(fetchProducts.pending, handlePending)
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.error = null;

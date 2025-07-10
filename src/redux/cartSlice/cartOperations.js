@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import { selectIsLoggedIn } from '../authSlice/authSelectors.js';
 import api from '../axiosInstans.js';
 
@@ -10,7 +9,6 @@ export const fetchProductsInCart = createAsyncThunk(
       const response = await api.get('/cart');
       return response.data;
     } catch (error) {
-      toast.error('Помилка при завантаженні кошику');
       return rejectWithValue(error.message);
     }
   }
@@ -37,7 +35,6 @@ export const fetchProductsInCartFromLocal = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      toast.error('Помилка при завантаженні кошику');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -53,7 +50,6 @@ export const addProductToCart = createAsyncThunk(
       const response = await api.post('/cart', { productId });
       return response.data;
     } catch (error) {
-      toast.error('Помилка при додаванні товару до кошику');
       return rejectWithValue(error.message);
     }
   }
@@ -69,7 +65,6 @@ export const deleteProductFromCart = createAsyncThunk(
       const response = await api.delete(`/cart`, { data: { productId } });
       return response.data;
     } catch (error) {
-      toast.error('Помилка при видаленні товару з кошику');
       return rejectWithValue(error.message);
     }
   }
@@ -85,7 +80,6 @@ export const addPlusQuantity = createAsyncThunk(
       const response = await api.patch(`/cart`, { productId, quantity });
       return response.data;
     } catch (error) {
-      toast.error('Помилка при додаванні кількості товару');
       return rejectWithValue(error.message);
     }
   }
@@ -101,7 +95,6 @@ export const addMinusQuantity = createAsyncThunk(
       const response = await api.patch(`/cart`, { productId, quantity });
       return response.data;
     } catch (error) {
-      toast.error('Помилка при зменшенні кількості товару');
       return rejectWithValue(error.message);
     }
   }
@@ -117,7 +110,6 @@ export const clearCart = createAsyncThunk(
       const response = await api.put(`/cart`);
       return response.data;
     } catch (error) {
-      toast.error('Помилка при очищенні кошику');
       return rejectWithValue(error.message);
     }
   }

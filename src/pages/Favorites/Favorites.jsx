@@ -1,33 +1,14 @@
 import { useSelector } from 'react-redux';
-import { selectFavoritesIds, selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
+import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import s from './Favorites.module.css';
 import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
 import ProductsList from '../../components/ProductList/ProductList.jsx';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-import { fetchProductsInFavorites } from '../../redux/favoritesSlice/favoritesOperations.js';
-import { fetchFavoritesFromLocal } from '../../redux/favoritesSlice/favoritesOperations.js';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { selectIsLoggedIn } from '../../redux/authSlice/authSelectors.js';
 
 const Favorites = () => {
-  const favoritesIds = useSelector(selectFavoritesIds);
   const favoritesProducts = useSelector(selectFavoritesProducts);
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const onPageChange = (page) => {
-    console.log(page);
-  };
-
-  useEffect(() => {
-    if (favoritesIds && isLoggedIn) {
-      dispatch(fetchProductsInFavorites());
-    } else if (favoritesIds && !isLoggedIn) {
-      dispatch(fetchFavoritesFromLocal());
-    }
-  }, [dispatch, isLoggedIn, favoritesIds]);
 
   return (
     <motion.div
@@ -43,11 +24,7 @@ const Favorites = () => {
 
             {favoritesProducts.length > 0 ? (
               <div className={s.list}>
-                <ProductsList
-                  products={favoritesProducts}
-                  isFavoritesPage={true}
-                  onPageChange={onPageChange}
-                />
+                <ProductsList products={favoritesProducts} isFavoritesPage={true} />
               </div>
             ) : (
               <div className={s.isNotFavorite}>

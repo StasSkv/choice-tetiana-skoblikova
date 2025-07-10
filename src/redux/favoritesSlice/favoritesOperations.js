@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import { selectIsLoggedIn } from '../authSlice/authSelectors.js';
 import api from '../axiosInstans.js';
 
@@ -10,7 +9,6 @@ export const fetchProductsInFavorites = createAsyncThunk(
       const response = await api.get('/favorites');
       return response.data.products;
     } catch (error) {
-      toast.error('Помилка при завантаженні кошику');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -37,7 +35,6 @@ export const fetchFavoritesFromLocal = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      toast.error('Помилка при завантаженні улюблених товарів');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -53,7 +50,6 @@ export const addProductToFavorites = createAsyncThunk(
       const response = await api.post('/favorites', { productId });
       return response.data.products;
     } catch (error) {
-      toast.error('Помилка при додаванні товару до кошику');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -69,7 +65,6 @@ export const removeProductFromFavorites = createAsyncThunk(
       const response = await api.delete('/favorites', { data: { productId } });
       return response.data;
     } catch (error) {
-      toast.error('Помилка при видаленні товару з кошику');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -82,8 +77,7 @@ export const clearFavorites = createAsyncThunk('favorites/clearFavorites', async
     if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
     const response = await api.delete('/favorites');
     return response.data;
-  } catch (error) {
-    toast.error('Помилка при очищенні кошику');
+  } catch (error) { 
     return thunkAPI.rejectWithValue(error.message);
   }
 });

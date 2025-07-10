@@ -26,6 +26,7 @@ const initialState = {
   },
   isRegister: false,
   isLoggedIn: false,
+  isLoggingOut: false,
   isRefreshing: false,
   loginModalIsOpen: false,
   isLoading: false,
@@ -55,6 +56,7 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state) => {
         state.isRegister = false;
         state.isLoading = false;
+        
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoggedIn = false;
@@ -63,6 +65,7 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.accessToken = action.payload.data.accessToken;
         state.isLoggedIn = true;
+        state.isRegister = true;
         state.isLoading = false;
       })
       .addCase(loginUser.rejected, (state) => {
@@ -72,19 +75,19 @@ const authSlice = createSlice({
       .addCase(logoutUser.pending, (state) => {
         state.isLoggedIn = false;
         state.isLoading = true;
+        state.isLoggingOut = true;
       })
-      .addCase(logoutUser.fulfilled, (state) => {
-        state.user = {
-          name: null,
-          phone: null,
-          email: null,
+      .addCase(logoutUser.fulfilled, () => {
+        return {
+          ...initialState,
+          isLoading: false,
+          isLoggingOut: false,
         };
-        state.isLoggedIn = false;
-        state.isLoading = false;
       })
       .addCase(logoutUser.rejected, (state) => {
         state.isLoggedIn = false;
         state.isLoading = false;
+        state.isLoggingOut = false;
       })
       .addCase(getCurrentUser.pending, (state) => {
         state.isLoading = true;
@@ -101,6 +104,7 @@ const authSlice = createSlice({
       })
       .addCase(refreshSession.fulfilled, (state, action) => {
         state.accessToken = action.payload.data.accessToken;
+        state.user = action.payload.data.user;
         state.isLoading = false;
       })
       .addCase(refreshSession.rejected, (state) => {

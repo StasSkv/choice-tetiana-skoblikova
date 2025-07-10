@@ -11,9 +11,19 @@ import {
   fetchProductsInCart,
   fetchProductsInCartFromLocal,
 } from './redux/cartSlice/cartOperations.js';
-import { selectIsLoggedIn, selectIsOpen } from './redux/authSlice/authSelectors.js';
+import {
+  selectIsLoggedIn,
+  selectIsLoggingOut,
+  selectIsOpen,
+} from './redux/authSlice/authSelectors.js';
 import { selectProductsIds } from './redux/cartSlice/cartSelectors.js';
+import { selectFavoritesIds } from './redux/favoritesSlice/favoritesSelectors.js';
 import { AuthModal } from './components/AuthModal/AuthModal.jsx';
+import { checkSession } from './redux/authSlice/authOperations.js';
+import {
+  fetchFavoritesFromLocal,
+  fetchProductsInFavorites,
+} from './redux/favoritesSlice/favoritesOperations.js';
 
 const LazyTeam = lazy(() => import('./pages/Team/Team.jsx'));
 const LazyProductDetails = lazy(() => import('./pages/ProductDetails/ProductDetails.jsx'));
@@ -27,15 +37,30 @@ const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const productsIds = useSelector(selectProductsIds);
+  const favoritesIds = useSelector(selectFavoritesIds);
   const isOpenAuthModal = useSelector(selectIsOpen);
+  const isLoggingOut = useSelector(selectIsLoggingOut);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(fetchProductsInCart());
-    } else {
-      dispatch(fetchProductsInCartFromLocal());
-    }
-  }, [dispatch, isLoggedIn, productsIds]);
+    if (isLoggingOut || isLoggedIn) return;
+    dispatch(fetchProductsInCartFromLocal(productsIds));
+    dispatch(fetchFavoritesFromLocal(favoritesIds));
+  }, [dispatch, isLoggedIn, isLoggingOut, productsIds, favoritesIds]);
+
+  useEffect(() => {
+    if (isLoggingOut || !isLoggedIn) return;
+    const init = async () => {
+      const res = await dispatch(checkSession());
+      if (res.meta.requestStatus === 'fulfilled') {
+        dispatch(fetchProductsInCart());
+        dispatch(fetchProductsInFavorites());
+      } else {
+        dispatch(fetchProductsInCartFromLocal(productsIds));
+        dispatch(fetchFavoritesFromLocal(favoritesIds));
+      }
+    };
+    init();
+  }, [dispatch, isLoggedIn, isLoggingOut]);
 
   // const name = 'Фітомус для вмивання';
 

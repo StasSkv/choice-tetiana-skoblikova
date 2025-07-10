@@ -4,11 +4,11 @@ import CustomModal from '../../../CustomModal/CustomModal.jsx';
 import { useState } from 'react';
 import { Cart } from '../../../../pages/Cart/Cart.jsx';
 import { useSelector } from 'react-redux';
-import { selectProductsIds, selectTotalPriceCart } from '../../../../redux/cartSlice/cartSelectors.js';
+import { selectCartProducts, selectTotalPriceCart } from '../../../../redux/cartSlice/cartSelectors.js';
 
 export const CartLink = ({ animate }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const productInCart = useSelector(selectProductsIds);
+  const productInCart = useSelector(selectCartProducts);
   const totalPriceCart = useSelector(selectTotalPriceCart);
   const count = productInCart.length;
 
