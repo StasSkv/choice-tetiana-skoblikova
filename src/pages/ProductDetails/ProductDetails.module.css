@@ -1,5 +1,36 @@
 .productContainer {
   padding: 20px 100px;
+  position: relative;
+}
+
+.goBack {
+  position: absolute;
+  top: -24px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 240px;
+  gap: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 5px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.goBack span {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.goBack:hover {
+  color: var(--accent);
+}
+
+.goBack:active {
+  transform: scale(1.1);
 }
 
 .productHeaderWrap {
@@ -109,3 +140,4 @@
 .mySwiper {
   margin-bottom: 50px;
 }
+

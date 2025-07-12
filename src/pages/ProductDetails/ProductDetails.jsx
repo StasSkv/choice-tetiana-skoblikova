@@ -6,12 +6,13 @@ import { InfoSwitcher } from './components/InfoSwitcher/InfoSwitcher.jsx';
 import { Main } from './components/Main/Main.jsx';
 import { motion } from 'framer-motion';
 import { FormReviews } from './components/FormReviews/FormReviews.jsx';
+import { GoArrowLeft } from 'react-icons/go';
 
 import { selectProductById } from '../../redux/productsSlice/productsSelectors.js';
 import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 
 // import MySwiper from '../../components/MySwiper/MySwiper.jsx';
@@ -37,6 +38,12 @@ const ProductDetails = () => {
         <section className={s.ProductDetails}>
           <div className={clsx('container', s.productContainer)}>
             <Main product={product} />
+            <NavLink to="/products" className={s.goBack}>
+              <span>
+                <GoArrowLeft />
+              </span>
+              Продовжити покупки
+            </NavLink>
           </div>
         </section>
 

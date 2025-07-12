@@ -11,7 +11,6 @@
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-height: 570px;
   overflow-x: hidden;
 }
 
@@ -21,7 +20,6 @@
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   min-width: 400px;
-  min-height: 570px;
 }
 
 .form {
@@ -61,11 +59,17 @@
   transition: border 0.3s, box-shadow 0.3s;
 }
 
-.input:focus,
 .textarea:focus {
   outline: none;
   border-color: #8bc34a;
   box-shadow: 0 0 6px rgba(139, 195, 74, 0.4);
+}
+
+.input[readonly] {
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: not-allowed;
+  outline: none;
 }
 
 .textarea {
@@ -80,7 +84,8 @@
   gap: 8px;
 }
 
-.submitBtn {
+.submitBtn,
+.loginBtn {
   background-color: var(--accent);
   color: white;
   border: none;
@@ -90,6 +95,11 @@
   cursor: pointer;
   align-self: flex-end;
   transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.loginBtn {
+  right: 50%;
+  transform: translateX(50%);
 }
 
 .submitBtn:hover {
@@ -103,10 +113,6 @@
   margin-top: 4px;
 }
 
-
-
-
-
 .leaveRewievs {
   padding: 32px 24px;
   background-color: #f9f9f9;
@@ -114,11 +120,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-.scrollBox {  
-  max-height: 450px; 
+.scrollBox {
+  max-height: 450px;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 8px; 
+  padding-right: 8px;
 }
 
 .scrollBox::-webkit-scrollbar {
@@ -133,7 +139,6 @@
 .scrollBox::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 
 .listWrap {
   padding-right: 8px;
@@ -152,10 +157,10 @@
 }
 
 .list li > div {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 .headerReview {
@@ -184,6 +189,5 @@ margin-bottom: 8px;
   font-weight: 500;
   color: var(--grey-text);
   text-align: center;
+  margin-bottom: 24px;
 }
-
-

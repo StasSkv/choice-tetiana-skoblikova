@@ -42,21 +42,18 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(logoutUser.fulfilled, () => {
-        return {
-          items: [],
-          paginationData: null,
-          filters: {
-            page: 1,
-            perPage: 20,
-            sortBy: '_id',
-            sortOrder: 'asc',
-            category: 'all',
-          },
-          currentItem: null,
-          isLoading: false,
-          error: null,
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.items = [];
+        state.paginationData = null;
+        state.filters = {
+          page: 1,
+          perPage: 20,
+          sortBy: '_id',
+          sortOrder: 'asc',
+          category: 'all',
         };
+        state.isLoading = false;
+        state.error = null;
       })
       .addCase(fetchProducts.pending, handlePending)
       .addCase(fetchProducts.fulfilled, (state, action) => {

@@ -14,20 +14,22 @@ import {
   fetchReviewsByProductId,
 } from '../../../../redux/reviewsSlice/reviewsOperations.js';
 import { useEffect } from 'react';
+import { selectIsLoggedIn, selectUser } from '../../../../redux/authSlice/authSelectors.js';
+import { setLoginModalIsOpen } from '../../../../redux/authSlice/authSlice.js';
+import { toast } from 'react-toastify';
 
 export const FormReviews = () => {
-  const userId = '60f8c2d5a3b2c826d8e8b123';
   const { id } = useParams();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const reviews = useSelector(selectProductReviews);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     dispatch(fetchReviewsByProductId(id));
   }, [id, dispatch]);
 
-  const reviews = useSelector(selectProductReviews);
-
   const validationSchema = Yup.object({
-    userName: Yup.string().required("Введіть ім'я"),
     comment: Yup.string()
       .min(10, 'Розкажіть трошки більше')
       .max(500, 'Занадто багато символів')
@@ -35,11 +37,12 @@ export const FormReviews = () => {
     rating: Yup.number().min(1, 'Оцініть товар').required('Оцініть товар'),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     const newReview = {
       ...values,
     };
-    dispatch(createReview(newReview));
+    await dispatch(createReview(newReview));
+    toast.success('Дякуємо за ваш відгук!');
     resetForm();
   };
 
@@ -68,48 +71,67 @@ export const FormReviews = () => {
           <p className={s.noReviews}>Якщо вам є що розповісти про цей товар, залиште свій відгук</p>
         )}
       </div>
-      <div className={s.formWrap}>
-        <h2 className={s.title}>Залишити відгук</h2>
-        <Formik
-          initialValues={{
-            userId: userId,
-            productId: id,
-            userName: '',
-            comment: '',
-            rating: 0,
-          }}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ values, setFieldValue }) => (
-            <Form className={s.form}>
-              <Field type="hidden" name="userId" />
-              <Field type="hidden" name="productId" />
-              <label className={s.label}>
-                Ім'я:
-                <Field type="text" name="userName" className={s.input} />
-                <ErrorMessage name="userName" component="div" className={s.error} />
-              </label>
-              <label className={s.label}>
-                Відгук:
-                <Field as="textarea" name="comment" rows="4" className={s.textarea} />
-                <ErrorMessage name="comment" component="div" className={s.error} />
-              </label>
-              <div className={s.ratingBlock}>
-                <p>Оцініть товар:</p>
-                <RatingProduct
-                  value={values.rating}
-                  onChange={(val) => setFieldValue('rating', val)}
-                />
+      {isLoggedIn ? (
+        <div className={s.formWrap}>
+          <h2 className={s.title}>Залишити відгук</h2>
+          <Formik
+            initialValues={{
+              productId: id,
+              userName: user?.name || '',
+              comment: '',
+              rating: 0,
+            }}
+            enableReinitialize={true}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ values, setFieldValue }) => (
+              <Form className={s.form}>
+                <Field type="hidden" name="productId" />
+                <label className={s.label}>
+                  Ім'я:
+                  <Field type="text" name="userName" readOnly className={s.input} />
+                  <ErrorMessage name="userName" component="div" className={s.error} />
+                </label>
+                <label className={s.label}>
+                  Відгук:
+                  <Field
+                    as="textarea"
+                    name="comment"
+                    rows="4"
+                    placeholder="Введіть ваш відгук"
+                    className={s.textarea}
+                  />
+                  <ErrorMessage name="comment" component="div" className={s.error} />
+                </label>
+                <div className={s.ratingBlock}>
+                  <p>Оцініть товар:</p>
+                  <RatingProduct
+                    value={values.rating}
+                    onChange={(val) => setFieldValue('rating', val)}
+                  />
                 <ErrorMessage name="rating" component="div" className={s.error} />
-              </div>
-              <button type="submit" className={s.submitBtn}>
-                Надіслати відгук
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </div>
+                </div>
+                <button type="submit" className={s.submitBtn}>
+                  Надіслати відгук
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      ) : (
+        <div className={s.formWrap}>
+          <h2 className={s.title}>Залишити відгук</h2>
+          <p className={s.noReviews}>Для того щоб залишити відгук, потрібно авторизуватися</p>
+          <button
+            type="button"
+            className={s.loginBtn}
+            onClick={() => dispatch(setLoginModalIsOpen(true))}
+          >
+            Вхід / Реєстрація
+          </button>
+        </div>
+      )}
     </div>
   );
 };

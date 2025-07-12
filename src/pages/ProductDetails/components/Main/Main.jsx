@@ -31,10 +31,19 @@ export const Main = ({ product }) => {
     toast.success('Товар додано до кошику');
   };
 
+  const addCloudinaryParams = (url, params) => {
+    return url.replace('/upload/', `/upload/${params}/`);
+  };
+
   return (
     <div className={s.productHeaderWrap}>
       <div className={s.productImgWrap}>
-        <img src={`/images/${product.imgL}`} alt={product.name} className={s.productImg} />
+        <img
+          src={addCloudinaryParams(product.imgS, 'q_auto,f_auto,c_fill,g_auto,h_380')}
+          alt={product.name}
+          className={s.productImg}
+          loading="lazy"
+        />
       </div>
       <div className={s.descriptionWrap}>
         <div className={s.wrap}>

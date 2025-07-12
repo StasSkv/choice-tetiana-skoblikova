@@ -63,7 +63,7 @@ export const removeProductFromFavorites = createAsyncThunk(
     try {
       if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
       const response = await api.delete('/favorites', { data: { productId } });
-      return response.data;
+      return response.data.products;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -75,7 +75,7 @@ export const clearFavorites = createAsyncThunk('favorites/clearFavorites', async
   const isLoggedIn = selectIsLoggedIn(state);
   try {
     if (!isLoggedIn) return thunkAPI.rejectWithValue('Потрібно авторизуватися');
-    const response = await api.delete('/favorites');
+    const response = await api.put('/favorites');
     return response.data;
   } catch (error) { 
     return thunkAPI.rejectWithValue(error.message);

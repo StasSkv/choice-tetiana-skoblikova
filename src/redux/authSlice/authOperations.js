@@ -40,6 +40,7 @@ export const loginUser = createAsyncThunk('auth/login', async (dataUser, { rejec
     const response = await api.post('/auth/login', dataUser, {
       requiresAuth: false,
     });
+    console.log('loginUser response:', response.data);
     const token = response.data.accessToken;
     setAccessToken(token);    
     return response.data;

@@ -11,7 +11,7 @@ import {
 import { useEffect } from 'react';
 import { fetchProducts } from '../../redux/productsSlice/productsOperations.js';
 import { useSearchParams } from 'react-router-dom';
-import { setFilters } from '../../redux/productsSlice/productsSlice.js';
+// import { setFilters } from '../../redux/productsSlice/productsSlice.js';
 
 const Products = () => {
   const allProducts = useSelector(selectAllProducts);
@@ -21,24 +21,23 @@ const Products = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const params = Object.fromEntries(searchParams.entries());
-
-    if (Object.keys(params).length > 0) {
-      const parsed = {
-        page: Number(params.page) || 1,
-        perPage: Number(params.perPage) || 20,
-        sortBy: params.sortBy || '_id',
-        sortOrder: params.sortOrder || 'asc',
-        category: params.category || 'all',
-      };
-      dispatch(setFilters(parsed));
-      dispatch(fetchProducts({ filters: parsed }));
-    } else {
-      setSearchParams(filters);
-      dispatch(fetchProducts({ filters }));
-    }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const params = Object.fromEntries(searchParams.entries());
+  //   if (Object.keys(params).length > 0) {
+  //     const parsed = {
+  //       page: Number(params.page) || 1,
+  //       perPage: Number(params.perPage) || 20,
+  //       sortBy: params.sortBy || '_id',
+  //       sortOrder: params.sortOrder || 'asc',
+  //       category: params.category || 'all',
+  //     };
+  //     dispatch(setFilters(parsed));
+  //     dispatch(fetchProducts({ filters: parsed }));
+  //   } else {
+  //     setSearchParams(filters);
+  //     dispatch(fetchProducts({ filters }));
+  //   }
+  // }, [dispatch]);
 
   useEffect(() => {
     setSearchParams(filters);

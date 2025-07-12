@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const validationSchema = Yup.object({
   name: Yup.string()
     .required('Введіть ім’я')
-    .min(5, 'Ім’я повинно містити не менше 5 символів')
+    .min(2, 'Ім’я повинно містити не менше 2 символів')
     .max(40, 'Ім’я повинно містити не більше 40 символів'),
   email: Yup.string().email('Невірний email'),
   phone: Yup.string()

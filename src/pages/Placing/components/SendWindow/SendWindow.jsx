@@ -19,7 +19,7 @@ export const SendWindow = () => {
 
   return (
     <div className={s.sendWindow}>
-      <input id="promocod" type="text" placeholder="Ввести промокод" className={s.promocod} />
+      <input id="promocod" type="text" placeholder="Ввести промокод" className={s.promocod}/>
       <div className={s.orderWrap}>
         <div className={s.orderLine}>
           <p>Сума замовлення:</p>

@@ -7,9 +7,11 @@ import { motion } from 'framer-motion';
 import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 import { History } from './History/History.jsx';
 import { Reviews } from './Reviews/Reviews.jsx';
+import { selectUser } from '../../redux/authSlice/authSelectors.js';
 
 const UserOffice = () => {
   const products = useSelector(selectAllProducts);
+  const user = useSelector(selectUser);
 
   return (
     <motion.div
@@ -21,9 +23,8 @@ const UserOffice = () => {
       <div className={`container ${s.container}`}>
         <div className={s.main}>
           <Menu />
-
           <div className={s.mainWrap}>
-            <h2>Вітаємо, Тетяно!</h2>
+            <h2>Вітаємо, {user?.name}!</h2>
             <div id="info">
               <Info />
             </div>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import logo from '../../assets/images/tetiana-logo.png';
 import { GoArrowLeft } from 'react-icons/go';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,29 +19,48 @@ import { createOrder, createOrderNotAuthorized } from '../../redux/orderSlice/or
 import { formatPhoneNumber } from './formatedPhone.js';
 import { toast } from 'react-toastify';
 import { selectIsLoggedIn } from '../../redux/authSlice/authSelectors.js';
+import { selectUser } from '../../redux/authSlice/authSelectors.js';
+import { clearCart } from '../../redux/cartSlice/cartOperations.js';
 
 const Placing = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const productsIds = useSelector(selectProductsIds);
+  const user = useSelector(selectUser);
 
   const handleClickBack = () => {
     navigate(-1);
   };
 
-  const initialValues = {
-    name: '',
-    phone: '',
-    email: '',
-    recipient: 'self',
-    recipientName: '',
-    recipientPhone: '',
-    delivery: 'Nova_Poshta',
-    city: '',
-    department: '',
-    paymentMethod: 'overpayment',
-  };
+  let initialValues;
+  if (isLoggedIn) {
+    initialValues = {
+      name: user?.name || '',
+      phone: user?.phone || '',
+      email: user?.email || '',
+      recipient: 'self',
+      recipientName: '',
+      recipientPhone: '',
+      delivery: 'Nova_Poshta',
+      city: user?.deliveryOption?.city || '',
+      department: user?.deliveryOption?.department || '',
+      paymentMethod: user?.paymentOption?.method || 'overpayment',
+    };
+  } else {
+    initialValues = {
+      name: '',
+      phone: '',
+      email: '',
+      recipient: 'self',
+      recipientName: '',
+      recipientPhone: '',
+      delivery: 'Nova_Poshta',
+      city: '',
+      department: '',
+      paymentMethod: 'overpayment',
+    };
+  }
 
   const handleSubmit = async (values, actions) => {
     const orderData = {
@@ -51,7 +70,6 @@ const Placing = () => {
       paymentStatus: 'pending',
       products: productsIds,
       status: 'pending',
-
       recipient: {
         fullName: values.recipient === 'other' ? values.recipientName : values.name,
         phone:
@@ -69,11 +87,12 @@ const Placing = () => {
     try {
       if (isLoggedIn) {
         await dispatch(createOrder(orderData)).unwrap();
+        dispatch(clearCart());
       } else {
         await dispatch(createOrderNotAuthorized(orderData)).unwrap();
+        dispatch(clearCartLocal());
       }
       actions.resetForm();
-      dispatch(clearCartLocal());
       navigate('/', { state: { showModal: true } });
     } catch (error) {
       toast.error('Сталася помилка при створенні замовлення');
@@ -96,9 +115,9 @@ const Placing = () => {
             </button>
           </div>
           <div className={s.logoWrap}>
-            <a href="/">
+            <Link to="/">
               <img className={s.logoImg} src={logo} alt="logo" />
-            </a>
+            </Link>
           </div>
           <div className={s.contacts}>
             <p>095-383-54-92</p>

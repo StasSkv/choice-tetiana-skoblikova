@@ -32,7 +32,7 @@ const ProductsList = ({ products = [], pagination, isFavoritesPage = false }) =>
         </ul>
       )}
 
-      {pageCount > 1 && (
+      {pageCount > 1 && products.length > 0 && (
         <ReactPaginate
           breakLabel="..."
           nextLabel=">"

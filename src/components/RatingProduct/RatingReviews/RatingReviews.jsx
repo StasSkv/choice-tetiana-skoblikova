@@ -19,7 +19,7 @@ export const RatingReviews = ({ value = 0, size = 24 }) => {
           {renderStar(index)}
         </span>
       ))}
-      <span className={s.value}>{value}</span>
+      {value > 0 && <span className={s.value}>{Number(value).toFixed(1)}</span>}
     </div>
   );
 };

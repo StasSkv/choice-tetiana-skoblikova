@@ -7,13 +7,11 @@ import { removeProductFromFavorites } from '../../../redux/favoritesSlice/favori
 
 const DeleteButton = ({ id, onStartRemove }) => {
   const dispatch = useDispatch();
-  
+
   const handleRemove = (e) => {
     e.stopPropagation();
     onStartRemove();
-    setTimeout(() => {
-      dispatch(removeProductFromFavorites(id));
-    }, 300);
+    dispatch(removeProductFromFavorites(id));
     dispatch(removeProductFromFavoritesLocal(id));
     toast.warning('Товар видалено з улюблених');
   };

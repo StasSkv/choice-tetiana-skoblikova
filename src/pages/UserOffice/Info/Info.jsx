@@ -1,34 +1,34 @@
 import s from './Info.module.css';
 import { FaPencil } from 'react-icons/fa6';
 import { FaPlus } from 'react-icons/fa6';
+import { selectUser } from '../../../redux/authSlice/authSelectors.js';
+import { useSelector } from 'react-redux';
 
 export const Info = () => {
+  const user = useSelector(selectUser);
+
   return (
     <div className={`container ${s.infoContainer}`}>
       <div className={s.userInfo}>
-     
         <ul>
           <li>
             <span> Ім'я та прізвище:</span>
-            <p>Скоблікова Тетяна</p>
+            <p>{user?.name}</p>
           </li>
-
           <li>
             <span>Телефон:</span>
-            <p>095-383-54-92</p>
+            <p>{user?.phone}</p>
           </li>
           <li>
             <span>Пошта:</span>
-            <p>stas000123@gmail.com</p>
+            <p>{user?.email}</p>
           </li>
         </ul>
-
         <button className={s.edit}>
           <FaPencil />
           Редагувати дані
         </button>
       </div>
-
       <div className={s.userAdress}>
         <button className={s.userAdressBtn}>
           <span className={s.img}>

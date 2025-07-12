@@ -15,7 +15,6 @@ import { selectFavoritesIds } from '../../redux/favoritesSlice/favoritesSelector
 const ProductCard = ({ product, isFavoritesPage = false }) => {
   const favoritesProducts = useSelector(selectFavoritesIds);
   const productsInCart = useSelector(selectProductsIds);  
-
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
 
@@ -28,6 +27,10 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
     navigate(`/products/${product._id}`);
   };
 
+   const addCloudinaryParams = (url, params) => {
+     return url.replace('/upload/', `/upload/${params}/`);
+   };
+
   return (
     <div className={clsx(s.productCard, isRemoving && s.removing)} onClick={handleCardClick}>
       {isFavoritesPage ? (
@@ -36,7 +39,12 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
         favoritesProducts && <LikeButton isLoved={isInFavorite} id={product._id} />
       )}
 
-      <img src={`/images/${product.imgS}`} alt={product.name} className={s.productImage} />
+      <img
+        src={addCloudinaryParams(product.imgS, 'q_auto,f_auto,c_fill,g_auto,h_137')}
+        alt={product.name}
+        className={s.productImage}
+        loading="lazy"
+      />
       <div className={s.descriptionWrap}>
         <p className={s.name}>{product.name}</p>
         <div className={s.textAndOptions}>

@@ -73,13 +73,13 @@ export const UserWindow = ({ onClose }) => {
               >
                 Улюбленні товари
               </NavLink>
-              <NavLink className={navLinkStyle} to="/office">
+              <NavLink className={s.link} to="/office">
                 Переглянуті товари
               </NavLink>
-              <NavLink className={navLinkStyle} to="/office">
+              <NavLink className={s.link} to="/office">
                 Історія замовлень
               </NavLink>
-              <NavLink className={navLinkStyle} to="/placing">
+              <NavLink className={s.link} to="/placing">
                 Оформити замовлення
               </NavLink>
 

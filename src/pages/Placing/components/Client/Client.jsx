@@ -15,7 +15,6 @@ export const Client = () => {
   return (
     <div className={s.client}>
       <h3>1. Отримувач</h3>
-
       <div className={s.clientWrap}>
         <div className={s.inputsWrap}>
           <div className={s.inputWrap}>

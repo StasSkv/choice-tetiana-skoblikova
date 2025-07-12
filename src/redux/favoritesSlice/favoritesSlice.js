@@ -38,8 +38,7 @@ const favoritesSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchProductsInFavorites.fulfilled, (state, action) => {
-      state.isLoading = false;
-      const newFavoritesProducts = action.payload;
+      const newFavoritesProducts = action.payload || [];
       const newFavoritesIds = newFavoritesProducts.map((product) => product._id);
       if (!isEqual(state.favoritesProducts, newFavoritesProducts)) {
         state.favoritesProducts = newFavoritesProducts;
@@ -47,6 +46,7 @@ const favoritesSlice = createSlice({
       if (!isEqual(state.favoritesIds, newFavoritesIds)) {
         state.favoritesIds = newFavoritesIds;
       }
+      state.isLoading = false;
     });
 
     builder.addCase(fetchProductsInFavorites.rejected, (state, action) => {
@@ -77,9 +77,8 @@ const favoritesSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(removeProductFromFavorites.fulfilled, (state, action) => {
-      state.favoritesProducts = state.favoritesProducts.filter(
-        (product) => product._id !== action.payload
-      );
+      console.log('action.payload', action.payload);
+      state.favoritesProducts = action.payload || [];
       state.isLoading = false;
     });
     builder.addCase(removeProductFromFavorites.rejected, (state, action) => {
