@@ -13,19 +13,35 @@ import { fetchProductById } from '../../redux/productsSlice/productsOperations.j
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // import MySwiper from '../../components/MySwiper/MySwiper.jsx';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const product = useSelector(selectProductById);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchProductById(id));
   }, [id, dispatch]);
 
-  const product = useSelector(selectProductById);
+  useEffect(() => {
+    if (openModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [openModal]);
+
+  const addCloudinaryParams = (url, params) => {
+    return url.replace('/upload/', `/upload/${params}/`);
+  };
 
   return product ? (
     <motion.div
@@ -34,10 +50,19 @@ const ProductDetails = () => {
       exit={{ opacity: 0, x: 100 }}
       transition={{ duration: 0.4 }}
     >
+      <div
+        className={clsx(s.modalwrap, openModal && s.modalWrapOpen)}
+        onClick={() => setOpenModal(false)}
+      >
+        <img
+          src={addCloudinaryParams(product.imgS, 'q_auto,f_auto,c_fill,g_auto,h_800')}
+          alt={product.name}
+        />
+      </div>
       <>
         <section className={s.ProductDetails}>
           <div className={clsx('container', s.productContainer)}>
-            <Main product={product} />
+            <Main product={product} openModal={setOpenModal} />
             <NavLink to="/products" className={s.goBack}>
               <span>
                 <GoArrowLeft />

@@ -14,7 +14,7 @@ import { addProductToCartLocal } from '../../../../redux/cartSlice/cartSlice.js'
 import { addProductToCart } from '../../../../redux/cartSlice/cartOperations.js';
 import { selectProductsIds } from '../../../../redux/cartSlice/cartSelectors.js';
 
-export const Main = ({ product }) => {
+export const Main = ({ product, openModal }) => {
   const dispatch = useDispatch();
   const productsIds = useSelector(selectProductsIds);
   const isInCart = !!product && productsIds.some((item) => item?.productId === product._id);
@@ -35,6 +35,10 @@ export const Main = ({ product }) => {
     return url.replace('/upload/', `/upload/${params}/`);
   };
 
+  const handleClick = () => {
+    openModal(true);
+  };
+
   return (
     <div className={s.productHeaderWrap}>
       <div className={s.productImgWrap}>
@@ -43,6 +47,7 @@ export const Main = ({ product }) => {
           alt={product.name}
           className={s.productImg}
           loading="lazy"
+          onClick={handleClick}
         />
       </div>
       <div className={s.descriptionWrap}>

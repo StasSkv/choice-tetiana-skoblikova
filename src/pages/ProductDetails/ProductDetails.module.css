@@ -1,3 +1,7 @@
+.ProductDetails {
+  padding-top: 50px;
+}
+
 .productContainer {
   padding: 20px 100px;
   position: relative;
@@ -5,7 +9,7 @@
 
 .goBack {
   position: absolute;
-  top: -24px;
+  top: -50px;
   left: 0px;
   display: flex;
   align-items: center;
@@ -141,3 +145,32 @@
   margin-bottom: 50px;
 }
 
+.modalwrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 150%;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  cursor: pointer;
+}
+
+.modalwrap img {
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  cursor: pointer;
+}
+
+.modalWrapOpen {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}

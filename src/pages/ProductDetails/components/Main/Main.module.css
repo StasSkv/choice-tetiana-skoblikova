@@ -24,6 +24,7 @@
   object-fit: none;
   object-position: center;
   display: block;
+  cursor: pointer;
 }
 
 
