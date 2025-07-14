@@ -40,11 +40,11 @@ const UserOffice = () => {
         </div>
         <div id="favorites" className={s.favorites}>
           <h2>Улюбленні</h2>
-          <MySwiper products={products} slidesPerView={5} />
+          <MySwiper products={products} slidesPerView={5.5} />
         </div>
         <div id="viewed" className={s.views}>
           <h2>Нещодавно переглянуті</h2>
-          <MySwiper products={products} slidesPerView={5} />
+          <MySwiper products={products} slidesPerView={5.5} />
         </div>
       </div>
     </motion.div>

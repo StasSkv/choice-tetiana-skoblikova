@@ -40,7 +40,6 @@ export const loginUser = createAsyncThunk('auth/login', async (dataUser, { rejec
     const response = await api.post('/auth/login', dataUser, {
       requiresAuth: false,
     });
-    console.log('loginUser response:', response.data);
     const token = response.data.accessToken;
     setAccessToken(token);    
     return response.data;
@@ -78,7 +77,6 @@ export const getCurrentUser = createAsyncThunk(
 export const refreshSession = createAsyncThunk('auth/refresh', async (_, { rejectWithValue }) => {
   try {
     const response = await api.post('/auth/refresh', {}, { withCredentials: true });
-    console.log('refreshSession response:', response.data);
     const token = response.data?.data?.accessToken;
     if (!token) {
       throw new Error('Токен не знайдений у відповіді сервера');
@@ -91,3 +89,11 @@ export const refreshSession = createAsyncThunk('auth/refresh', async (_, { rejec
   }
 });
 
+export const updateUser = createAsyncThunk('auth/updateUser', async (dataUser, { rejectWithValue }) => {
+  try {
+    const response = await api.patch('/auth/updateUser', dataUser);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});

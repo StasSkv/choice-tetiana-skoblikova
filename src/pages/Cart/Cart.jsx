@@ -10,7 +10,6 @@ import {
   addPlusQuantity,
   addMinusQuantity,
 } from '../../redux/cartSlice/cartOperations.js';
-
 import {
   clearCartLocal,
   deleteProductFromCartLocal,
@@ -67,6 +66,10 @@ export const Cart = ({ onClose }) => {
     }
   };
 
+  const addCloudinaryParams = (url, params) => {
+    return url.replace('/upload/', `/upload/${params}/`);
+  };
+
   return (
     <div className={s.cart}>
       <h2 className={s.title}>Кошик товарів</h2>
@@ -93,7 +96,13 @@ export const Cart = ({ onClose }) => {
               role="button"
               tabIndex={0}
             >
-              <img src={`/images/${product.imgS}`} alt={product.name} className={s.productImg} />
+              <div className={s.productImageWrap}>
+                <img
+                  src={addCloudinaryParams(product.imgS, 'q_auto,f_auto,c_fill,g_auto,h_80')}
+                  alt={product.name}
+                  className={s.productImg}
+                />
+              </div>
               <div className={s.description}>
                 <h3>{product.name}</h3>
                 <p>{product.brief}</p>
@@ -110,6 +119,7 @@ export const Cart = ({ onClose }) => {
                     <span></span>
                   </button>
                   <p>{product.quantity}</p>
+
                   <button className={s.plus} onClick={() => handlePlusQuantity(product)}>
                     +
                   </button>

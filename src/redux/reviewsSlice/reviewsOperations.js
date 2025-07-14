@@ -12,7 +12,7 @@ export const fetchAllReviews = createAsyncThunk('reviews/fetchAllReviews', async
 
 export const fetchReviewsByUserId = createAsyncThunk('reviews/fetchReviewsByUserId', async (userId, thunkAPI) => {
   try {
-    const response = await api.get(`/reviews/user/${userId}`, { requiresAuth: false });
+    const response = await api.get(`/reviews/user/${userId}`);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

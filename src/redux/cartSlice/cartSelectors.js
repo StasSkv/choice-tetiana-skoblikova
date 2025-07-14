@@ -11,3 +11,5 @@ const selectCart = (state) => state.cart;
 export const selectCartProducts = createSelector([selectCart], (cart) => cart.products || []);
 
 export const selectIsCartLoading = (state) => state.cart.isLoading;
+
+export const selectIsUpdating = (state) => state.cart.isUpdating;

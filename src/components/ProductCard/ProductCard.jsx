@@ -39,12 +39,14 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
         favoritesProducts && <LikeButton isLoved={isInFavorite} id={product._id} />
       )}
 
-      <img
-        src={addCloudinaryParams(product.imgS, 'q_auto,f_auto,c_fill,g_auto,h_137')}
-        alt={product.name}
-        className={s.productImage}
-        loading="lazy"
-      />
+    <div className={s.productImageWrap}>
+        <img
+          src={addCloudinaryParams(product.imgS, 'q_auto,f_auto,c_fill,g_auto,h_137')}
+          alt={product.name}
+          className={s.productImage}
+          loading="lazy"
+        />
+    </div>
       <div className={s.descriptionWrap}>
         <p className={s.name}>{product.name}</p>
         <div className={s.textAndOptions}>

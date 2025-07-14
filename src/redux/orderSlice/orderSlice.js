@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createOrder, createOrderNotAuthorized } from './orderOperation.js';
+import { createOrder, createOrderNotAuthorized, getUserOrders } from './orderOperation.js';
 
 const orderSlice = createSlice({
   name: 'order',
   initialState: {
+    orders: [],
     currentOrder: null,
     isLoading: false,
     error: null,
@@ -32,6 +33,16 @@ const orderSlice = createSlice({
       state.isLoading = false;
     })
     .addCase(createOrderNotAuthorized.rejected, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(getUserOrders.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(getUserOrders.fulfilled, (state, action) => {
+      state.orders = action.payload.data.orders;
+      state.isLoading = false;
+    })
+    .addCase(getUserOrders.rejected, (state, action) => {
       state.error = action.payload;
     }),
 });

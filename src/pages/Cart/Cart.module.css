@@ -88,9 +88,17 @@
   color: var(--grey-text);
 }
 
+.productImageWrap {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
 .productImg {
   max-width: 100px;
-  margin-right: 20px;
 }
 
 .quantity {
@@ -172,4 +180,8 @@
   font-size: 24px;
   text-align: center;
   padding: 50px;
+}
+
+.isUpdating {
+  cursor: progress;
 }

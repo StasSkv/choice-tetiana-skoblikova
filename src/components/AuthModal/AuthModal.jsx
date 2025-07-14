@@ -102,7 +102,6 @@ export const AuthModal = ({ isOpen }) => {
                   className={s.authTypeInput}
                 />
                 <label htmlFor="register">Реєстрація</label>
-
                 <Field
                   type="radio"
                   id="login"

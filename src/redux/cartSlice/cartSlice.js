@@ -16,6 +16,7 @@ const initialState = {
   productsIds: [],
   totalPriceCart: 0,
   isLoading: false,
+  isUpdating: false,
   error: null,
 };
 
@@ -29,7 +30,9 @@ const cartSlice = createSlice({
     deleteProductFromCartLocal: (state, action) => {
       const productId = state.productsIds.find((p) => p.productId === action.payload);
       if (productId) {
-        state.productsIds = state.productsIds.filter((productId) => productId.productId !== action.payload);
+        state.productsIds = state.productsIds.filter(
+          (productId) => productId.productId !== action.payload
+        );
       }
     },
     clearCartLocal: (state) => {
@@ -50,22 +53,22 @@ const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(logoutUser.fulfilled, () => initialState);    
+    builder.addCase(logoutUser.fulfilled, () => initialState);
     builder.addCase(fetchProductsInCart.pending, (state) => {
       state.isLoading = true;
     });
-  builder.addCase(fetchProductsInCart.fulfilled, (state, action) => {
-    state.products = action.payload.products;
-    state.totalPriceCart = action.payload.totalPriceCart;
-    const newProductsIds = action.payload.products.map((product) => ({
-      productId: product.productId,
-      quantity: product.quantity,
-    }));
+    builder.addCase(fetchProductsInCart.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.totalPriceCart = action.payload.totalPriceCart;
+      const newProductsIds = action.payload.products.map((product) => ({
+        productId: product.productId,
+        quantity: product.quantity,
+      }));
 
-    if (!isEqual(state.productsIds, newProductsIds)) {
-      state.productsIds = newProductsIds;
-    }
-  });
+      if (!isEqual(state.productsIds, newProductsIds)) {
+        state.productsIds = newProductsIds;
+      }
+    });
     builder.addCase(fetchProductsInCart.rejected, (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
@@ -118,28 +121,27 @@ const cartSlice = createSlice({
       state.totalPriceCart = 0;
       state.isLoading = false;
     });
-    builder.addCase(addPlusQuantity.rejected, (state, action) => {
-      state.error = action.payload;
-      state.isLoading = false;
+    builder.addCase(addPlusQuantity.pending, (state) => {
+      state.isUpdating = true;
     });
     builder.addCase(addPlusQuantity.fulfilled, (state, action) => {
       state.products = action.payload.products;
-      state.isLoading = false;
+      state.isUpdating = false;
     });
-    builder.addCase(addPlusQuantity.pending, (state) => {
-      state.isLoading = true;
+    builder.addCase(addPlusQuantity.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isUpdating = false;
     });
-    builder
-      .addCase(addMinusQuantity.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(addMinusQuantity.fulfilled, (state, action) => {
-        state.products = action.payload.products;
-        state.isLoading = false;
-      });
     builder.addCase(addMinusQuantity.pending, (state) => {
-      state.isLoading = true;
+      state.isUpdating = true;
+    });
+    builder.addCase(addMinusQuantity.fulfilled, (state, action) => {
+      state.products = action.payload.products;
+      state.isUpdating = false;
+    });
+    builder.addCase(addMinusQuantity.rejected, (state, action) => {
+      state.error = action.payload;
+      state.isUpdating = false;
     });
   },
 });
