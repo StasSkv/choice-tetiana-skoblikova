@@ -15,6 +15,7 @@ import { productsReducer } from './productsSlice/productsSlice.js';
 import { favoritesReducer } from './favoritesSlice/favoritesSlice.js';
 import { reviewsReducer } from './reviewsSlice/reviewsSlice.js';
 import { authReducer } from './authSlice/authSlice.js';
+import { orderReducer } from './orderSlice/orderSlice.js';
 
 const productsPersistConfig = {
   key: 'products',
@@ -40,7 +41,7 @@ const authPersistConfig = {
   key: 'auth',
   version: 1,
   storage,
-  blacklist: ['accessToken'],
+  blacklist: ['accessToken', 'user._id'],
 };
 
 export const store = configureStore({
@@ -50,6 +51,7 @@ export const store = configureStore({
     favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
     reviews: reviewsReducer,
     auth: persistReducer(authPersistConfig, authReducer),
+    order: orderReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

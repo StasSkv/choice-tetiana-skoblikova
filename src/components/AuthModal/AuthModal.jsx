@@ -123,7 +123,7 @@ export const AuthModal = ({ isOpen }) => {
                       className={s.authFormGroup}
                     >
                       <label className={s.authFormLabel} htmlFor="name">
-                        Ім'я
+                        Ім'я та прізвище
                       </label>
                       <Field className={s.authFormInput} id="name" name="name" type="text" />
                       <ErrorMessage name="name" component="span" className={s.error} />

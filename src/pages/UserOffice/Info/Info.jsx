@@ -1,6 +1,5 @@
 import s from './Info.module.css';
 import { FaPencil } from 'react-icons/fa6';
-import { FaPlus } from 'react-icons/fa6';
 import { selectUser } from '../../../redux/authSlice/authSelectors.js';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -63,20 +62,25 @@ export const Info = () => {
             <span>Пошта:</span>
             <p>{user?.email}</p>
           </li>
+          <li>
+            <span>Місто доставки:</span>
+            <p>{user?.deliveryOptions?.city}</p>
+          </li>
+          <li>
+            <span>Служба доставки:</span>
+            <p>{user?.deliveryOptions?.method}</p>
+          </li>
+          <li>
+            <span>Відділення:</span>
+            <p>{user?.deliveryOptions?.department}</p>
+          </li>
         </ul>
         <button className={s.edit} onClick={() => setOpenModal(true)}>
           <FaPencil />
           Редагувати дані
         </button>
       </div>
-      {/* <div className={s.userAdress}>
-          <button className={s.userAdressBtn}>
-            <span className={s.img}>
-              <FaPlus />
-            </span>
-            Додати адресу доставки
-          </button>
-      </div> */}
+
       <div className={clsx(s.modalWrap, openModal && s.modalWrapOpen)}>
         <Formik
           initialValues={initialValues}
@@ -86,7 +90,14 @@ export const Info = () => {
         >
           {({ values, resetForm }) => (
             <Form className={s.modalForm}>
-              <button className={s.closeBtn} type="button" onClick={() => {setOpenModal(false); resetForm()}}>
+              <button
+                className={s.closeBtn}
+                type="button"
+                onClick={() => {
+                  setOpenModal(false);
+                  resetForm();
+                }}
+              >
                 <TfiClose />
               </button>
               <div className={s.modalFormGroup}>

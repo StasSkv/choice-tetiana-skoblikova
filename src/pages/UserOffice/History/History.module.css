@@ -1,17 +1,93 @@
 .history {
-  background-color: var(--white);
-  padding: 32px;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  flex: 1;
-  width: 100%;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 24px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
 }
 
-.history p {
-    font-size: 18px;
-    color: var(--grey-text);
+.empty {
+  text-align: center;
+  color: var(--gray-text);
+  font-style: italic;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.historyItem {
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+
+.historyItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.orderTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.orderDate {
+  font-size: 14px;
+  color: #999;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.productItem {
+  font-size: 16px;
+  color: var(--main-text);
+  border-bottom: 1px dotted var(--main-text);
+  transition: transform 0.3s ease;
+
+}
+
+.productItem:hover {
+  transform: scale(1.01);
+}
+
+.productLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productName {
+  flex: 1;
+}
+
+.productQuantity {
+  width: 60px;
+  text-align: center;
+}
+
+.productPrice {
+  width: 80px;
+  text-align: right;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 16px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.totalPrice {
+  color: var(--accent);
 }

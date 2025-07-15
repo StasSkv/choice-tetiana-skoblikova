@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../axiosInstans.js';
-import { selectIsLoggedIn } from '../authSlice/authSelectors.js';
 
 export const createOrder = createAsyncThunk('orders', async (orderData, thunkAPI) => {
   try {
@@ -27,15 +26,14 @@ export const createOrderNotAuthorized = createAsyncThunk(
 
 export const getUserOrders = createAsyncThunk(
   'orders/getUserOrders',
-  async (_, { getState, rejectWithValue }) => {
-    const state = getState();
-    const isLoggedIn = selectIsLoggedIn(state);
+  async (_, thunkAPI) => {
     try {
-      if (!isLoggedIn) return rejectWithValue('Потрібно авторизуватися');
-      const response = await api.get('/orders/userOrders');
-      return response.data;
+      const response = await api.get('/orders/user-orders');
+      return response.data.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
+
+

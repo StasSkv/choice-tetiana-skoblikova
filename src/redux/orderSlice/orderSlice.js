@@ -4,7 +4,7 @@ import { createOrder, createOrderNotAuthorized, getUserOrders } from './orderOpe
 const orderSlice = createSlice({
   name: 'order',
   initialState: {
-    orders: [],
+    orders: null,
     currentOrder: null,
     isLoading: false,
     error: null,
@@ -39,7 +39,7 @@ const orderSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(getUserOrders.fulfilled, (state, action) => {
-      state.orders = action.payload.data.orders;
+      state.orders = action.payload;
       state.isLoading = false;
     })
     .addCase(getUserOrders.rejected, (state, action) => {

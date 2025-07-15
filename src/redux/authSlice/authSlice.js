@@ -6,6 +6,7 @@ import {
   registerUser,
   refreshSession,
   updateUser,
+  checkSession,
 } from './authOperations.js';
 
 const initialState = {
@@ -120,6 +121,15 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(checkSession.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkSession.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(checkSession.rejected, (state) => {
         state.isLoading = false;
       }),
 });

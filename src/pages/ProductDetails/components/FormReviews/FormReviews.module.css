@@ -59,12 +59,6 @@
   transition: border 0.3s, box-shadow 0.3s;
 }
 
-.textarea:focus {
-  outline: none;
-  border-color: #8bc34a;
-  box-shadow: 0 0 6px rgba(139, 195, 74, 0.4);
-}
-
 .input[readonly] {
   background-color: #f9f9f9;
   color: #333;
@@ -75,6 +69,7 @@
 .textarea {
   resize: none;
   min-height: 150px;
+  outline: none;
 }
 
 .ratingBlock {

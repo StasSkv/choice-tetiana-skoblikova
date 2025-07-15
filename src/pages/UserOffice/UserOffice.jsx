@@ -7,11 +7,29 @@ import { motion } from 'framer-motion';
 import { selectAllProducts } from '../../redux/productsSlice/productsSelectors.js';
 import { History } from './History/History.jsx';
 import { Reviews } from './Reviews/Reviews.jsx';
-import { selectUser } from '../../redux/authSlice/authSelectors.js';
+import { selectIsLoading, selectUser } from '../../redux/authSlice/authSelectors.js';
+import { useDispatch } from 'react-redux';
+import { getUserOrders } from '../../redux/orderSlice/orderOperation.js';
+import { useEffect } from 'react';
+import { selectUserOrders } from '../../redux/orderSlice/orderSelectors.js';
+import { selectUserReviews } from '../../redux/reviewsSlice/reviewsSelectors.js';
+import { fetchReviewsByUserId } from '../../redux/reviewsSlice/reviewsOperations.js';
 
 const UserOffice = () => {
   const products = useSelector(selectAllProducts);
   const user = useSelector(selectUser);
+  const isLoadingSession = useSelector(selectIsLoading);
+  const orders = useSelector(selectUserOrders);
+  const reviews = useSelector(selectUserReviews);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isLoadingSession) {
+      dispatch(getUserOrders());
+      dispatch(fetchReviewsByUserId());
+    }
+  }, [dispatch, isLoadingSession]);
 
   return (
     <motion.div
@@ -32,11 +50,11 @@ const UserOffice = () => {
         </div>
         <div id="history" className={s.history}>
           <h2>Історія замовлень</h2>
-          <History />
+          <History orders={orders} />
         </div>
         <div id="reviews" className={s.reviews}>
           <h2>Мої відгуки</h2>
-          <Reviews />
+          <Reviews reviews={reviews} />
         </div>
         <div id="favorites" className={s.favorites}>
           <h2>Улюбленні</h2>
