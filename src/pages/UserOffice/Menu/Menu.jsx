@@ -25,11 +25,6 @@ export const Menu = () => {
             Улюблені товари
           </a>
         </li>
-        <li>
-          <a href="#viewed" className={s.menuLink}>
-            Нещодавно переглянуті
-          </a>
-        </li>
       </ul>
     </nav>
   );

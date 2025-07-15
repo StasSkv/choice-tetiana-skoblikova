@@ -18,7 +18,7 @@ import { selectIsLoggedIn, selectUser } from '../../../../redux/authSlice/authSe
 import { setLoginModalIsOpen } from '../../../../redux/authSlice/authSlice.js';
 import { toast } from 'react-toastify';
 
-export const FormReviews = () => {
+export const FormReviews = ({ product }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -76,7 +76,8 @@ export const FormReviews = () => {
           <h2 className={s.title}>Залишити відгук</h2>
           <Formik
             initialValues={{
-              productId: id,
+              productId: product._id,
+              productName: product.name,
               userName: user?.name || '',
               comment: '',
               rating: 0,

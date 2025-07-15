@@ -18,7 +18,6 @@
 
 .reviewItem {
   background-color: var(--white);
-  border: 1px solid #e3e3e3;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);

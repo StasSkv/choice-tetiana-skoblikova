@@ -43,7 +43,7 @@ const ProductDetails = () => {
     return url.replace('/upload/', `/upload/${params}/`);
   };
 
-  return product ? (
+  return product && (
     <motion.div
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
@@ -92,7 +92,7 @@ const ProductDetails = () => {
 
         <section>
           <div className={clsx('container', s.productContainer)}>
-            <FormReviews product={product._id} />
+            <FormReviews product={product} />
           </div>
         </section>
 
@@ -104,8 +104,6 @@ const ProductDetails = () => {
         </section>
       </>
     </motion.div>
-  ) : (
-    <div>Loading...</div>
   );
 };
 

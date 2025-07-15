@@ -3,17 +3,16 @@ import { FaStar, FaRegStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export const Reviews = ({ reviews }) => {
-  if (!reviews || reviews.length === 0) {
-    return <p className={s.empty}>Ви ще не залишали відгуків</p>;
-  }
-
   return (
     <div className={s.reviews}>
-      <ul className={s.reviewList}>
-        {reviews.map((review) => (
-          <li key={review._id} className={s.reviewItem}>
-            <div className={s.reviewHeader}>
-              <h3 className={s.reviewName}>{review.userName}</h3>
+      {!reviews || reviews.length === 0 ? (
+        <p className={s.empty}>Ви ще не залишали відгуків</p>
+      ) : (
+        <ul className={s.reviewList}>
+          {reviews.map((review) => (
+            <li key={review._id} className={s.reviewItem}>
+              <div className={s.reviewHeader}>
+              <h3 className={s.reviewName}>{review.productName}</h3>
               <p className={s.reviewDate}>
                 {new Date(review.createdAt).toLocaleString('uk-UA', {
                   day: '2-digit',
@@ -40,9 +39,10 @@ export const Reviews = ({ reviews }) => {
             </div>
 
             <p className={s.comment}>{review.comment}</p>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

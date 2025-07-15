@@ -16,37 +16,48 @@ import {
   addMinusQuantityLocal,
   addPlusQuantityLocal,
 } from '../../redux/cartSlice/cartSlice.js';
+import { useState } from 'react';
 
 export const Cart = ({ onClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [updatingProductId, setUpdatingProductId] = useState(null);
+  const [isRemovingProduct, setIsRemovingProduct] = useState(null);
   const products = useSelector(selectCartProducts);
 
-  const handleClickClearCart = () => {
+  const handleClickClearCart = async() => {
     dispatch(clearCartLocal());
     dispatch(clearCart());
     toast.warning('Кошик очищенно');
   };
 
-  const handleClickDeleteProduct = (productId) => {
+  const handleClickDeleteProduct = async (productId) => {
+    setIsRemovingProduct(productId);
     dispatch(deleteProductFromCartLocal(productId));
-    dispatch(deleteProductFromCart(productId));
+    await dispatch(deleteProductFromCart(productId));
     toast.warning('Товар видалено з кошику');
+    setIsRemovingProduct(null);
   };
 
-  const handlePlusQuantity = (product) => {
+  const handlePlusQuantity = async (product) => {
+    setUpdatingProductId(product.productId);
     dispatch(addPlusQuantityLocal(product.productId));
-    dispatch(addPlusQuantity({ productId: product.productId, quantity: product.quantity + 1 }));
+    await dispatch(
+      addPlusQuantity({ productId: product.productId, quantity: product.quantity + 1 })
+    );
+    setUpdatingProductId(null);
   };
 
-  const handleMinusQuantity = (product) => {
+  const handleMinusQuantity = async (product) => {
+    setUpdatingProductId(product.productId);
     dispatch(addMinusQuantityLocal(product.productId));
-    dispatch(
+    await dispatch(
       addMinusQuantity({
         productId: product.productId,
         quantity: product.quantity - 1,
       })
     );
+    setUpdatingProductId(null);
   };
 
   const handleCardClick = (e, id) => {
@@ -118,7 +129,11 @@ export const Cart = ({ onClose }) => {
                   >
                     <span></span>
                   </button>
-                  <p>{product.quantity}</p>
+                  {updatingProductId === product.productId ? (
+                    <div className={s.spinner}></div>
+                  ) : (
+                    <p>{product.quantity}</p>
+                  )}
 
                   <button className={s.plus} onClick={() => handlePlusQuantity(product)}>
                     +
@@ -131,7 +146,11 @@ export const Cart = ({ onClose }) => {
                     handleClickDeleteProduct(product.productId);
                   }}
                 >
-                  {<MdOutlineDeleteOutline />}
+                  {isRemovingProduct === product.productId ? (
+                    <div className={s.spinner}></div>
+                  ) : (
+                    <MdOutlineDeleteOutline />
+                  )}
                 </button>
               </div>
             </li>

@@ -6,9 +6,11 @@ import { NavLink } from 'react-router-dom';
 import ProductsList from '../../components/ProductList/ProductList.jsx';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import { selectIsFavoritesLoading } from '../../redux/favoritesSlice/favoritesSelectors.js';
 
 const Favorites = () => {
   const favoritesProducts = useSelector(selectFavoritesProducts);
+  const isFavoritesLoading = useSelector(selectIsFavoritesLoading);
 
   return (
     <motion.div
@@ -20,7 +22,10 @@ const Favorites = () => {
       <>
         <section className={s.favorites}>
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
-            <h2 className={s.subtitle}>Улюблені товари</h2>
+            <div className={s.favoritesHeader}>
+              <h2 className={s.subtitle}>Улюблені товари</h2>
+              {isFavoritesLoading && <div className={s.spinner}></div>}
+            </div>
 
             {favoritesProducts.length > 0 ? (
               <div className={s.list}>

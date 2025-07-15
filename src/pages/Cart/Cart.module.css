@@ -110,6 +110,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
+  cursor: auto;
+  margin-right: 20px;
 }
 
 .quantityPrice {
@@ -117,6 +119,8 @@
   font-size: 18px;
   font-weight: 600;
   min-width: 110px;
+  cursor: auto;
+  margin-right: 20px;
 }
 
 .plus {
@@ -125,8 +129,9 @@
 .plus,
 .minus {
   padding: 0;
-  width: 15px;
-  height: 15px;
+  width: 30px;
+  height: 30px;
+  padding: 8px;
   border: none;
   background-color: transparent;
   font-size: 24px;
@@ -148,14 +153,14 @@
 }
 
 .deleteBtn {
-  padding: 0;
   display: flex;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-color: transparent;
   font-size: 24px;
   border: none;
+  padding: 5px;
   transition: color 0.3s ease;
 }
 
@@ -165,7 +170,6 @@
 
 .options {
   display: flex;
-  gap: 20px;
   align-items: center;
   margin-left: auto;
 }
@@ -182,6 +186,18 @@
   padding: 50px;
 }
 
-.isUpdating {
-  cursor: progress;
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

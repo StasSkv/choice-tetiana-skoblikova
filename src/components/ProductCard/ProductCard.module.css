@@ -68,6 +68,7 @@
   color: var(--main-text);
   cursor: pointer;
   min-height: 58px;
+  min-width: 201px;
 }
 
 .brief {

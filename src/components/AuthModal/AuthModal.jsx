@@ -83,7 +83,7 @@ export const AuthModal = ({ isOpen }) => {
         <TfiClose />
       </button>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className={s.loading}>Вхід...</div>
       ) : (
         <Formik
           initialValues={initialValues}
