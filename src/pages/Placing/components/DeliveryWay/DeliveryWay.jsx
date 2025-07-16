@@ -6,7 +6,7 @@ export const DeliveryWay = () => {
   const novaPoshtaId = useId();
   const ukrposhtaId = useId();
   const selfPickupId = useId();
-
+ 
   return (
     <div className={s.deliveryOptions}>
       <h4 className={s.title}>Спосіб доставки</h4>
@@ -15,7 +15,7 @@ export const DeliveryWay = () => {
           id={novaPoshtaId}
           type="radio"
           name="delivery"
-          value="Nova_Poshta"
+          value="nova_poshta"
           className={s.radioInput}
         />
         <span className={s.customRadio}></span>
@@ -27,7 +27,7 @@ export const DeliveryWay = () => {
           id={ukrposhtaId}
           type="radio"
           name="delivery"
-          value="Ukrposhta"
+          value="ukrposhta"
           className={s.radioInput}
         />
         <span className={s.customRadio}></span>
@@ -39,7 +39,7 @@ export const DeliveryWay = () => {
           id={selfPickupId}
           type="radio"
           name="delivery"
-          value="Self"
+          value="self_pickup"
           className={s.radioInput}
         />
         <span className={s.customRadio}></span>

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import s from './UserWindow.module.css';
 import { IoExitOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
@@ -16,7 +16,7 @@ export const UserWindow = ({ onClose }) => {
   const user = useSelector(selectUser);
   const navLinkStyle = ({ isActive }) => (isActive ? `${s.link} ${s.active}` : s.link);
   const [animationClass, setAnimationClass] = useState(s.modalOpen);
-
+  const navigate = useNavigate();
   const handleClose = () => {
     setAnimationClass(s.modalClose);
   };
@@ -32,6 +32,7 @@ export const UserWindow = ({ onClose }) => {
 
   const handleLogout = async () => {
     await dispatch(logoutUser()).unwrap();
+    navigate('/');
     toast.warning('Ви успішно вийшли з аккаунту');
     onClose();
   };

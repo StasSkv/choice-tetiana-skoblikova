@@ -12,14 +12,14 @@ import { toast } from 'react-toastify';
 import { translateErrorMessage } from './translateErrorMessage.js';
 import { validationSchema } from './validationSchema.js';
 import { formatPhoneNumber } from './formatedPhone.js';
-import { getCurrentUser } from '../../redux/authSlice/authOperations.js';
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
 export const AuthModal = ({ isOpen }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -53,10 +53,11 @@ export const AuthModal = ({ isOpen }) => {
     try {
       if (values.authType === 'register') {
         await dispatch(registerUser(userData)).unwrap();
+        navigate('/office');
         toast.success('Ви успішно зареєструвалися та увійшли в аккаунт');
       } else {
         await dispatch(loginUser({ phone: userData.phone, password: userData.password })).unwrap();
-        await dispatch(getCurrentUser()).unwrap();
+        navigate('/office');
         toast.success('Ви успішно увійшли в аккаунт');
       }
       dispatch(setLoginModalIsOpen(false));

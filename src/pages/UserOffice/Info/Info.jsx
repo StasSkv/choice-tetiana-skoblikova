@@ -11,6 +11,7 @@ import { updateUser } from '../../../redux/authSlice/authOperations.js';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { validationSchema } from './validationSchema.js';
+import { removeEmptyStrings } from './removeEmptyStrings.js';
 
 export const Info = () => {
   const user = useSelector(selectUser);
@@ -22,34 +23,36 @@ export const Info = () => {
       name: values.name,
       phone: values.phone,
       email: values.email,
-      birthDate: values.birthDate,
+      dateOfBirth: values.dateOfBirth,
       deliveryOption: {
         city: values.deliveryOptionCity,
         method: values.deliveryOptionMethod,
         department: values.deliveryOptionDepartment,
       },
     };
-    await dispatch(updateUser(data));
-    console.log(data);
-    if (dispatch.fulfilled) {
+
+    const cleanedData = removeEmptyStrings(data);
+    const result = await dispatch(updateUser(cleanedData));
+
+    if (updateUser.fulfilled.match(result)) {
       toast.success('Дані успішно оновлені');
+      setOpenModal(false);
     } else {
       toast.error('Не вдалося оновити дані');
     }
-    setOpenModal(false);
   };
 
   const initialValues = {
     name: user?.name,
     phone: user?.phone,
     email: user?.email || '',
-    birthDate: user?.birthDate || '',
+    dateOfBirth: user?.dateOfBirth || '',
     deliveryOptionCity: user?.deliveryOption?.city || '',
     deliveryOptionMethod: user?.deliveryOption?.method || '',
     deliveryOptionDepartment: user?.deliveryOption?.department || '',
   };
 
-  return (
+  return !user ? null : (
     <div className={`container ${s.infoContainer}`}>
       <div className={s.userInfo}>
         <ul>
@@ -63,7 +66,7 @@ export const Info = () => {
           </li>
           <li>
             <span>Дата народження:</span>
-            <p>{user?.birthDate || 'Не вказано'}</p>
+            <p>{user?.dateOfBirth || 'Не вказано'}</p>
           </li>
           <li>
             <span>E-mail:</span>
@@ -92,7 +95,7 @@ export const Info = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          enableReinitialize={false}
+          enableReinitialize={true}
           onSubmit={handleSubmit}
         >
           {({ values, resetForm }) => (
@@ -140,12 +143,12 @@ export const Info = () => {
                 </label>
                 <Field
                   type="date"
-                  id="birthDate"
-                  name="birthDate"
+                  id="dateOfBirth"
+                  name="dateOfBirth"
                   placeholder="Дата народження"
                   className={s.modalFormInput}
                 />
-                <ErrorMessage name="birthDate" component="span" className={s.error} />
+                <ErrorMessage name="dateOfBirth" component="span" className={s.error} />
               </div>
               <div className={s.modalFormGroup}>
                 <label htmlFor="email" className={s.modalFormLabel}>
@@ -202,7 +205,11 @@ export const Info = () => {
                   placeholder="Відділення"
                   className={s.modalFormInput}
                 />
-                <ErrorMessage name="deliveryOptionDepartment" component="span" className={s.error} />
+                <ErrorMessage
+                  name="deliveryOptionDepartment"
+                  component="span"
+                  className={s.error}
+                />
               </div>
               <button type="submit" className={s.modalFormButton}>
                 Зберегти

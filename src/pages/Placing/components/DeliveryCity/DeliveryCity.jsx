@@ -13,7 +13,6 @@ export const DeliveryCity = () => {
   const recipientOtherFieldId = useId();
 
   const { values } = useFormikContext();
-
   return (
     <div className={s.deliveryCityWrap}>
       <div className={s.recipient}>

@@ -10,22 +10,7 @@ import {
 } from './authOperations.js';
 
 const initialState = {
-  user: {
-    name: null,
-    phone: null,
-    email: null,
-    deliveryOption: {
-      method: '',
-      city: '',
-      department: '',
-    },
-    paymentOption: {
-      method: '',
-      cardNumber: '',
-      cardExpiration: '',
-    },
-    createdAt: '',
-  },
+  user: null,
   isRegister: false,
   isLoggedIn: false,
   isLoggingOut: false,
@@ -65,6 +50,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.accessToken = action.payload.data.accessToken;
+        state.user = action.payload.data.user;
         state.isLoggedIn = true;
         state.isRegister = true;
         state.isLoading = false;
@@ -115,9 +101,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.user.name = action.payload.data.user.name;
-        state.user.phone = action.payload.data.user.phone;
-        state.user.email = action.payload.data.user.email;
+        state.user = action.payload.data;
         state.isLoading = false;
       })
       .addCase(updateUser.rejected, (state) => {

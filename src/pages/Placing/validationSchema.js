@@ -26,7 +26,7 @@ export const validationSchema = Yup.object({
   }),
 
   delivery: Yup.string()
-    .oneOf(['Nova_Poshta', 'Ukrposhta', 'Self'], 'Оберіть спосіб доставки')
+    .oneOf(['nova_poshta', 'ukrposhta', 'self_pickup'], 'Оберіть спосіб доставки')
     .required('Оберіть спосіб доставки'),
   city: Yup.string().required('Введіть місто'),
   department: Yup.string().required('Введіть відділення'),

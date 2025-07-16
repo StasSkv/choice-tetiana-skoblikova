@@ -91,7 +91,8 @@ export const refreshSession = createAsyncThunk('auth/refresh', async (_, { rejec
 
 export const updateUser = createAsyncThunk('auth/updateUser', async (dataUser, { rejectWithValue }) => {
   try {
-    const response = await api.patch('/auth/updateUser', dataUser);
+    const response = await api.patch('/auth/update-user', dataUser);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);
