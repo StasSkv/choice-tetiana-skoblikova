@@ -12,6 +12,7 @@ export const Options = ({ info }) => {
     recommendations: 'РЕКОМЕНДАЦІЇ',
     composition: 'СКЛАД',
     reservation: 'ЗАСТЕРЕЖЕННЯ',
+    contraindication: 'ПРОТИПОКАЗАННЯ',
     notСontain: 'НЕ МІСТИТЬ',
   };
 

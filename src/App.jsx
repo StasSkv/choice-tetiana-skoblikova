@@ -62,12 +62,12 @@ const App = () => {
     init();
   }, [dispatch, isLoggedIn, isLoggingOut]);
 
-  const name = 'Фітомус для вмивання';
+  // const name = 'Фітомус для вмивання';
 
-  const imgName = 'PHYTOMOUSS FOR WASHING';
+  // const imgName = 'PHYTOMOUSS FOR WASHING';
 
-  console.log(name.toUpperCase());
-  console.log(imgName.toLowerCase().split(' ').join('-'));
+  // console.log(name.toUpperCase());
+  // console.log(imgName.toLowerCase().split(' ').join('-'));
 
   return (
     <>

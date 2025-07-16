@@ -17,7 +17,7 @@ export const Recipient = () => {
             id={recipientNameFieldId}
             type="text"
             name="recipientName"
-            placeholder="Введіть ваше ім'я..."
+            placeholder="Введіть ім'я та прізвище..."
             className={s.input}
           />
      </div>
@@ -30,7 +30,7 @@ export const Recipient = () => {
           id={recipientPhoneFieldId}
           type="text"
           name="recipientPhone"
-          placeholder="Введіть ваш телефон..."
+          placeholder="Введіть номер телефону..."
           className={s.input}
         />
       </div>
