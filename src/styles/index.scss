@@ -1,11 +1,13 @@
+@use './variables.scss' as *;
+
 :root {
-  --font-family: 'Montserrat', sans-serif;
-  --background: #f4f4f4;
-  --white: #fff;
-  --accent: #008000;
-  --main-text: #1e293b;
-  --grey-text: #8f8f8f;
-  --error: #f44336;
+  --font-family: #{$font-family};
+  --background: #{$background};
+  --white: #{$white};
+  --accent: #{$accent};
+  --main-text: #{$main-text};
+  --grey-text: #{$grey-text};
+  --error: #{$error};
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,9 +21,6 @@ html {
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--background);
-  color: var(--main-text);
   display: flex;
   flex-direction: column;
   min-width: 100%;
@@ -31,7 +30,7 @@ body {
 
 main {
   flex-grow: 1;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 h1,
@@ -75,20 +74,21 @@ img {
   max-width: 375px;
   margin: 0 auto;
   padding: 0 8px;
-}
 
-@media only screen and (min-width: 768px) {
-  .container {
+  @media only screen and (min-width: 768px) {
     max-width: 768px;
     padding: 0 16px;
   }
-}
 
-@media only screen and (min-width: 1200px) {
-  .container {
+  @media only screen and (min-width: 1200px) {
     max-width: 1280px;
     padding: 0 12px;
   }
+
+  // @media only screen and (min-width: 1440px) {
+  //   max-width: 1440px;
+  //   padding: 0 12px;
+  // }
 }
 
 .swiper {
@@ -97,8 +97,8 @@ img {
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  color: var(--white);
-  background-color: var(--accent);
+  color: $white;
+  background-color: $accent;
   width: 30px;
   height: 30px;
   padding: 30px;

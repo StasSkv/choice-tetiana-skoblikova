@@ -2,7 +2,7 @@
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 24px;
-  color: var(--main-text);
+  color: $main-text;
 }
 
 .descriptions {
@@ -12,32 +12,30 @@
 }
 
 .item {
-  border-bottom: 1px solid var(--accent);
+  border-bottom: 1px solid $accent;
 }
 
 .header {
+  @include flex(row, space-between, center);
   width: 100%;
   text-align: left;
   background: none;
   border: none;
   font-size: 18px;
   font-weight: 500;
-  color: #0f172a;
+  color: $main-text;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .icon {
   padding: 10px;
-  transition: transform 0.3s ease;
   font-size: 28px;
-  color: var(--accent);
+  color: $accent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transform-origin: center;
+  @include transition(transform, 0.4s, ease);
 }
 
 .contentWrapper {
@@ -60,16 +58,14 @@
 }
 
 .content p {
-  color: #334155;
+  color: $main-text;
   font-size: 16px;
   margin: 0;
   line-height: 1.5;
 }
 
 .content ul {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  @include flex(column, null, null, 8px);
 }
 
 @keyframes fadeIn {

@@ -1,4 +1,4 @@
-import s from './ProductCard.module.css';
+import s from './ProductCard.module.scss';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ import { selectFavoritesIds } from '../../redux/favoritesSlice/favoritesSelector
 
 const ProductCard = ({ product, isFavoritesPage = false }) => {
   const favoritesProducts = useSelector(selectFavoritesIds);
-  const productsInCart = useSelector(selectProductsIds);  
+  const productsInCart = useSelector(selectProductsIds);
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
 
@@ -27,9 +27,9 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
     navigate(`/products/${product._id}`);
   };
 
-   const addCloudinaryParams = (url, params) => {
-     return url.replace('/upload/', `/upload/${params}/`);
-   };
+  const addCloudinaryParams = (url, params) => {
+    return url.replace('/upload/', `/upload/${params}/`);
+  };
 
   return (
     <div className={clsx(s.productCard, isRemoving && s.removing)} onClick={handleCardClick}>
@@ -39,18 +39,18 @@ const ProductCard = ({ product, isFavoritesPage = false }) => {
         favoritesProducts && <LikeButton isLoved={isInFavorite} id={product._id} />
       )}
 
-    <div className={s.productImageWrap}>
+      <div className={s.productImageWrap}>
         <img
           src={addCloudinaryParams(product.imgS, 'q_auto,f_auto,c_fill,g_auto,h_137')}
           alt={product.name}
           className={s.productImage}
           loading="lazy"
         />
-    </div>
+      </div>
       <div className={s.descriptionWrap}>
         <p className={s.name}>{product.name}</p>
         <div className={s.textAndOptions}>
-          <div>
+          <div className={s.textAndRating}>
             <p className={clsx(s.brief, { [s.textIsInCart]: isInCart })}>{product.brief}</p>
             <div className={clsx('rating', s.rating, { [s.ratingIsInCart]: isInCart })}>
               <RatingReviews value={product.averageRating} />

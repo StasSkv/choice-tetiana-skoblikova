@@ -1,5 +1,5 @@
 import { Navigation } from '../Navigation/Navigation';
-import s from './AppBar.module.css';
+import s from './AppBar.module.scss';
 import logo from '../../assets/images/tetiana-logo.png';
 
 export const AppBar = () => {
@@ -13,6 +13,7 @@ export const AppBar = () => {
         </div>
         <Navigation />
       </div>
+ 
     </header>
   );
 };

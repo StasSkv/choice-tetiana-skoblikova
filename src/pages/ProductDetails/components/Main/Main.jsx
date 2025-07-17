@@ -1,4 +1,4 @@
-import s from './Main.module.css';
+import s from './Main.module.scss';
 import clsx from 'clsx';
 import { BsCart4 } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';

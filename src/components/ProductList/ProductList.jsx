@@ -1,5 +1,5 @@
 import ProductCard from '../ProductCard/ProductCard.jsx';
-import s from './ProductList.module.css';
+import s from './ProductList.module.scss';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilters } from '../../redux/productsSlice/productsSelectors.js';

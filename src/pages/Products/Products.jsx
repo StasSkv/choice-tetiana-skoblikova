@@ -1,4 +1,4 @@
-import s from './Products.module.css';
+import s from './Products.module.scss';
 import ProductsList from '../../components/ProductList/ProductList.jsx';
 import { Catalog } from '../../components/Catalog/Catalog.jsx';
 import { motion } from 'framer-motion';
@@ -11,6 +11,7 @@ import {
 import { useEffect } from 'react';
 import { fetchProducts } from '../../redux/productsSlice/productsOperations.js';
 import { useSearchParams } from 'react-router-dom';
+import AboutBrandNav from '../../components/AboutBrandNav/AboutBrandNav.jsx';
 // import { setFilters } from '../../redux/productsSlice/productsSlice.js';
 
 const Products = () => {
@@ -51,6 +52,19 @@ const Products = () => {
       exit={{ opacity: 0, x: 50 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
     >
+      <div className={s.runningLine}>
+        <p>Безкоштовна доставка при замовленні від 1000 грн</p>
+        <p>Безкоштовна доставка при замовленні від 1000 грн</p>
+        <p>Безкоштовна доставка при замовленні від 1000 грн</p>
+        <p>Безкоштовна доставка при замовленні від 1000 грн</p>
+        <p>Безкоштовна доставка при замовленні від 1000 грн</p>
+      </div>
+
+      <section className={s.aboutBrandNav}>
+        <div className="container">
+          <AboutBrandNav />
+        </div>
+      </section>
       <section className={s.products}>
         <div className="container">
           <h2 className={s.subtitle}>Каталог товарів</h2>

@@ -1,4 +1,4 @@
-import s from './Catalog.module.css';
+import s from './Catalog.module.scss';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,9 +26,9 @@ export const Catalog = () => {
   const dispatch = useDispatch();
   const params = useSelector(selectFilters);
   const [checkedCategories, setCheckedCategories] = useState(params.category);
-const [checkedSort, setCheckedSort] = useState(
-  params.sortBy && params.sortOrder ? `${params.sortBy}-${params.sortOrder}` : ''
-);
+  const [checkedSort, setCheckedSort] = useState(
+    params.sortBy && params.sortOrder ? `${params.sortBy}-${params.sortOrder}` : ''
+  );
 
   const handleChangeCategories = (value) => {
     dispatch(setFilters({ category: value, page: 1 }));
@@ -81,7 +81,7 @@ const [checkedSort, setCheckedSort] = useState(
                 <label className={`${s.label} ${checkedSort === sortKey ? s.active : ''}`}>
                   <input
                     type="checkbox"
-                    className={s.checkbox}  
+                    className={s.checkbox}
                     checked={checkedSort === sortKey}
                     onChange={() => handleChangeSort(sortBy, sortOrder)}
                   />

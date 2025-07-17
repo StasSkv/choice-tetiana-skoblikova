@@ -1,0 +1,15 @@
+.aboutBrandNav {
+  background-color: $accent;
+  ul {
+    @include flex(row, space-around, center, 24px);
+  }
+  img {
+    width: 150px;
+    color: black;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+  .aboutBrandNavImageGreenMax {
+    width: 80px;
+  }
+}

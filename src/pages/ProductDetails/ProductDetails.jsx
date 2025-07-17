@@ -1,4 +1,4 @@
-import s from './ProductDetails.module.css';
+import s from './ProductDetails.module.scss';
 import clsx from 'clsx';
 
 import { Options } from './components/Options/Options.jsx';
@@ -22,6 +22,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const product = useSelector(selectProductById);
   const [openModal, setOpenModal] = useState(false);
+console.log(product);
 
   useEffect(() => {
     dispatch(fetchProductById(id));
@@ -72,7 +73,7 @@ const ProductDetails = () => {
           </div>
         </section>
 
-        <section>
+        <section className={s.infoSection}>
           <div className={clsx('container', s.productContainer)}>
             {product.description && (
               <InfoSwitcher
@@ -90,13 +91,13 @@ const ProductDetails = () => {
           </div>
         </section>
 
-        <section>
+        <section className={s.reviewsSection}>
           <div className={clsx('container', s.productContainer)}>
             <FormReviews product={product} />
           </div>
         </section>
 
-        <section>
+        <section className={s.swiperSection}>
           <div className={clsx('container', s.productContainer, s.mySwiper)}>
             <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
             {/* {product && <MySwiper products={product} />} */}

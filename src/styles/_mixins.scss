@@ -1,0 +1,60 @@
+@use "sass:list";
+
+@mixin container(
+  $min-width: 320px,
+  $max-width-mobile: 375px,
+  $max-width-md: 768px,
+  $max-width-lg: 1280px,
+  $padding-mobile: 8px,
+  $padding-md: 16px,
+  $padding-lg: 12px
+) {
+  min-width: $min-width;
+  max-width: $max-width-mobile;
+  margin: 0 auto;
+  padding: 0 $padding-mobile;
+
+  @media only screen and (min-width: 768px) {
+    max-width: $max-width-md;
+    padding: 0 $padding-md;
+  }
+
+  @media only screen and (min-width: 1200px) {
+    max-width: $max-width-lg;
+    padding: 0 $padding-lg;
+  }
+}
+
+@mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin transition($properties, $duration: 0.3s, $timing: ease) {
+  $result: ();
+  @each $prop in $properties {
+    $result: list.append($result, "#{$prop} #{$duration} #{$timing}", comma);
+  }
+  transition: #{list.join($result, ', ')};
+}
+
+@mixin absolute-position($bottom: null, $right: null, $top: null, $left: null, $z-index: 0) {
+  position: absolute;
+  z-index: $z-index;
+  @if $bottom != null {
+    bottom: $bottom;
+  }
+  @if $right != null {
+    right: $right;
+  }
+  @if $top != null {
+    top: $top;
+  }
+  @if $left != null {
+    left: $left;
+  }
+}
+

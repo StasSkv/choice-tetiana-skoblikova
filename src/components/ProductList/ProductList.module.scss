@@ -1,12 +1,11 @@
 .productList {
-  display: flex;
+  @include flex(row, center, center, 20px);
   flex-wrap: wrap;
-  gap: 20px;
 }
 
 .productListWrap {
   opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 0.5s ease forwards 0.3s;
 }
 
 @keyframes fadeIn {
@@ -25,7 +24,7 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   opacity: 0;
-  animation: fadeInCard 0.5s ease forwards;
+  animation: fadeInCard 0.5s ease forwards 0.3s;
 }
 
 @keyframes fadeInCard {
@@ -40,14 +39,11 @@
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+  @include flex(row, center, center, 8px);
   padding: 20px 0;
   list-style: none;
   opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
-  animation-delay: 0.3s;
+  animation: fadeIn 0.5s ease forwards 0.3s;
 }
 
 .page {
@@ -55,7 +51,7 @@
   border-radius: 8px;
   background-color: #f2f2f2;
   cursor: pointer;
-  transition: background 0.3s ease;
+  @include transition(background);
 }
 
 .page:hover {
@@ -63,7 +59,7 @@
 }
 
 .active {
-  background-color: var(--accent);
+  background-color: $accent;
   color: white;
   font-weight: bold;
 }

@@ -1,6 +1,8 @@
+import s from './Options.module.scss';
 import { useEffect, useRef, useState } from 'react';
-import s from './Options.module.css';
 import { IoIosArrowDropdown } from 'react-icons/io';
+import { array } from 'yup';
+import { Fragment } from 'react';
 
 export const Options = ({ info }) => {
   const [openIndexes, setOpenIndexes] = useState([]);
@@ -14,6 +16,9 @@ export const Options = ({ info }) => {
     reservation: 'ЗАСТЕРЕЖЕННЯ',
     contraindication: 'ПРОТИПОКАЗАННЯ',
     notСontain: 'НЕ МІСТИТЬ',
+    properties: 'ВЛАСТИВОСТІ',
+    termOfTheCondition: 'ТЕРМІН ЗБЕРІГАННЯ, УМОВИ ЗБЕРІГАННЯ',
+    advice: 'ПОРАДИ',
   };
 
   const toggle = (index) => {
@@ -37,28 +42,30 @@ export const Options = ({ info }) => {
     <div className={s.container}>
       <h3 className={s.title}>Інформація про продукт</h3>
       <ul className={s.descriptions}>
-        <li className={s.item}>
-          <button className={s.header} onClick={() => toggle(0)}>
-            {titles[first.name] || 'ДІЯ АКТИВНИХ КОМПОНЕНТІВ'}
-            <span className={`${s.icon} ${openIndexes.includes(0) ? s.openIcon : ''}`}>
-              <IoIosArrowDropdown />
-            </span>
-          </button>
-          <div ref={(el) => (contentRefs.current[0] = el)} className={s.contentWrapper}>
-            <div className={s.content}>
-              <ul>
-                {first.actions.map((action, i) => (
-                  <li key={i}>
-                    <p>
-                      <strong>{action.name}</strong>
-                    </p>
-                    <p>{action.desc}</p>
-                  </li>
-                ))}
-              </ul>
+        {info[0] === array && (
+          <li className={s.item}>
+            <button className={s.header} onClick={() => toggle(0)}>
+              {titles[first.name] || 'ДІЯ АКТИВНИХ КОМПОНЕНТІВ'}
+              <span className={`${s.icon} ${openIndexes.includes(0) ? s.openIcon : ''}`}>
+                <IoIosArrowDropdown />
+              </span>
+            </button>
+            <div ref={(el) => (contentRefs.current[0] = el)} className={s.contentWrapper}>
+              <div className={s.content}>
+                <ul>
+                  {first.actions.map((action, i) => (
+                    <li key={i}>
+                      <p>
+                        <strong>{action.name}</strong>
+                      </p>
+                      <p>{action.desc}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        )}
 
         {rest.map((item, i) => {
           const realIndex = i + 1;
@@ -72,7 +79,18 @@ export const Options = ({ info }) => {
               </button>
               <div ref={(el) => (contentRefs.current[realIndex] = el)} className={s.contentWrapper}>
                 <div className={s.content}>
-                  <p>{item.desc}</p>
+                  <p>
+                    {item.desc
+                      .replace(/\\n/g, '\n')
+                      .replace(/\\/g, '')
+                      .split('\n')
+                      .map((line, idx) => (
+                        <Fragment key={idx}>
+                          {line}
+                          <br />
+                        </Fragment>
+                      ))}
+                  </p>
                 </div>
               </div>
             </li>
