@@ -20,11 +20,11 @@ const MySwiper = ({ products, slidesPerView = 4 }) => {
       spaceBetween={20}
       speed={400}
       modules={[Navigation, Pagination, Scrollbar, Autoplay]}
-      style={{ height: '400px', width: '100%' }}
+      style={{ height: '300px', width: '100%', padding: '20px 0 20px 0' }}
       breakpoints={{
         320: { slidesPerView: 1 },
         678: { slidesPerView: 2 },
-        968: { slidesPerView: 4 },
+        968: { slidesPerView: 5 },
       }}
       className={s.swiper}
     >

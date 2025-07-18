@@ -1,9 +1,29 @@
 .ProductDetails {
   padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.infoSection {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.optionsSection {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.reviewsSection {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiperSection {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .productContainer {
-  // padding: 20px 100px;
   position: relative;
 }
 
@@ -108,10 +128,6 @@
   margin-bottom: auto;
 }
 
-.optionsSection {
-  margin-bottom: 50px;
-}
-
 .swiperTitle {
   font-size: 32px;
   margin-bottom: 30px;
@@ -134,6 +150,7 @@
 
 .modalwrap img {
   margin: 0 auto;
+  max-height: 90vh;
   position: fixed;
   top: 50%;
   left: 50%;

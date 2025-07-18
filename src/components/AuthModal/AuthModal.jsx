@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import s from './AuthModal.module.css';
+import s from './AuthModal.module.scss';
 import { TfiClose } from 'react-icons/tfi';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, registerUser } from '../../redux/authSlice/authOperations.js';

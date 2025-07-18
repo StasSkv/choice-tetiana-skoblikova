@@ -1,7 +1,6 @@
 import s from './Options.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDropdown } from 'react-icons/io';
-import { array } from 'yup';
 import { Fragment } from 'react';
 
 export const Options = ({ info }) => {
@@ -42,7 +41,7 @@ export const Options = ({ info }) => {
     <div className={s.container}>
       <h3 className={s.title}>Інформація про продукт</h3>
       <ul className={s.descriptions}>
-        {info[0] === array && (
+        {info[0].actions.length > 0 && (
           <li className={s.item}>
             <button className={s.header} onClick={() => toggle(0)}>
               {titles[first.name] || 'ДІЯ АКТИВНИХ КОМПОНЕНТІВ'}
@@ -58,7 +57,18 @@ export const Options = ({ info }) => {
                       <p>
                         <strong>{action.name}</strong>
                       </p>
-                      <p>{action.desc}</p>
+                      <p>
+                        {action.desc
+                          .replace(/\\n/g, '\n')
+                          .replace(/\\/g, '')
+                          .split('\n')
+                          .map((line, idx) => (
+                            <Fragment key={idx}>
+                              {line}
+                              <br />
+                            </Fragment>
+                          ))}
+                      </p>
                     </li>
                   ))}
                 </ul>

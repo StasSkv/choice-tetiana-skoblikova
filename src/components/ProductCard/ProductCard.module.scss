@@ -82,7 +82,7 @@
 }
 
 .colorRound {
-  @include absolute-position(-10%, 0, null, null, 0);
+  @include absolute-position(-12%, -7%, null, null, 0);
   width: 45%;
   height: 30%;
   border-radius: 100%;

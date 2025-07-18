@@ -5,10 +5,11 @@
 }
 
 .productImgWrap {
-  @include flex();
+  @include flex(row, center, center);
   overflow: hidden;
   border-radius: 12px;
   flex-shrink: 0;
+  width: 400px;
 }
 
 .productImg {
@@ -18,26 +19,23 @@
   cursor: pointer;
 }
 
-
-
 .descriptionWrap {
   @include flex(column, space-between, start);
-  min-height: 400px;
+  max-width: 600px;
 }
 
 .appointmentWrap {
   font-size: 18px;
+  padding-top: 16px;
 }
 
 .apoint {
-  width: 100%;
   background: $white;
   font-weight: 600;
-  max-width: 400px;
-  padding: 4px 16px;
+  text-align: justify;
+  text-justify: inter-word;
   border-radius: 8px;
   line-height: 1.6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .apoint span {

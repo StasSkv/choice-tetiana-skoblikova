@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: center;
   transform-origin: center;
-  @include transition(transform, 0.4s, ease);
+  transition: transform 0.4s ease;
 }
 
 .contentWrapper {
@@ -46,6 +46,8 @@
 
 .content {
   padding: 8px 0;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .openIcon {

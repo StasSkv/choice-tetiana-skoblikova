@@ -1,10 +1,12 @@
 .productList {
-  @include flex(row, center, center, 20px);
+  @include flex(row, start, center, 20px);
   flex-wrap: wrap;
+  padding-bottom: 50px;
 }
 
 .productListWrap {
   opacity: 0;
+  width: 100%;
   animation: fadeIn 0.5s ease forwards 0.3s;
 }
 

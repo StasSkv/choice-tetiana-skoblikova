@@ -1,4 +1,4 @@
-@use "sass:list";
+@use 'sass:list';
 
 @mixin container(
   $min-width: 320px,
@@ -34,11 +34,15 @@
 }
 
 @mixin transition($properties, $duration: 0.3s, $timing: ease) {
-  $result: ();
+  $props-string: '';
   @each $prop in $properties {
-    $result: list.append($result, "#{$prop} #{$duration} #{$timing}", comma);
+    $props-string: if(
+      $props-string == '',
+      '#{$prop} #{$duration} #{$timing}',
+      '#{$props-string}, #{$prop} #{$duration} #{$timing}'
+    );
   }
-  transition: #{list.join($result, ', ')};
+  transition: #{$props-string};
 }
 
 @mixin absolute-position($bottom: null, $right: null, $top: null, $left: null, $z-index: 0) {
@@ -57,4 +61,3 @@
     left: $left;
   }
 }
-
