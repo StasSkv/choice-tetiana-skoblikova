@@ -1,0 +1,100 @@
+.sendWindow {
+  @include flex(column, space-between);
+  height: 600px;
+  background-color: rgb(241, 242, 243);
+  border-radius: 12px;
+  padding: 32px 40px;
+  top: 24px;
+  box-shadow: 0 8px 24px rgba(56, 54, 54, 0.7);
+}
+
+.promocod {
+  border: none;
+  background-color: #ebebeb;
+  min-width: 360px;
+  height: 40px;
+  padding: 28px 20px;
+  font-size: 18px;
+  border-radius: 12px;
+  letter-spacing: 1.3px;
+  margin-bottom: 12px;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.orderWrap {
+  margin-bottom: 24px;
+}
+
+.orderLine:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.orderLine {
+  @include flex(row, space-between, end);
+  font-size: 20px;
+}
+
+.order {
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 3px;
+}
+.orderLine p {
+  white-space: nowrap;
+  padding-right: 3px;
+}
+
+.line {
+  display: block;
+  width: 100%;
+  border-top: 3px dotted #999;
+  padding-bottom: 3px;
+}
+
+.delivery {
+  @include flex(row, center, start);
+  font-size: 16px;
+  color: #999;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.rover {
+  font-size: 36px;
+}
+
+.poster {
+  @include flex(row, start, center);
+  width: 100%;
+  padding: 24px 24px;
+  background-color: $yellow;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 18px;
+  gap: 12px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 16px rgba(0, 128, 0, 0.2);
+}
+
+.poster div {
+  width: 100%;
+}
+
+.poster span {
+  @include flex(row, end, center);
+}
+
+.posterIcon {
+  font-size: 42px;
+  color: $black;
+}
+
+.total {
+  font-size: 32px;
+}
+
+.totalOrder {
+  font-size: 32px;
+  font-weight: 600;
+}

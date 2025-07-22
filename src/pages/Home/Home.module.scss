@@ -1,0 +1,76 @@
+.hero {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.hero h2 {
+  font-size: clamp(1.6rem, 1.4rem + 1vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.hero p {
+  font-size: 28px;
+  font-weight: 400;
+}
+
+
+  .container {
+    border: 1px solid red;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(0.3rem, 1vw, 2rem);
+}
+
+
+.tetiana {
+  max-width: 400px;
+}
+
+.hello {
+  max-width: 600px;
+}
+
+.contentActive {
+  width: 50% !important;
+  height: 30% !important;
+  outline: none !important;
+}
+
+.customModalContent {
+  @include flex(column, center, center, 40px);
+  width: 100%;
+  background-color: $white;
+  border-radius: 20px;
+}
+
+.customModalContent h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  color: $main-text;
+}
+
+.customModalContent p {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: $grey-text;
+}
+
+.closeModal {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: $accent;
+  color: $white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  @include transition((background-color));
+}
+
+.closeModal:hover {
+  background-color: $accent;
+}

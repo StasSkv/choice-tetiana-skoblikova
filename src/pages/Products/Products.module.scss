@@ -10,17 +10,14 @@
 }
 
 .mainWrap {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 20px;
+  @include flex(row, space-between, start, 20px);
 }
 
 .runningLine {
   height: 40px;
   bottom: -40px;
   width: 100%;
-  background-color: yellow;
+  background-color: $yellow;
   overflow: hidden;
   white-space: nowrap;
   padding: 8px 0;
@@ -29,7 +26,7 @@
     display: inline-block;
     padding-left: 50px;
     animation: scrollText 15s linear infinite;
-    color: #333;
+    color: $main-text;
     font-size: 16px;
     font-weight: 500;
   }

@@ -1,8 +1,9 @@
-import { useId } from 'react';
+import s from './DeliveryCity.module.scss';
 import { DeliveryWay } from '../DeliveryWay/DeliveryWay.jsx';
-import s from './DeliveryCity.module.css';
-import { Field, ErrorMessage, useFormikContext } from 'formik';
 import { Recipient } from '../Recipient/Recipient.jsx';
+
+import { Field, ErrorMessage, useFormikContext } from 'formik';
+import { useId } from 'react';
 
 // const popularCities = ['Київ', 'Харків', 'Одеса', 'Львів', 'Дніпро'];
 

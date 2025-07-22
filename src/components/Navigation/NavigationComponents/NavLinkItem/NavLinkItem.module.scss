@@ -1,0 +1,39 @@
+.link {
+  font-family: $font-family;
+  color: $main-text;
+  padding: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  @include transition((color, letter-spacing));
+  position: relative;
+}
+
+.link:hover {
+  letter-spacing: 1px;
+  color: $accent;
+}
+
+.link::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: $accent;
+  width: 0;
+  opacity: 0;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 10px rgb(30, 181, 30);
+  @include transition((width, opacity));
+}
+
+.link.active {
+  color: $accent;
+}
+
+.link.active::after {
+  width: 80%;
+  opacity: 1;
+}

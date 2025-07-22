@@ -1,4 +1,4 @@
-import s from './Team.module.css';
+import s from './Team.module.scss';
 import { motion } from 'framer-motion';
 
 const Team = () => {

@@ -1,0 +1,4 @@
+.nav {
+  @include flex(row, center, center);
+  gap: 12px;
+}

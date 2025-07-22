@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCartProducts } from '../../redux/cartSlice/cartSelectors.js';
+import s from './Cart.module.scss';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
-import s from './Cart.module.css';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+
 import {
   clearCart,
   deleteProductFromCart,
@@ -16,7 +14,11 @@ import {
   addMinusQuantityLocal,
   addPlusQuantityLocal,
 } from '../../redux/cartSlice/cartSlice.js';
+
+import { selectCartProducts } from '../../redux/cartSlice/cartSelectors.js';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Cart = ({ onClose }) => {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ export const Cart = ({ onClose }) => {
   const [isRemovingProduct, setIsRemovingProduct] = useState(null);
   const products = useSelector(selectCartProducts);
 
-  const handleClickClearCart = async() => {
+  const handleClickClearCart = async () => {
     dispatch(clearCartLocal());
     dispatch(clearCart());
     toast.warning('Кошик очищенно');

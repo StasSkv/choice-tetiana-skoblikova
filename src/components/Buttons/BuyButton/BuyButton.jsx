@@ -1,10 +1,12 @@
+import s from './BuyButton.module.scss';
+import clsx from 'clsx';
+
 import { BsCart4 } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
-import s from './BuyButton.module.css';
-import clsx from 'clsx';
+import { toast } from 'react-toastify';
+
 import { useDispatch } from 'react-redux';
 import { addProductToCart } from '../../../redux/cartSlice/cartOperations.js';
-import { toast } from 'react-toastify';
 import { addProductToCartLocal } from '../../../redux/cartSlice/cartSlice.js';
 
 export const BuyButton = ({ productId, quantity, isInCart }) => {

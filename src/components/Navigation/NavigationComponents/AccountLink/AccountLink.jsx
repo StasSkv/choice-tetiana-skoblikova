@@ -1,7 +1,8 @@
+import s from './AccountLink.module.scss';
 import { VscAccount } from 'react-icons/vsc';
-import s from './AccountLink.module.css';
-import { useState } from 'react';
 import { UserWindow } from '../../../UserWindow/UserWindow.jsx';
+
+import { useState } from 'react';
 
 
 export const AccountLink = () => {

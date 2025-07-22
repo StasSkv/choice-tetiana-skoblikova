@@ -1,4 +1,4 @@
-import s from './Description.module.css';
+import s from './Description.module.scss';
 import { Fragment } from 'react';
 
 export const Description = ({ info }) => {
@@ -9,7 +9,7 @@ export const Description = ({ info }) => {
         return (
           <li key={index}>
             <h4>{item.name}</h4>
-            <p>
+            <p className={s.descriptionText}>
               {normalizedDesc.split('\n').map((line, idx) => (
                 <Fragment key={idx}>
                   {line}

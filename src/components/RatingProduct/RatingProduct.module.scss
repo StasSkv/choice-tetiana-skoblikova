@@ -1,0 +1,22 @@
+.ratingWrapper {
+  @include flex(row, center, center);
+}
+
+.star {
+  cursor: pointer;
+  @include transition((color));
+}
+
+.star:last-child {
+  margin-right: 0;
+}
+
+.ratingValue {
+  margin-left: 8px;
+  font-weight: bold;
+  user-select: none;
+}
+
+.value {
+  margin-left: 8px;
+}

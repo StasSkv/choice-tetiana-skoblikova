@@ -1,4 +1,4 @@
-import s from './PaymentMethod.module.css';
+import s from './PaymentMethod.module.scss';
 import { Field } from 'formik';
 import { useId } from 'react';
 

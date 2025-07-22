@@ -1,4 +1,4 @@
-import s from './Actions.module.css';
+import s from './Actions.module.scss';
 
 export const Actions = ({ info }) => {
   return (

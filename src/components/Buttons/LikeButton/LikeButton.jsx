@@ -1,4 +1,8 @@
-import { useDispatch } from 'react-redux';
+import s from './LikeButton.module.scss';
+
+import { toast } from 'react-toastify';
+import { FaHeart } from 'react-icons/fa';
+
 import {
   addProductToFavoritesLocal,
   removeProductFromFavoritesLocal,
@@ -7,9 +11,8 @@ import {
   removeProductFromFavorites,
   addProductToFavorites,
 } from '../../../redux/favoritesSlice/favoritesOperations.js';
-import { toast } from 'react-toastify';
-import s from './LikeButton.module.css';
-import { FaHeart } from 'react-icons/fa';
+
+import { useDispatch } from 'react-redux';
 
 export const LikeButton = ({ isLoved, id }) => {
   const dispatch = useDispatch();

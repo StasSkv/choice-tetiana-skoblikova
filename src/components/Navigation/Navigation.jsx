@@ -1,12 +1,14 @@
-import { useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
-import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
-import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
-import s from './Navigation.module.css';
-import { NavLinkItem } from './NavigationComponents/NavLinkItem/NavLinkItem.jsx';
-import { FavoritesLink } from './NavigationComponents/FavoritesLink/FavoritesLink.jsx';
-import { CartLink } from './NavigationComponents/CartLink/CartLink.jsx';
+import s from './Navigation.module.scss';
+
 import { AccountLink } from './NavigationComponents/AccountLink/AccountLink.jsx';
+import { CartLink } from './NavigationComponents/CartLink/CartLink.jsx';
+import { FavoritesLink } from './NavigationComponents/FavoritesLink/FavoritesLink.jsx';
+import { NavLinkItem } from './NavigationComponents/NavLinkItem/NavLinkItem.jsx';
+
+import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
+import { selectProductsIds } from '../../redux/cartSlice/cartSelectors.js';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export const Navigation = () => {
   const productsInCart = useSelector(selectProductsIds);

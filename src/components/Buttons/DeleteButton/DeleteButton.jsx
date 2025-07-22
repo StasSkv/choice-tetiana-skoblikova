@@ -1,5 +1,5 @@
 import { MdDelete } from 'react-icons/md';
-import s from './DeleteButton.module.css';
+import s from './DeleteButton.module.scss';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { removeProductFromFavoritesLocal } from '../../../redux/favoritesSlice/favoritesSlice.js';

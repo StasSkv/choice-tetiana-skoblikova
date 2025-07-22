@@ -1,0 +1,10 @@
+.details {
+  @include flex(column, normal, normal);
+  padding-top: 16px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.details p span {
+  color: $grey-text;
+}

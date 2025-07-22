@@ -1,10 +1,12 @@
-import s from './Client.module.css';
-import { CartLink } from '../../../../components/Navigation/NavigationComponents/CartLink/CartLink.jsx';
-import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from '../../../../redux/authSlice/authSelectors.js';
+import s from './Client.module.scss';
 import clsx from 'clsx';
+
+import { CartLink } from '../../../../components/Navigation/NavigationComponents/CartLink/CartLink.jsx';
 import { Field, ErrorMessage } from 'formik';
+
 import { useId } from 'react';
+import { selectIsLoggedIn } from '../../../../redux/authSlice/authSelectors.js';
+import { useSelector } from 'react-redux';
 
 export const Client = () => {
   const nameFieldId = useId();

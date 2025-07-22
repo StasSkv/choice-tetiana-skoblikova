@@ -3,7 +3,6 @@
   opacity: 95%;
   background-color: var(--white);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
   z-index: 10;
   position: fixed;
 }
@@ -20,9 +19,7 @@
 }
 
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flex(row, space-between, center);
 }
 
 .logoWrap {

@@ -1,3 +1,5 @@
+import s from './MySwiper.module.scss';
+
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, Autoplay } from 'swiper/modules';
@@ -7,7 +9,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import s from './MySwiper.module.css';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 
 const MySwiper = ({ products, slidesPerView = 4 }) => {

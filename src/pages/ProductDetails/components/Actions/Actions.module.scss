@@ -1,0 +1,43 @@
+.container {
+  padding: 0 20px 20px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: $main-text;
+}
+
+.descriptions {
+  @include flex(column, normal, normal, 12px);
+  list-style: none;
+  padding: 0;
+}
+
+.descriptions li {
+  position: relative;
+  background: $white;
+  border-left: 4px solid $accent;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.descriptions li::before {
+  content: '✔';
+  color: $accent;
+  font-weight: bold;
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.descriptions p {
+  margin: 0;
+  font-size: 16px;
+  color: $main-text;
+}

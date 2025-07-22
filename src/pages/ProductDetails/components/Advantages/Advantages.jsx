@@ -1,4 +1,4 @@
-import s from './Advantages.module.css';
+import s from './Advantages.module.scss';
 
 export const Advantages = ({ info }) => {
   return (

@@ -61,3 +61,18 @@
     left: $left;
   }
 }
+
+$breakpoints: (
+  'sm': 375px,
+  'md': 768px,
+  'lg': 1200px,
+);
+
+@mixin respond($breakpoint) {
+  $size: map-get($breakpoints, $breakpoint);
+  @if $size {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}

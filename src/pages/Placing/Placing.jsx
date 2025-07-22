@@ -1,4 +1,4 @@
-import s from './Placing.module.css';
+import s from './Placing.module.scss';
 import { motion } from 'framer-motion';
 import logo from '../../assets/images/tetiana-logo.png';
 import { GoArrowLeft } from 'react-icons/go';

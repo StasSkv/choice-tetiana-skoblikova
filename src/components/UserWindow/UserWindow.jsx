@@ -1,14 +1,17 @@
+import s from './UserWindow.module.scss';
+
 import { NavLink, useNavigate } from 'react-router-dom';
-import s from './UserWindow.module.css';
 import { IoExitOutline } from 'react-icons/io5';
-import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
+
+import { formattedDate } from './formattedDate';
+
+import { setLoginModalIsOpen } from '../../redux/authSlice/authSlice';
+import { selectIsLoggedIn, selectUser } from '../../redux/authSlice/authSelectors';
 import { logoutUser } from '../../redux/authSlice/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn, selectUser } from '../../redux/authSlice/authSelectors';
-import { setLoginModalIsOpen } from '../../redux/authSlice/authSlice';
-import { toast } from 'react-toastify';
-import { formattedDate } from './formattedDate';
+import { useEffect, useState } from 'react';
 
 export const UserWindow = ({ onClose }) => {
   const dispatch = useDispatch();

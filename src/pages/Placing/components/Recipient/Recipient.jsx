@@ -1,5 +1,5 @@
 import { Field, ErrorMessage } from 'formik';
-import s from './Recipient.module.css';
+import s from './Recipient.module.scss';
 import { useId } from 'react';
 
 export const Recipient = () => {

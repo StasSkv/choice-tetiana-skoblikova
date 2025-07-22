@@ -1,0 +1,12 @@
+.starsWrapper {
+  @include flex(row, start, center, 4px);
+}
+
+.star {
+  display: inline-block;
+}
+
+.value {
+  margin-left: 8px;
+  font-size: 18px;
+}

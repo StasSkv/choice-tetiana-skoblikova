@@ -1,0 +1,44 @@
+.deliveryOptions {
+  @include flex(column, normal, normal, 14px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.deliveryOptions label {
+  @include flex(row, normal, center);
+  cursor: pointer;
+  font-size: 16px;
+  color: $main-text;
+}
+
+.deliveryOptions input {
+  margin-right: 12px;
+  display: none;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: $main-text;
+}
+
+.customRadio {
+  @include flex(row, center, center);
+  width: 20px;
+  height: 20px;
+  border: 2px solid $main-text;
+  border-radius: 100%;
+  position: relative;
+  margin-right: 4px;
+}
+
+.radioInput:checked + .customRadio::after {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border-radius: 100%;
+  background-color: $accent;
+}

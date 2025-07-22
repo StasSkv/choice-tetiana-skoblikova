@@ -1,8 +1,8 @@
+import s from './InfoSwitcher.module.scss';
 import { Advantages } from '../Advantages/Advantages.jsx';
 import { Description } from '../Description/Description.jsx';
 import { Actions } from '../Actions/Actions.jsx';
 import { useState, useRef, useEffect } from 'react';
-import s from './InfoSwitcher.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const InfoSwitcher = ({ advantagesData, descriptionData, actionsData }) => {

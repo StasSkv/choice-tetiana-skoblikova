@@ -1,5 +1,5 @@
+import s from './RatingReviews.module.scss';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
-import s from './RatingReviews.module.css';
 
 export const RatingReviews = ({ value = 0, size = 24 }) => {
   const renderStar = (index) => {

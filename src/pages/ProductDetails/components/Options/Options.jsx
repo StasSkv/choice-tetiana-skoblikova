@@ -57,7 +57,7 @@ export const Options = ({ info }) => {
                       <p>
                         <strong>{action.name}</strong>
                       </p>
-                      <p>
+                      <p className={s.descriptionText}>
                         {action.desc
                           .replace(/\\n/g, '\n')
                           .replace(/\\/g, '')

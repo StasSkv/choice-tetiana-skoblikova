@@ -1,12 +1,14 @@
-import { useSelector } from 'react-redux';
-import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
-import s from './Favorites.module.css';
+import s from './Favorites.module.scss';
+import clsx from 'clsx';
+
+import { motion } from 'framer-motion';
+import ProductsList from '../../components/ProductList/ProductList.jsx';
 import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
-import ProductsList from '../../components/ProductList/ProductList.jsx';
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
+
+import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
 import { selectIsFavoritesLoading } from '../../redux/favoritesSlice/favoritesSelectors.js';
+import { useSelector } from 'react-redux';
 
 const Favorites = () => {
   const favoritesProducts = useSelector(selectFavoritesProducts);

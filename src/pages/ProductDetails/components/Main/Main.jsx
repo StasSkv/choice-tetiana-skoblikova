@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { BsCart4 } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import { Details } from '../Details/Details.jsx';
 import { toast } from 'react-toastify';
@@ -74,7 +74,19 @@ export const Main = ({ product, openModal }) => {
         </div>
         <div className={s.appointmentWrap}>
           <p className={s.apoint}>
-            Призначення: <span>{product.appointment}</span>
+            Призначення: <br />
+            <span>
+              {product.appointment
+                .replace(/\\n/g, '\n')
+                .replace(/\\/g, '')
+                .split('\n')
+                .map((line, idx) => (
+                  <Fragment key={idx}>
+                    {line}
+                    <br />
+                  </Fragment>
+                ))}
+            </span>
           </p>
           {product.details ? <Details info={product.details} /> : null}
         </div>

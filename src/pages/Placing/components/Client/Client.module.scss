@@ -1,0 +1,135 @@
+.client {
+  @include flex(column, start, start);
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.client h3 {
+  padding-left: 50px;
+  margin-bottom: 20px;
+}
+
+.clientWrap {
+  @include flex(row, space-between, center);
+  width: 100%;
+  padding: 24px;
+  border: 1px solid $grey-text;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  gap: 24px;
+}
+
+.inputsWrap {
+  @include flex(column, center, normal, 12px);
+  width: 100%;
+}
+
+.inputWrap {
+  @include flex(column, center, normal, 8px);
+  width: 100%;
+}
+
+.input {
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: $white;
+  color: $main-text;
+  @include transition((border-color));
+}
+
+.inputActive {
+  cursor: text;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.error {
+  color: $error;
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #aaa;
+  box-shadow: none;
+}
+
+.input[readonly] {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+  color: $main-text;
+}
+
+.label {
+  font-size: 16px;
+  color: $main-text;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.required {
+  color: $error;
+  font-size: 20px;
+}
+
+.optional {
+  color: $grey-text;
+  font-weight: 400;
+}
+
+.cart {
+  @include flex(column, space-between, center);
+  border: 1px solid $grey-text;
+  background-color: $white;
+  border-radius: 12px;
+  padding: 30px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.cart h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: $main-text;
+  text-align: center;
+}
+.arrowDownWrapper {
+  @include flex(column, normal, center, 6px);
+  margin: 20px auto;
+}
+
+.arrow {
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid $accent;
+  border-bottom: 2px solid $accent;
+  transform: rotate(45deg);
+  animation: arrowDownAnim 1.5s infinite;
+  opacity: 0.6;
+}
+
+.arrow:nth-child(2) {
+  animation-delay: 0.2s;
+  opacity: 0.8;
+}
+
+.arrow:nth-child(3) {
+  animation-delay: 0.4s;
+  opacity: 1;
+}
+
+@keyframes arrowDownAnim {
+  0% {
+    transform: rotate(45deg) translateY(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: rotate(45deg) translateY(6px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) translateY(0);
+    opacity: 0.2;
+  }
+}

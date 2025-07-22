@@ -1,4 +1,4 @@
-import s from './Details.module.css';
+import s from './Details.module.scss';
 
 export const Details = ({ info }) => {
   return (

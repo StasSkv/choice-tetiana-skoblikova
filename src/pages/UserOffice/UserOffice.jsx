@@ -1,8 +1,8 @@
+import s from './UserOffice.module.scss';
 import { useSelector } from 'react-redux';
 import MySwiper from '../../components/MySwiper/MySwiper.jsx';
 import { Info } from './Info/Info.jsx';
 import { Menu } from './Menu/Menu.jsx';
-import s from './UserOffice.module.css';
 import { motion } from 'framer-motion';
 import { History } from './History/History.jsx';
 import { Reviews } from './Reviews/Reviews.jsx';

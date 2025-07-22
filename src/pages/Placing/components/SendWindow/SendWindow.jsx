@@ -1,9 +1,10 @@
-import s from './SendWindow.module.css';
+import s from './SendWindow.module.scss';
 import { RiTakeawayLine } from 'react-icons/ri';
+import { DeliveryDate } from '../DeliveryDate/DeliveryDate.jsx';
 import { SubmitBtn } from '../../../../components/Buttons/SubmitBtn/SubmitBtn.jsx';
+
 import { useSelector } from 'react-redux';
 import { selectTotalPriceCart } from '../../../../redux/cartSlice/cartSelectors.js';
-import { DeliveryDate } from '../DeliveryDate/DeliveryDate.jsx';
 
 export const SendWindow = () => {
   const totalPriceCart = useSelector(selectTotalPriceCart);
@@ -43,7 +44,7 @@ export const SendWindow = () => {
         <RiTakeawayLine className={s.posterIcon} />
         <div>
           <p>БЕЗКОШТОВНА доставка </p>
-          <span>при замовленні від 499 грн</span>
+          <span>при замовленні від 1000 грн</span>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
+import s from './SubmitBtn.module.scss';
 import { motion } from 'framer-motion';
-import s from './SubmitBtn.module.css';
 
 export const SubmitBtn = ({ children }) => {
   return (

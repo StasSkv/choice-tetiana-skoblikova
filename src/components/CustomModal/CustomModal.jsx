@@ -1,12 +1,14 @@
+import s from './CustomModal.module.scss';
+import clsx from 'clsx';
+
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import s from './CustomModal.module.css';
 import { TfiClose } from 'react-icons/tfi';
 import { GoArrowLeft } from 'react-icons/go';
 import { NavLink } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import { selectCartProducts } from '../../redux/cartSlice/cartSelectors.js';
-import clsx from 'clsx';
 
 const CustomModal = ({
   isOpen,

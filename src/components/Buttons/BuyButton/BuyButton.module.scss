@@ -1,0 +1,39 @@
+
+.btn {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  @include transition((color, transform));
+}
+
+.btn:hover {
+  color: $white;
+  transform: scale(1.3);
+}
+
+.btnIsInCart {
+    color: $white;
+  transform: scale(1.3);
+  pointer-events: none;
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+.check {
+  color: $white;
+  font-size: 14px;
+  position: absolute;
+  top: 35%;
+  left: -30%;
+    opacity: 0;
+  transform: translateY(-5px);
+  @include transition((opacity, transform));
+}
+
+.checkVisible {
+  opacity: 1;
+  transform: translateY(0);
+}

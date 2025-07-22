@@ -1,4 +1,4 @@
-import s from './DeliveryWay.module.css';
+import s from './DeliveryWay.module.scss';
 import { Field } from 'formik';
 import { useId } from 'react';
 

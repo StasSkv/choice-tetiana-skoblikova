@@ -1,6 +1,7 @@
+import s from './FavoritesLink.module.scss';
 import { NavLink } from 'react-router-dom';
 import { CiHeart } from 'react-icons/ci';
-import s from './FavoritesLink.module.css';
+
 import { useSelector } from 'react-redux';
 import { selectFavoritesIds } from '../../../../redux/favoritesSlice/favoritesSelectors.js';
 import { useState, useEffect } from 'react';

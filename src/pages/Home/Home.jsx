@@ -1,8 +1,10 @@
-import s from './Home.module.css';
+import s from './Home.module.scss';
+import clsx from 'clsx';
+
 import tetiana from '../../assets/images/tetiana.jpeg';
 import { motion } from 'framer-motion';
 import CustomModal from '../../components/CustomModal/CustomModal.jsx';
-import clsx from 'clsx';
+
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';

@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import s from './RatingProduct.module.scss';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
-import s from './RatingProduct.module.css';
+import { useState } from 'react';
 
 export const RatingProduct = ({ value = 0, onChange }) => {
   const [hoverRating, setHoverRating] = useState(0);
