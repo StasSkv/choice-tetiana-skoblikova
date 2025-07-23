@@ -11,9 +11,9 @@
 }
 
 .container h2 {
-  margin-bottom: 24px;
-  font-size: 32px;
-  margin-left: 80px;
+  margin-bottom: clamp(16px, 2vw, 24px);
+  font-size: clamp(24px, 2vw, 32px);
+  margin-left: clamp(40px, 2vw, 80px);
 }
 
 .history {

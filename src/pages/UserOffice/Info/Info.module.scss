@@ -17,6 +17,7 @@
 
 .infoContainer h2 {
   margin-bottom: 28px;
+  font-size: clamp(24px, 2vw, 32px);
 }
 
 .infoContainer ul {
@@ -34,14 +35,14 @@
 
 .infoContainer span {
   display: block;
-  font-size: 16px;
+  font-size: clamp(14px, 2vw, 16px);
   color: var(--grey-text);
   margin-bottom: 8px;
 }
 
 .infoContainer p {
   margin-left: 20px;
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   font-weight: 500;
   color: var(--main-text);
 }
@@ -50,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: clamp(8px, 2vw, 12px) clamp(16px, 2vw, 24px);
   border-radius: 12px;
   background-color: var(--accent);
   color: var(--white);

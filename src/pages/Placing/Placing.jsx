@@ -21,6 +21,7 @@ import { toast } from 'react-toastify';
 import { selectIsLoggedIn } from '../../redux/authSlice/authSelectors.js';
 import { selectUser } from '../../redux/authSlice/authSelectors.js';
 import { clearCart } from '../../redux/cartSlice/cartOperations.js';
+import clsx from 'clsx';
 
 const Placing = () => {
   const navigate = useNavigate();
@@ -108,7 +109,7 @@ const Placing = () => {
       transition={{ duration: 0.2 }}
     >
       <header className={s.header}>
-        <div className={`container ${s.container}`}>
+        <div className={clsx('container', s.container)}>
           <div className={s.goBack}>
             <button onClick={handleClickBack}>
               <GoArrowLeft /> Назад
@@ -127,7 +128,7 @@ const Placing = () => {
       </header>
 
       <section className={s.main}>
-        <div className={`container ${s.mainContainer}`}>
+        <div className="container">
           <Formik
             onSubmit={handleSubmit}
             initialValues={initialValues}

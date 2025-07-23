@@ -1,9 +1,11 @@
 import s from './Catalog.module.scss';
+import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilters } from '../../redux/productsSlice/productsSelectors.js';
 import { setFilters } from '../../redux/productsSlice/productsSlice.js';
+import { RiArrowRightWideLine } from 'react-icons/ri';
 
 const categories = [
   { label: 'Всі товари', value: 'all' },
@@ -24,6 +26,7 @@ const sortOptions = [
 
 export const Catalog = () => {
   const dispatch = useDispatch();
+  const [switchCatalog, setSwitchCatalog] = useState(false);
   const params = useSelector(selectFilters);
   const [checkedCategories, setCheckedCategories] = useState(params.category);
   const [checkedSort, setCheckedSort] = useState(
@@ -45,10 +48,14 @@ export const Catalog = () => {
       dispatch(setFilters({ sortBy, sortOrder, page: 1 }));
     }
   };
+  console.log(switchCatalog);
 
   return (
-    <div className={s.catalogWrap}>
-      <div>
+    <div className={clsx(s.catalogWrap, switchCatalog && s.openCatalog)}>
+      <button className={s.openBtn} onClick={()=> setSwitchCatalog(!switchCatalog)}>
+       Сортувати
+      </button>
+      <div className={s.filterWrap}>
         <h3>БРЕНДИ КОМПАНІЇ</h3>
         <motion.ul>
           {categories.map((item) => (
@@ -71,7 +78,7 @@ export const Catalog = () => {
         </motion.ul>
       </div>
 
-      <div>
+      <div className={s.sortWrap}>
         <h3>Сортувати за</h3>
         <motion.ul>
           {sortOptions.map(({ label, sortBy, sortOrder }) => {

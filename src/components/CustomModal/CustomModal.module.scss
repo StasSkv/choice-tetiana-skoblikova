@@ -29,14 +29,18 @@
 .content {
   @include flex(column, center, center);
   position: relative;
-  width: 80%;
+  width: 90%;
   height: 100%;
   flex-grow: 1;
-  padding: 32px 60px 40px;
+  padding: 40px 16px;
   background-color: $white;
   border-radius: 16px;
   transform: translateY(50px);
   @include transition((transform));
+  @include respond(md) {
+    width: 80%;
+    padding: 32px 60px 40px;
+  }
 }
 
 .contentActive {
@@ -45,14 +49,19 @@
 
 .closeBtn {
   position: absolute;
-  top: 32px;
-  right: 60px;
+  top: 8px;
+  right: 8px;
   background: none;
   border: none;
+  font-size: 1rem;
   cursor: pointer;
-  font-size: 1.7rem;
   color: $main-text;
   @include transition((transform));
+  @include respond(md) {
+    top: 32px;
+    right: 60px;
+    font-size: 1.7rem;
+  }
 }
 
 .closeBtn:hover {
@@ -60,8 +69,11 @@
 }
 
 .optionsWrap {
-  @include flex(row, space-between, center);
+  @include flex(column, space-between, center, 16px);
   width: 100%;
+  @include respond(md) {
+    @include flex(row, space-between, center, 0);
+  }
 }
 
 .goBack {
@@ -98,22 +110,22 @@
 }
 
 .orderSum {
-  font-size: 32px;
+  font-size: clamp(20px, 2vw, 32px);
   font-weight: 600;
 }
 
 .orderCurrency {
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
 }
 
 .submitBtn {
-  padding: 18px 24px;
+  padding: clamp(12px, 2vw, 18px) clamp(16px, 2vw, 24px);
   background-color: $accent;
   color: $white;
   border: none;
   border-radius: 32px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   @include transition((opacity));
 }
 

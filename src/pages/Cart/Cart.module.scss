@@ -5,33 +5,38 @@
 }
 
 .title {
-  margin-bottom: 24px;
-  font-size: 36px;
+  margin-bottom: clamp(16px, 2vw, 24px);
+  font-size: clamp(24px, 4vw, 36px);
   font-weight: 600;
 }
 
 .header {
   @include flex(row, space-between, center);
-  margin-bottom: 20px;
+  margin-bottom: clamp(16px, 2vw, 20px);
 }
 
 .totalProducts {
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   color: $grey-text;
 }
 
 .totalProducts span {
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   color: $main-text;
 }
 
 .cleanCart {
-  @include flex(row, center, center, 8px);
-  font-size: 16px;
+  @include flex(row, center, center);
+  max-width: 100px;
+  font-size: clamp(14px, 2vw, 16px);
   padding: 0;
   border: none;
   background-color: transparent;
   @include transition((color));
+  @include respond(md) {
+    @include flex(row, center, center, 8px);
+    max-width: 200px;
+  }
 }
 
 .cleanCart:hover {
@@ -39,18 +44,22 @@
 }
 
 .cleanCart span {
-  font-size: 24px;
+  font-size: clamp(20px, 2vw, 24px);
 }
 
 .productList {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  height: 70%;
+  gap: clamp(16px, 2vw, 20px);
   flex: 1;
+  height: 80%;
   overflow: scroll;
   overflow-y: scroll;
-  padding-right: 40px;
+  padding-right: 0;
+  @include respond(md) {
+    padding-right: 40px;
+    height: 70%;
+  }
 }
 
 .productList::-webkit-scrollbar {
@@ -68,26 +77,37 @@
 }
 
 .productItem {
-  @include flex(row, center, center);
-  padding-bottom: 20px;
+  @include flex(column, center, center);
+  padding-bottom: clamp(16px, 2vw, 20px);
   cursor: pointer;
   border-bottom: 1px solid $grey-text;
+  @include respond(md) {
+    @include flex(row, center, center);
+  }
+}
+
+.description {
+  margin-bottom: 8px;
+  @include respond(md) {
+    margin-bottom: 0;
+  }
 }
 
 .description h3 {
-  font-size: 18px;
+  font-size: clamp(14px, 2vw, 18px);
   margin-bottom: 8px;
 }
 
 .description p {
   color: $grey-text;
+  font-size: clamp(12px, 2vw, 16px);
 }
 
 .productImageWrap {
   @include flex(row, center, center);
   width: 100px;
   height: 100px;
-  margin-right: 20px;
+  margin-right: clamp(16px, 2vw, 20px);
 }
 
 .productImg {
@@ -95,43 +115,47 @@
 }
 
 .quantity {
-  @include flex(row, space-between, center);
-  width: 110px;
-  height: 50px;
+  @include flex(row, center, center);
   border: 2px solid black;
   border-radius: 50px;
-  padding: 8px 12px;
+  padding: clamp(4px, 2vw, 8px) clamp(8px, 2vw, 12px) clamp(4px, 2vw, 8px) clamp(8px, 2vw, 12px);
   cursor: auto;
-  margin-right: 20px;
+  width: 70px;
+  height: 30px;
+  margin-right: clamp(16px, 2vw, 20px);
+  @include respond(md) {
+    height: 50px;
+    width: 110px;
+  }
 }
 
 .quantityPrice {
   text-align: center;
-  font-size: 18px;
+  font-size: clamp(14px, 2vw, 18px);
   font-weight: 600;
   min-width: 110px;
   cursor: auto;
-  margin-right: 20px;
+  margin-right: clamp(16px, 2vw, 20px);
 }
 
 .plus {
-  margin-bottom: 3px;
+  margin-bottom: clamp(2px, 2vw, 3px);
 }
 .plus,
 .minus {
   @include flex(row, center, center);
   padding: 0;
-  width: 30px;
-  height: 30px;
-  padding: 8px;
+  width: clamp(24px, 2vw, 30px);
+  height: clamp(24px, 2vw, 30px);
+  padding: clamp(6px, 2vw, 8px);
   border: none;
   background-color: transparent;
-  font-size: 24px;
+  font-size: clamp(16px, 2vw, 24px);
 }
 
 .minus span {
-  width: 12px;
-  height: 2.2px;
+  width: clamp(10px, 2vw, 12px);
+  height: clamp(1px, 2vw, 2.2px);
   border: 50%;
   background-color: $main-text;
 }
@@ -143,12 +167,12 @@
 
 .deleteBtn {
   @include flex(row, center, center);
-  width: 40px;
-  height: 40px;
+  width: clamp(32px, 2vw, 40px);
+  height: clamp(32px, 2vw, 40px);
   background-color: transparent;
-  font-size: 24px;
+  font-size: clamp(20px, 2vw, 24px);
   border: none;
-  padding: 5px;
+  padding: clamp(4px, 2vw, 5px);
   @include transition((color));
 }
 
@@ -163,19 +187,19 @@
 
 .line {
   width: 100%;
-  border: 1px solid gray;
+  border: 1px solid $grey-text;
 }
 
 .notProductInCart {
   color: $grey-text;
-  font-size: 24px;
+  font-size: clamp(18px, 2vw, 24px);
   text-align: center;
-  padding: 50px;
+  padding: clamp(32px, 2vw, 50px);
 }
 
 .spinner {
-  width: 20px;
-  height: 20px;
+  width: clamp(16px, 2vw, 20px);
+  height: clamp(16px, 2vw, 20px);
   border: 2px solid rgba(0, 0, 0, 0.1);
   border-left-color: $accent;
   border-radius: 50%;

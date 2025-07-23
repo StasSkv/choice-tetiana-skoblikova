@@ -10,7 +10,7 @@ import { GoArrowLeft } from 'react-icons/go';
 
 import {
   selectProductById,
-  selectAllProducts,
+  // selectAllProducts,
 } from '../../redux/productsSlice/productsSelectors.js';
 import { fetchProductById } from '../../redux/productsSlice/productsOperations.js';
 
@@ -18,13 +18,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import MySwiper from '../../components/MySwiper/MySwiper.jsx';
+// import MySwiper from '../../components/MySwiper/MySwiper.jsx';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(selectProductById);
-  const products = useSelector(selectAllProducts);
+  // const products = useSelector(selectAllProducts);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
@@ -101,12 +101,12 @@ const ProductDetails = () => {
             </div>
           </section>
 
-          <section className={s.swiperSection}>
+          {/* <section className={s.swiperSection}>
             <div className={clsx('container', s.productContainer, s.mySwiper)}>
               <h2 className={s.swiperTitle}>Також вас може зацікавити</h2>
               {products && <MySwiper products={products} slidesPerView={5} />}
             </div>
-          </section>
+          </section> */}
         </>
       </motion.div>
     )

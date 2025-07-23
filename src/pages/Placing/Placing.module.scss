@@ -6,6 +6,18 @@
   z-index: 10;
 }
 
+.contacts {
+  width: clamp(250px, 2vw, 360px);
+  font-size: clamp(14px, 2vw, 18px);
+}
+
+.container {
+  @include flex(row, center, center);
+  @include respond(md) {
+    @include flex(row, space-between, center);
+  }
+}
+
 .header::after {
   content: '';
   display: block;
@@ -23,9 +35,6 @@
   padding-bottom: 100px;
 }
 
-.container {
-  @include flex(row, center, space-between);
-}
 
 .goBack button {
   @include flex(row, center, center);
@@ -46,12 +55,15 @@
 }
 
 .main h2 {
-  font-size: 32px;
+  font-size: clamp(24px, 2vw, 32px);
   margin-bottom: 20px;
 }
 
 .form {
-  @include flex(row, space-between, start);
+  @include flex(column, start, start, 32px);
+  @include respond(md) {
+    @include flex(row, space-between, start);
+  }
 }
 
 .formInfoWrap {
@@ -60,14 +72,14 @@
 }
 
 .main h3 {
-  font-size: 24px;
+  font-size: clamp(20px, 2vw, 24px);
   margin-bottom: 20px;
   padding-left: 50px;
 }
 
 .delivery {
   width: 100%;
-  padding: 24px;
+  padding: clamp(16px, 2vw, 24px);
   border: 1px solid $grey-text;
   border-radius: 12px;
   margin-bottom: 50px;
@@ -80,4 +92,3 @@
   height: fit-content;
   overflow: visible;
 }
-

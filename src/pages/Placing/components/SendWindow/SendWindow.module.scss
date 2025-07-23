@@ -3,7 +3,7 @@
   height: 600px;
   background-color: rgb(241, 242, 243);
   border-radius: 12px;
-  padding: 32px 40px;
+  padding: clamp(16px, 2vw, 32px) clamp(20px, 2vw, 40px);
   top: 24px;
   box-shadow: 0 8px 24px rgba(56, 54, 54, 0.7);
 }
@@ -11,7 +11,7 @@
 .promocod {
   border: none;
   background-color: #ebebeb;
-  min-width: 360px;
+  min-width: clamp(200px, 2vw, 360px);
   height: 40px;
   padding: 28px 20px;
   font-size: 18px;

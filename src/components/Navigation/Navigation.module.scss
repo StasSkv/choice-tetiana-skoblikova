@@ -1,4 +1,10 @@
 .nav {
-  @include flex(row, center, center);
-  gap: 12px;
+  @include flex(row, center, center, 12px);
+}
+
+.navLinks {
+  display: none;
+  @include respond(md) {
+    @include flex(row, center, center, 12px);
+  }
 }

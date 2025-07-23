@@ -1,6 +1,6 @@
 import s from './UserOffice.module.scss';
 import { useSelector } from 'react-redux';
-import MySwiper from '../../components/MySwiper/MySwiper.jsx';
+// import MySwiper from '../../components/MySwiper/MySwiper.jsx';
 import { Info } from './Info/Info.jsx';
 import { Menu } from './Menu/Menu.jsx';
 import { motion } from 'framer-motion';
@@ -13,10 +13,10 @@ import { useEffect } from 'react';
 import { selectUserOrders } from '../../redux/orderSlice/orderSelectors.js';
 import { selectUserReviews } from '../../redux/reviewsSlice/reviewsSelectors.js';
 import { fetchReviewsByUserId } from '../../redux/reviewsSlice/reviewsOperations.js';
-import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
+// import { selectFavoritesProducts } from '../../redux/favoritesSlice/favoritesSelectors.js';
 
 const UserOffice = () => {
-  const products = useSelector(selectFavoritesProducts);
+  // const products = useSelector(selectFavoritesProducts);
   const user = useSelector(selectUser);
   const isLoadingSession = useSelector(selectIsLoading);
   const orders = useSelector(selectUserOrders);
@@ -56,10 +56,10 @@ const UserOffice = () => {
           <h2>Мої відгуки</h2>
           <Reviews reviews={reviews} />
         </div>
-        <div id="favorites" className={s.favorites}>
-          <h2>Улюбленні</h2>
-          <MySwiper products={products} slidesPerView={5} />
-        </div>
+        {/* <div id="favorites" className={s.favorites}>
+            <h2>Улюбленні</h2>
+            <MySwiper products={products} slidesPerView={5} />
+          </div> */}
       </div>
     </motion.div>
   );

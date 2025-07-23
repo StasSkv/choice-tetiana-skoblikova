@@ -26,7 +26,7 @@ const AboutBrandNav = () => {
           <img src={choicePhyto} alt="choicePhyto" className={s.aboutBrandNavImage} />
         </li>
         <li className={s.aboutBrandNavItem}>
-          <img src={greenMax} alt="greenMax" className={s.aboutBrandNavImageGreenMax} />
+          <img src={greenMax} alt="greenMax" className={s.aboutBrandNavImage} />
         </li>
       </ul>
     </div>

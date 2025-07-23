@@ -39,9 +39,11 @@ export const Navigation = () => {
 
   return (
     <nav className={s.nav}>
-      <NavLinkItem to="/">Головна</NavLinkItem>
-      <NavLinkItem to="/team">Команда</NavLinkItem>
-      <NavLinkItem to="/products">Каталог</NavLinkItem>
+ <div className={s.navLinks}>
+        <NavLinkItem to="/">Головна</NavLinkItem>
+        <NavLinkItem to="/team">Команда</NavLinkItem>
+        <NavLinkItem to="/products">Каталог</NavLinkItem>
+ </div>
       <FavoritesLink count={favoriteItems.length} animate={animateFavorites} />
       <AccountLink />
       <CartLink count={productsInCart.length} animate={animateCart} />

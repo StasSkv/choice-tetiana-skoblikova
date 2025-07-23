@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { fetchProducts } from '../../redux/productsSlice/productsOperations.js';
 import { useSearchParams } from 'react-router-dom';
 import AboutBrandNav from '../../components/AboutBrandNav/AboutBrandNav.jsx';
+import clsx from 'clsx';
 // import { setFilters } from '../../redux/productsSlice/productsSlice.js';
 
 const Products = () => {
@@ -61,7 +62,7 @@ const Products = () => {
       </div>
 
       <section className={s.aboutBrandNav}>
-        <div className="container">
+        <div className={clsx('container', s.container)}>
           <AboutBrandNav />
         </div>
       </section>

@@ -1,15 +1,59 @@
 .catalogWrap {
   @include flex(column, center, center, 24px);
-  position: relative;
-  min-width: 230px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: clamp(230px, 70%, 320px);
   height: auto;
   background-color: $white;
   flex-shrink: 0;
-  padding: 32px 24px;
+  padding: 24px 12px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  box-shadow: none;
+  transform: translateX(-100%);
+  @include transition((transform));
+
+  @include respond(lg) {
+    top: 100px;
+  }
+
+  &.openCatalog {
+    transform: translateX(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    .arrow {
+      transform: rotate(180deg);
+    }
+    .filterWrap,
+    .sortWrap {
+      opacity: 1;
+    }
+  }
 }
 
+.openBtn {
+  @include flex(row, center, center);
+  position: absolute;
+  top: 80%;
+  right: -25%;
+  width: 100px;
+  height: 32px;
+  background-color: $accent;
+  border-radius: 8px;
+  border: none;
+  z-index: 1000;
+  color: $white;
+  transform: rotate(90deg);
+  .arrow {
+    height: 80%;
+    color: $white;
+    rotate: 180deg;
+    @include transition((transform));
+  }
+  @include respond(lg) {
+    right: -20%;
+  }
+}
 
 .catalogWrap h3 {
   margin-bottom: 16px;
@@ -47,6 +91,3 @@
   box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
   color: $accent;
 }
-
-
-

@@ -9,7 +9,7 @@
   overflow: hidden;
   border-radius: 12px;
   flex-shrink: 0;
-  width: 400px;
+  width: clamp(200px, 100%, 400px);
 }
 
 .productImg {
@@ -69,11 +69,11 @@
 
 .btnBuy {
   @include flex(row, space-between, center);
-  width: 210px;
+  width: clamp(180px, 100%, 210px);
   padding: 10px 30px;
   border-radius: 30px;
   background-color: $accent;
-  font-size: 22px;
+  font-size: clamp(18px, 2vw, 22px);
   font-weight: 400;
   color: $white;
   border: none;
@@ -89,7 +89,7 @@
 }
 
 .price {
-  font-size: 40px;
+  font-size: clamp(24px, 4vw, 40px);
   font-weight: 600;
   margin-bottom: auto;
 }

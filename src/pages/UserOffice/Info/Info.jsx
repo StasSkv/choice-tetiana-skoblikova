@@ -1,4 +1,4 @@
-import s from './Info.module.css';
+import s from './Info.module.scss';
 import { FaPencil } from 'react-icons/fa6';
 import { selectUser } from '../../../redux/authSlice/authSelectors.js';
 import { useSelector } from 'react-redux';

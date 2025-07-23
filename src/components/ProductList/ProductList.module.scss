@@ -1,5 +1,5 @@
 .productList {
-  @include flex(row, start, center, 20px);
+  @include flex(row, center, center, 20px);
   flex-wrap: wrap;
   padding-bottom: 50px;
 }
@@ -22,7 +22,7 @@
 }
 
 .productCard {
-  max-width: calc((100% - 60px) / 4);
+  width: 233px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   opacity: 0;

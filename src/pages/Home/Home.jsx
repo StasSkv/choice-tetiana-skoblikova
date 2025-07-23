@@ -1,7 +1,6 @@
 import s from './Home.module.scss';
 import clsx from 'clsx';
 
-import tetiana from '../../assets/images/tetiana.jpeg';
 import { motion } from 'framer-motion';
 import CustomModal from '../../components/CustomModal/CustomModal.jsx';
 
@@ -42,9 +41,7 @@ const Home = () => {
               <h2>
                 <span>Вітаю</span>, мене звати Тетяна Скоблікова!
               </h2>
-              <p>Якщо ви буде в мене замовляти багато продукції - то я куплю собі бібіку!</p>
             </div>
-            <img src={tetiana} alt="" className={s.tetiana} />
           </div>
         </section>
 
